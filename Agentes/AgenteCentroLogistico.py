@@ -24,7 +24,7 @@ from AgentUtil.ACLMessages import get_message_properties, build_message, send_me
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
 from AgentUtil.Logging import config_logger
-from AgentUtil.OntoNamespaces import DSO
+from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL
 from rdflib.namespace import RDF, FOAF
 
 __author__ = 'Alex'
@@ -64,6 +64,7 @@ cola1 = Queue()
 app = Flask(__name__)
 
 def register():
+    global mss_cnt
     logger.info("Nos registramos")
     gmess = Graph()
     gmess.bind('foaf', FOAF)
@@ -74,7 +75,17 @@ def register():
     gmess.add((reg_obj, FOAF.name, Literal(AgenteCentroLogistico.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteCentroLogistico.address)))
     gmess.add((reg_obj, DSO.AgentType, DSO.AgenteCentroLogistico))
-    # a medias
+
+    gr = send_message(
+        build_message(gmess, perf=ACL.request,
+                      sender=AgenteCentroLogistico.uri,
+                      receiver=DirectoryAgent.uri,
+                      content=reg_obj,
+                      msgcnt=mss_cnt),
+        DirectoryAgent.address)
+    mss_cnt += 1
+
+    return gr
 
 
 @app.route("/comm")

@@ -140,7 +140,7 @@ def register():
             gr.add((rsp_obj, DSO.Uri, agn_uri))
             return build_message(gr,
                                  ACL.inform,
-                                 sender=DirectoryAgent.uri,
+                                 sender=AgenteDirectorio.uri,
                                  msgcnt=mss_cnt,
                                  receiver=agn_uri,
                                  content=rsp_obj)
@@ -148,7 +148,7 @@ def register():
             # Si no encontramos nada retornamos un inform sin contenido
             return build_message(Graph(),
                 ACL.inform,
-                sender=DirectoryAgent.uri,
+                sender=AgenteDirectorio.uri,
                 msgcnt=mss_cnt)
 
     global dsgraph
