@@ -68,6 +68,31 @@ def get_count():
     mss_cnt += 1
     return mss_cnt
 
+def register():
+    global mss_cnt
+    logger.info("Nos registramos")
+    gmess = Graph()
+    gmess.bind('foaf', FOAF)
+    gmess.bind('dso', DSO)
+    reg_obj = agn[AgenteExternoTransportista.name + '-Register']
+    gmess.add((reg_obj, RDF.type, DSO.Register))
+    gmess.add((reg_obj, DSO.Uri, AgenteExternoTransportista.uri))
+    gmess.add((reg_obj, FOAF.name, Literal(AgenteExternoTransportista.name)))
+    gmess.add((reg_obj, DSO.Address, Literal(AgenteExternoTransportista.address)))
+    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteExternoTransportista))
+
+    gr = send_message(
+        build_message(gmess, perf=ACL.request,
+                      sender=AgenteExternoTransportista.uri,
+                      receiver=DirectoryAgent.uri,
+                      content=reg_obj,
+                      msgcnt=mss_cnt),
+        DirectoryAgent.address)
+    mss_cnt += 1
+
+    return gr
+
+
 @app.route("/comm")
 def comunicacion():
     """
@@ -92,10 +117,8 @@ def comunicacion():
         # El agente centro logistico nos hace request del precio de nuestro transporte
         if msgdic['performative'] == ACL.request:
 
-            # No estoy seguro de si se coge asi el peso del lote
             content = msgdic['content']
-            peso = gm.value(subject=content, predicate=RDF.Peso)
-
+            peso = gm.value(subject=content, predicate=ECSDI.Peso)
 
             gr = build_message(devolverPrecio(peso),
                                ACL['inform'],

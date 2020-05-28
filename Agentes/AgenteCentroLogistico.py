@@ -18,7 +18,7 @@ from multiprocessing import Process, Queue
 import socket
 
 from rdflib import Namespace, Graph, Literal
-from flask import Flask
+from flask import Flask, request
 from AgentUtil.ACLMessages import get_message_properties, build_message, send_message
 
 from AgentUtil.FlaskServer import shutdown_server
@@ -31,6 +31,7 @@ __author__ = 'Alex'
 
 
 # Configuration stuff
+
 hostname = socket.gethostname()
 port = 9031
 
@@ -63,6 +64,13 @@ cola1 = Queue()
 # Flask stuff
 app = Flask(__name__)
 
+
+def get_count():
+    global mss_cnt
+    mss_cnt += 1
+    return mss_cnt
+
+
 def register():
     global mss_cnt
     logger.info("Nos registramos")
@@ -91,11 +99,56 @@ def register():
 @app.route("/comm")
 def comunicacion():
     """
-    Entrypoint de comunicacion
-    """
-    global dsgraph
-    global mss_cnt
-    pass
+       Communication Entrypoint
+       """
+
+    global dsGraph
+    logger.info('Peticion de informacion recibida')
+
+    message = request.args['content']
+    gm = Graph()
+    gm.parse(data=message)
+
+    msgdic = get_message_properties(gm)
+
+    gr = None
+
+    if msgdic is None:
+        # Si no es, respondemos que no hemos entendido el mensaje
+        gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
+    else:
+        
+        Agente = get_agent_info('AgenteExternoTransportista')
+
+        if msgdic['performative'] == ACL.request:
+            # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
+            # de registro
+            content = msgdic['content']
+            # Averiguamos el tipo de la accion
+            peso = gm.value(subject=content, predicate=ECSDI.Peso)
+
+
+            gr = build_message(enviar_mensaje_transportista(peso),
+                               ACL['request'],
+                               sender=AgenteCentroLogistico.uri,
+                               receiver=Agente,
+                               msgcnt=get_count())
+
+        elif msgdic['performative'] == ACL.inform:
+            content = msgdic['content']
+            precio = gm.value(subject=content, predicate=ECSDI.Precio)
+            nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
+            informar_transportista()
+
+            gr = build_message(informar_transportista(),
+                               ACL['inform'],
+                               sender=AgenteCentroLogistico.uri,
+                               receiver=Agente.uri,
+                               msgcnt=get_count())
+
+    logger.info('Respondemos a la peticion')
+
+    return gr.serialize(format='xml'), 200
 
 
 @app.route("/Stop")
@@ -125,6 +178,62 @@ def agentbehavior1(cola):
     :return:
     """
     pass
+
+
+# DETERMINATE AGENT FUNCTIONS ------------------------------------------------------------------------------
+
+
+def enviar_mensaje_transportista(peso):
+    g = Graph()
+    content = ECSDI['Ecsdi_envio']
+    g.add((content, RDF.Type, ECSDI.Lote))
+    g.add((content, ECSDI.Peso, Literal(peso)))
+
+    return g
+
+
+def informar_transportista():
+    g = Graph()
+    content = ECSDI['Ecsdi_envio1']
+    g.add((content, RDF.Type, ECSDI.Aceptacion_o_denegacion_devolucion))
+    g.add((content, ECSDI.Resolucion, Literal('Eres el transportista elegido')))
+
+    return g
+
+def get_agent_info(type):
+    """
+    Busca en el servicio de registro mandando un
+    mensaje de request con una accion Search del servicio de directorio
+    :param type:
+    :return:
+    """
+    global mss_cnt
+    logger.info('Buscamos en el servicio de registro')
+
+    gmess = Graph()
+
+    gmess.bind('foaf', FOAF)
+    gmess.bind('dso', DSO)
+    reg_obj = agn[AgenteCentroLogistico.name + '-search']
+    gmess.add((reg_obj, RDF.type, DSO.Search))
+    gmess.add((reg_obj, DSO.AgentType, type))
+
+    msg = build_message(gmess, perf=ACL.request,
+                        sender=AgenteCentroLogistico.uri,
+                        receiver=DirectoryAgent.uri,
+                        content=reg_obj,
+                        msgcnt=mss_cnt)
+    gr = send_message(msg, DirectoryAgent.address)
+    mss_cnt += 1
+    logger.info('Recibimos informacion del agente')
+
+    dic = get_message_properties(gr)
+    content = dic['content']
+    address = gr.value(subject=content, predicate=DSO.Address)
+    url = gr.value(subject=content, predicate=DSO.Uri)
+    name = gr.value(subject=content, predicate=FOAF.name)
+
+    return Agent(name, url, address, None)
 
 
 if __name__ == '__main__':
