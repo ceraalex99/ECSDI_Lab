@@ -117,8 +117,8 @@ def comunicacion():
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
     else:
-        
-        Agente = get_agent_info('AgenteExternoTransportista')
+
+        content = msgdic['content']
 
         if msgdic['performative'] == ACL.request:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
@@ -126,7 +126,7 @@ def comunicacion():
             content = msgdic['content']
             # Averiguamos el tipo de la accion
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
-
+            Agente = get_agent_info(agn.AgenteExternoTransportista)
 
             gr = build_message(enviar_mensaje_transportista(peso),
                                ACL['request'],
@@ -134,13 +134,22 @@ def comunicacion():
                                receiver=Agente,
                                msgcnt=get_count())
 
-        elif msgdic['performative'] == ACL.inform:
-            content = msgdic['content']
+        elif msgdic['performative'] == ACL.propose:
             precio = gm.value(subject=content, predicate=ECSDI.Precio)
-            nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
             informar_transportista()
+            Agente = get_agent_info(agn.AgenteExternoTransportista)
 
             gr = build_message(informar_transportista(),
+                               ACL['inform'],
+                               sender=AgenteCentroLogistico.uri,
+                               receiver=Agente.uri,
+                               msgcnt=get_count())
+
+        elif msgdic['performative'] == ACL.agree:
+            Agente = get_agent_info(agn.AgenteCompras)
+            nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
+            fecha_llegada = gm.value(subject=content, predicate=ECSDI.Nombre)
+            gr = build_message(informar_usuario(nombre, fecha_llegada),
                                ACL['inform'],
                                sender=AgenteCentroLogistico.uri,
                                receiver=Agente.uri,
@@ -194,11 +203,22 @@ def enviar_mensaje_transportista(peso):
 
 def informar_transportista():
     g = Graph()
-    content = ECSDI['Ecsdi_envio1']
+    content = ECSDI['Ecsdi_envio']
     g.add((content, RDF.Type, ECSDI.Aceptacion_o_denegacion_devolucion))
     g.add((content, ECSDI.Resolucion, Literal('Eres el transportista elegido')))
 
     return g
+
+
+def informar_usuario(nombre, fecha_llegada):
+    g = Graph()
+    content = ECSDI['Ecsdi_envio']
+    g.add((content, RDF.Type, ECSDI.Info_transporte))
+    g.add((content, ECSDI.Informacion_transportista, Literal(nombre)))
+    g.add((content, ECSDI.Fecha_final, Literal(fecha_llegada)))
+
+    return g
+
 
 def get_agent_info(type):
     """
