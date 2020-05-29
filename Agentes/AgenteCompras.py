@@ -27,13 +27,12 @@ from AgentUtil.Logging import config_logger
 from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL
 from rdflib.namespace import RDF, FOAF
 
-__author__ = 'javier'
+__author__ = 'Alex'
 
 
 # Configuration stuff
 hostname = socket.gethostname()
-port = 9010
-
+port = 9020
 logger = config_logger(level=1)
 
 agn = Namespace("http://www.agentes.org#")
@@ -43,8 +42,8 @@ mss_cnt = 0
 
 # Datos del Agente
 
-AgenteExternoTransportista = Agent('AgenteExternoTransportista',
-                       agn.AgenteExternoTransportista,
+AgenteCompras = Agent('AgenteCompras',
+                       agn.AgenteCompras,
                        'http://%s:%d/comm' % (hostname, port),
                        'http://%s:%d/Stop' % (hostname, port))
 
@@ -68,22 +67,23 @@ def get_count():
     mss_cnt += 1
     return mss_cnt
 
+
 def register():
     global mss_cnt
     logger.info("Nos registramos")
     gmess = Graph()
     gmess.bind('foaf', FOAF)
     gmess.bind('dso', DSO)
-    reg_obj = agn[AgenteExternoTransportista.name + '-Register']
+    reg_obj = agn[AgenteCompras.name + '-Register']
     gmess.add((reg_obj, RDF.type, DSO.Register))
-    gmess.add((reg_obj, DSO.Uri, AgenteExternoTransportista.uri))
-    gmess.add((reg_obj, FOAF.name, Literal(AgenteExternoTransportista.name)))
-    gmess.add((reg_obj, DSO.Address, Literal(AgenteExternoTransportista.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteExternoTransportista))
+    gmess.add((reg_obj, DSO.Uri, AgenteCompras.uri))
+    gmess.add((reg_obj, FOAF.name, Literal(AgenteCompras.name)))
+    gmess.add((reg_obj, DSO.Address, Literal(AgenteCompras.address)))
+    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteCompras))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
-                      sender=AgenteExternoTransportista.uri,
+                      sender=AgenteCompras.uri,
                       receiver=DirectoryAgent.uri,
                       content=reg_obj,
                       msgcnt=mss_cnt),
@@ -96,9 +96,8 @@ def register():
 @app.route("/comm")
 def comunicacion():
     """
-       Communication Entrypoint
-       """
-
+    Entrypoint de comunicacion
+    """
     global dsGraph
     logger.info('Peticion de informacion recibida')
 
@@ -112,24 +111,35 @@ def comunicacion():
 
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
-        gr = build_message(Graph(), ACL['not-understood'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
+        gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCompras.uri, msgcnt=get_count())
     else:
-        # El agente centro logistico nos hace request del precio de nuestro transporte
-        if msgdic['performative'] == ACL.request:
 
+        Agente = get_agent_info(agn.AgenteExternoTransportista)
+
+        if msgdic['performative'] == ACL.request:
+            # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
+            # de registro
             content = msgdic['content']
+            # Averiguamos el tipo de la accion
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
 
-            gr = build_message(devolverPrecio(peso),
-                               ACL['propose'],
-                               sender=AgenteExternoTransportista.uri,
+            gr = build_message(enviar_mensaje_transportista(peso),
+                               ACL['request'],
+                               sender=AgenteCentroLogistico.uri,
+                               receiver=Agente,
                                msgcnt=get_count())
 
-        # El agentre centro logistico nos informa que nos ha elegido como transportista
         elif msgdic['performative'] == ACL.inform:
-            gr = build_message(Graph(), ACL['agree'], sender=AgenteExternoTransportista.uri,
+            content = msgdic['content']
+            precio = gm.value(subject=content, predicate=ECSDI.Precio)
+            nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
+            informar_transportista()
+
+            gr = build_message(informar_transportista(),
+                               ACL['inform'],
+                               sender=AgenteCentroLogistico.uri,
+                               receiver=Agente.uri,
                                msgcnt=get_count())
-            logger.info('Pedido entregado')
 
     logger.info('Respondemos a la peticion')
 
@@ -163,18 +173,6 @@ def agentbehavior1(cola):
     :return:
     """
     pass
-
-
-def devolverPrecio(peso):
-    g = Graph()
-    Transportista = ECSDI.Transportista
-
-    Precio = peso * 3
-    g.add((Transportista, RDF.Type, ECSDI.Transportista))
-    g.add((Transportista, ECSDI.Nombre, Literal('Pedro')))
-    g.add((Transportista, ECSDI.Precio, Literal(Precio)))
-
-    return g
 
 
 if __name__ == '__main__':
