@@ -117,8 +117,8 @@ def comunicacion():
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
     else:
-        
-        Agente = get_agent_info('AgenteExternoTransportista')
+
+        Agente = get_agent_info(agn.AgenteExternoTransportista)
 
         if msgdic['performative'] == ACL.request:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
@@ -126,7 +126,6 @@ def comunicacion():
             content = msgdic['content']
             # Averiguamos el tipo de la accion
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
-
 
             gr = build_message(enviar_mensaje_transportista(peso),
                                ACL['request'],
