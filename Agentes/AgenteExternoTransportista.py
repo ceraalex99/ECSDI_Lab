@@ -167,12 +167,12 @@ def agentbehavior1(cola):
 
 def devolverPrecio(peso):
     g = Graph()
-    Transportista = ECSDI.Transportista
+    transportista = ECSDI.Transportista
 
-    Precio = peso * 3
-    g.add((Transportista, RDF.Type, ECSDI.Transportista))
-    g.add((Transportista, ECSDI.Nombre, Literal('Pedro')))
-    g.add((Transportista, ECSDI.Precio, Literal(Precio)))
+    precio = peso * 3
+    g.add((transportista, RDF.Type, ECSDI.Transportista))
+    g.add((transportista, ECSDI.Nombre, Literal('Pedro')))
+    g.add((transportista, ECSDI.Precio, Literal(precio)))
 
     return g
 
