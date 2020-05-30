@@ -142,6 +142,9 @@ def comunicacion():
                 gr = buscarProductos(**restricciones_dict)
                 gr = build_message(gr, perf=ACL['inform-done'], sender=AgenteBuscador.uri, msgcnt=get_count(), receiver=msgdic['sender'])
 
+            else:
+                gr = build_message(Graph(), ACL['not-understood'], sender=AgenteBuscador.uri, msgcnt=get_count())
+
     logger.info('Respondemos a la peticion')
     return gr.serialize(format='xml')
 
