@@ -17,7 +17,7 @@ import sys
 from multiprocessing import Process, Queue
 import socket
 
-from rdflib import Namespace, Graph, Literal
+from rdflib import Namespace, Graph, Literal, XSD
 from flask import Flask, request
 from AgentUtil.ACLMessages import get_message_properties, build_message, send_message
 from AgentUtil.Logging import config_logger
@@ -140,6 +140,10 @@ def comunicacion():
                             restricciones_dict['precio_max'] = precio_max.toPython()
 
                 gr = buscarProductos(**restricciones_dict)
+                gr = build_message(gr, perf=ACL['inform-done'], sender=AgenteBuscador.uri, msgcnt=get_count(), receiver=msgdic['sender'])
+
+    logger.info('Respondemos a la peticion')
+    return gr.serialize(format='xml')
 
 
 def buscarProductos(modelo=None, marca=None, precio_min=0.0, precio_max=sys.float_info.max):
@@ -147,10 +151,48 @@ def buscarProductos(modelo=None, marca=None, precio_min=0.0, precio_max=sys.floa
     ontologyFile= open('../data/productos')
     graph.parse(ontologyFile, format='turtle')
 
-    first = second = 0
-    query = None #falta hacer la query
-
+    modeloPresence = marcaPresence = False
+    query = """
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX default: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#>
     
+    SELECT DISTINCT ?producto ?nombre ?marca ?modelo ?precio
+        where {
+            { ?producto rdf:type default:Producto } .
+            ?producto default:Nombre ?nombre .
+            ?producto default:Marca ?marca .
+            ?producto default:Modelo ?modelo .
+            ?producto default:Precio ?precio .
+            ?producto default:Peso ?peso .
+            FILTER("""
+
+    if modelo is not None:
+        query += """str(?modelo) = '""" + modelo + """'"""
+        modeloPresence = True
+
+    if marca is not None:
+        if modeloPresence:
+            query += """ && """
+        query += """str(?marca) = '""" + marca + """'"""
+        marcaPresence = True
+
+    if modeloPresence or marcaPresence:
+        query += """ && """
+    query += """?precio >= """ + str(precio_min)  + """ && ?precio <= """ + str(precio_max) + """ )} order by asc(UCASE(str(?nombre)))"""
+
+    gquery = graph.query(query)
+    res = Graph()
+    res.bind('ECSDI', ECSDI)
+    for prod in gquery:
+        logger.debug(prod.nombre, prod.marca, prod.modelo, prod.precio)
+        res.add((prod.producto, RDF.type, ECSDI.Producto))
+        res.add((prod.producto, ECSDI.Nombre, Literal(prod.nombre, datatype=XSD.string)))
+        res.add((prod.producto, ECSDI.Marca, Literal(prod.marca, datatype=XSD.string)))
+        res.add((prod.producto, ECSDI.Modelo, Literal(prod.modelo, datatype=XSD.string)))
+        res.add((prod.producto, ECSDI.Precio, Literal(prod.precio, datatype=XSD.float)))
+    return res
+
 
 
 @app.route("/Stop")
