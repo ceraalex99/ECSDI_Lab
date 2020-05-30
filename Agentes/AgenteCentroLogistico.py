@@ -148,15 +148,15 @@ def comunicacion():
             content = msgdic3['content']
 
             if msgdic['performative'] == ACL.accept:
-                agenteBuscador = get_agent_info(agn.AgenteBuscador)
+                agenteAsistentePersonal = get_agent_info(agn.AgenteCompras)
                 nom = gm.value(subject=content, predicate=ECSDI.Nombre)
-                data_arribada = gm.value(subject=content, predicate=ECSDI.Nombre)
+                data_arribada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
 
                 # PIENSA EL TIPO DEL GRAFO
                 gr = build_message(informar_usuario(nom, data_arribada, preu),
                         ACL['inform'],
                         sender=AgenteCentroLogistico.uri,
-                        receiver=agenteBuscador.uri,
+                        receiver=agenteAsistentePersonal.uri,
                         msgcnt=get_count())
 
     logger.info('Respondemos a la peticion')
@@ -201,6 +201,7 @@ def enviar_mensaje_transportista(peso, prioridad):
     content = ECSDI['Ecsdi_envio']
     g.add((content, RDF.Type, ECSDI.Lote))
     g.add((content, ECSDI.Peso, Literal(peso)))
+    g.add((content, ECSDI.Peso, Literal(prioridad)))
 
     return g
 
@@ -220,7 +221,7 @@ def informar_usuario(nombre, fecha_llegada, preu):
     g.add((content, RDF.Type, ECSDI.Info_transporte))
     g.add((content, ECSDI.Informacion_transportista, Literal(nombre)))
     g.add((content, ECSDI.Fecha_final, Literal(fecha_llegada)))
-    g.add((content, ECSDI.Informacion_transportista, Literal(preu)))
+    g.add((content, ECSDI.Precio, Literal(preu)))
 
     return g
 

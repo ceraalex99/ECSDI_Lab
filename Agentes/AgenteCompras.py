@@ -114,31 +114,21 @@ def comunicacion():
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCompras.uri, msgcnt=get_count())
     else:
 
-        Agente = get_agent_info(agn.AgenteExternoTransportista)
+        Agente = get_agent_info(agn.AgentePersonal)
 
-        if msgdic['performative'] == ACL.request:
+        if msgdic['performative'] == ACL.inform:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
             # de registro
             content = msgdic['content']
             # Averiguamos el tipo de la accion
-            peso = gm.value(subject=content, predicate=ECSDI.Peso)
-
-            gr = build_message(enviar_mensaje_transportista(peso),
-                               ACL['request'],
-                               sender=AgenteCentroLogistico.uri,
-                               receiver=Agente,
-                               msgcnt=get_count())
-
-        elif msgdic['performative'] == ACL.inform:
-            content = msgdic['content']
+            nom = gm.value(subject=content, predicate=ECSDI.Nombre)
             precio = gm.value(subject=content, predicate=ECSDI.Precio)
-            nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
-            informar_transportista()
+            data_arribada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
 
-            gr = build_message(informar_transportista(),
-                               ACL['inform'],
-                               sender=AgenteCentroLogistico.uri,
-                               receiver=Agente.uri,
+            gr = build_message(enviar_info_transporte(nom, precio, data_arribada),
+                               ACL['request'],
+                               sender=AgenteCompras.uri,
+                               receiver=Agente,
                                msgcnt=get_count())
 
     logger.info('Respondemos a la peticion')
@@ -173,6 +163,53 @@ def agentbehavior1(cola):
     :return:
     """
     pass
+
+
+def enviar_info_transporte(nom, precio, data_arribada):
+    g = Graph()
+    content = ECSDI['Ecsdi_envio']
+    g.add((content, RDF.Type, ECSDI.Info_transporte))
+    g.add((content, ECSDI.Informacion_transportista, Literal(nom)))
+    g.add((content, ECSDI.Fecha_final, Literal(data_arribada)))
+    g.add((content, ECSDI.Precio, Literal(precio)))
+
+    return g
+
+
+def get_agent_info(type):
+    """
+    Busca en el servicio de registro mandando un
+    mensaje de request con una accion Search del servicio de directorio
+    :param type:
+    :return:
+    """
+    global mss_cnt
+    logger.info('Buscamos en el servicio de registro')
+
+    gmess = Graph()
+
+    gmess.bind('foaf', FOAF)
+    gmess.bind('dso', DSO)
+    reg_obj = agn[AgenteCompras.name + '-search']
+    gmess.add((reg_obj, RDF.type, DSO.Search))
+    gmess.add((reg_obj, DSO.AgentType, type))
+
+    msg = build_message(gmess, perf=ACL.request,
+                        sender=AgenteCompras.uri,
+                        receiver=DirectoryAgent.uri,
+                        content=reg_obj,
+                        msgcnt=mss_cnt)
+    gr = send_message(msg, DirectoryAgent.address)
+    mss_cnt += 1
+    logger.info('Recibimos informacion del agente')
+
+    dic = get_message_properties(gr)
+    content = dic['content']
+    address = gr.value(subject=content, predicate=DSO.Address)
+    url = gr.value(subject=content, predicate=DSO.Uri)
+    name = gr.value(subject=content, predicate=FOAF.name)
+
+    return Agent(name, url, address, None)
 
 
 if __name__ == '__main__':
