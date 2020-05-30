@@ -12,10 +12,12 @@ __author__ = 'javier'
 
 from rdflib import Graph
 import requests
-from rdflib.namespace import RDF
+from rdflib.namespace import RDF, FOAF, Namespace
 
-from AgentUtil.OntoNamespaces import ACL
+from AgentUtil.Agent import Agent
+from AgentUtil.OntoNamespaces import ACL, DSO
 
+agn = Namespace("http://www.agentes.org#")
 
 def build_message(gmess, perf, sender=None, receiver=None,  content=None, msgcnt= 0):
     """
@@ -83,3 +85,27 @@ def get_message_properties(msg):
             if val is not None:
                 msgdic[key] = val
     return msgdic
+
+
+def get_agent_info(tipo, directory_agent, sender, msgcnt):
+    gmess = Graph()
+    # Construimos el mensaje de registro
+    gmess.bind('foaf', FOAF)
+    gmess.bind('dso', DSO)
+    ask_obj = agn[sender.name + '-Search']
+
+    gmess.add((ask_obj, RDF.type, DSO.Search))
+    gmess.add((ask_obj, DSO.AgentType, tipo))
+    gr = send_message(
+        build_message(gmess, perf=ACL.request, sender=sender.uri, receiver=directory_agent.uri, msgcnt=msgcnt,
+                      content=ask_obj),
+        directory_agent.address
+    )
+    dic = get_message_properties(gr)
+    content = dic['content']
+
+    address = gr.value(subject=content, predicate=DSO.Address)
+    url = gr.value(subject=content, predicate=DSO.Uri)
+    name = gr.value(subject=content, predicate=FOAF.name)
+
+    return Agent(name, url, address, None)
