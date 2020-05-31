@@ -49,7 +49,7 @@ AgenteExternoTransportista = Agent('AgenteExternoTransportista',
                        'http://%s:%d/Stop' % (hostname, port))
 
 # Directory agent address
-DirectoryAgent = Agent('DirectoryAgent',
+AgenteDirectorio = Agent('AgenteDirectorio',
                        agn.Directory,
                        'http://%s:9000/Register' % hostname,
                        'http://%s:9000/Stop' % hostname)
@@ -84,10 +84,10 @@ def register():
     gr = send_message(
         build_message(gmess, perf=ACL.request,
                       sender=AgenteExternoTransportista.uri,
-                      receiver=DirectoryAgent.uri,
+                      receiver=AgenteDirectorio.uri,
                       content=reg_obj,
                       msgcnt=mss_cnt),
-        DirectoryAgent.address)
+        AgenteDirectorio.address)
     mss_cnt += 1
 
     return gr

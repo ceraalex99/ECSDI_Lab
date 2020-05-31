@@ -48,7 +48,7 @@ AgenteCompras = Agent('AgenteCompras',
                        'http://%s:%d/Stop' % (hostname, port))
 
 # Directory agent address
-DirectoryAgent = Agent('DirectoryAgent',
+AgenteDirectorio = Agent('AgenteDirectorio',
                        agn.Directory,
                        'http://%s:9000/Register' % hostname,
                        'http://%s:9000/Stop' % hostname)
@@ -84,10 +84,10 @@ def register():
     gr = send_message(
         build_message(gmess, perf=ACL.request,
                       sender=AgenteCompras.uri,
-                      receiver=DirectoryAgent.uri,
+                      receiver=AgenteDirectorio.uri,
                       content=reg_obj,
                       msgcnt=mss_cnt),
-        DirectoryAgent.address)
+        AgenteDirectorio.address)
     mss_cnt += 1
 
     return gr
@@ -114,7 +114,7 @@ def comunicacion():
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCompras.uri, msgcnt=get_count())
     else:
 
-        Agente = get_agent_info(agn.AgentePersonal, DirectoryAgent, AgenteCompras, get_count())
+        Agente = get_agent_info(agn.AgentePersonal, AgenteDirectorio, AgenteCompras, get_count())
 
         if msgdic['performative'] == ACL.inform:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
