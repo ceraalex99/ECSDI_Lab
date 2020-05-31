@@ -48,7 +48,7 @@ AgenteBuscador = Agent('AgenteBuscador',
                        'http://%s:%d/Stop' % (hostname, port))
 
 # Directory agent address
-AgenteDirectorio = Agent('DirectoryAgent',
+AgenteDirectorio = Agent('AgenteDirectorio',
                        agn.Directorio,
                        'http://%s:9000/Register' % hostname,
                        'http://%s:9000/Stop' % hostname)
