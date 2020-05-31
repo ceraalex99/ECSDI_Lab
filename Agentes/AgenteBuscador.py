@@ -164,7 +164,7 @@ def buscarProductos(modelo=None, marca=None, precio_min=0.0, precio_max=sys.floa
     PREFIX default: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/property/>
     PREFIX pont: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/>
     
-    SELECT DISTINCT ?producto ?nombre ?marca ?modelo ?precio
+    SELECT DISTINCT ?producto ?nombre ?marca ?modelo ?precio ?peso
         where {
             { ?producto rdf:type pont:Producto } .
             ?producto default:nombre ?nombre .
@@ -198,6 +198,7 @@ def buscarProductos(modelo=None, marca=None, precio_min=0.0, precio_max=sys.floa
         res.add((prod.producto, ECSDI.Marca, Literal(prod.marca, datatype=XSD.string)))
         res.add((prod.producto, ECSDI.Modelo, Literal(prod.modelo, datatype=XSD.string)))
         res.add((prod.producto, ECSDI.Precio, Literal(prod.precio, datatype=XSD.float)))
+        res.add((prod.producto, ECSDI.Peso, Literal(prod.peso, datatype=XSD.float)))
     return res
 
 

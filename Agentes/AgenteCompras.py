@@ -79,7 +79,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteCompras.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteCompras.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteCompras.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteCompras))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteCompras))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
@@ -106,6 +106,7 @@ def comunicacion():
     gm.parse(data=message)
 
     msgdic = get_message_properties(gm)
+    content = msgdic['content']
 
     gr = None
 
@@ -113,13 +114,13 @@ def comunicacion():
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCompras.uri, msgcnt=get_count())
     else:
-
-        Agente = get_agent_info(agn.AgentePersonal, AgenteDirectorio, AgenteCompras, get_count())
-
         if msgdic['performative'] == ACL.inform:
+            Agente = get_agent_info(agn.AgentePersonal, AgenteDirectorio, AgenteCompras, get_count())
+
+
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
             # de registro
-            content = msgdic['content']
+
             # Averiguamos el tipo de la accion
             nom = gm.value(subject=content, predicate=ECSDI.Nombre)
             precio = gm.value(subject=content, predicate=ECSDI.Precio)
@@ -130,6 +131,17 @@ def comunicacion():
                                sender=AgenteCompras.uri,
                                receiver=Agente,
                                msgcnt=get_count())
+
+        if msgdic['performative'] == ACL.request:
+            CentroLogistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteCompras, get_count())
+            gr = send_message(
+                build_message(gm, perf=ACL.request,
+                              sender=AgenteCompras.uri,
+                              receiver=CentroLogistico.uri,
+                              msgcnt=mss_cnt),
+                CentroLogistico.address)
+
+
 
     logger.info('Respondemos a la peticion')
 

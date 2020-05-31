@@ -4,7 +4,9 @@
     <title></title>
 </head>
 <body>
-<form method="post" action="">
+ {% if not products %}
+     <form method="post">
+
     <p><label>Marca:</label> <input type="text" name="marca"></p>
 
     <p><label>Modelo:</label> <input type="text" name="modelo"></p>
@@ -14,14 +16,33 @@
     <p>
         <button type="submit" name="submit" value="buscar">Send</button>
     </p>
-</form>
-
-    <ul>
-        {% for p in products %}
-            <li>{{p.nombre}}, {{p.precio}}, {{p.modelo}}, {{p.marca}}</li>
-        {% endfor %}
-    </ul>
-
+     </form>
+    {% else %}
+        <form method="post">
+            <table cellpadding="5px">
+                <tr>
+                    <th><b>NOMBRE</b></th>
+                    <th><b>MARCA</b></th>
+                    <th><b>MODELO</b></th>
+                    <th><b>PRECIO</b></th>
+                    <th><b>PESO</b></th>
+                </tr>
+                {% for item in products %}
+                    {% if item.nombre %}
+                    <tr>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.marca }}</td>
+                        <td>{{ item.modelo }}</td>
+                        <td>{{ item.precio }}</td>
+                        <td>{{ item.peso }}</td>
+                        <td><input type="checkbox" name="checkbox" value="{{ products.index(item) }}"></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+            <input type="submit" name="submit" value="comprar">
+        </form>
+    {% endif %}
 
 </body>
 </html>

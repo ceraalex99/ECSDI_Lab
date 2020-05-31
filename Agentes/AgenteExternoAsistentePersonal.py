@@ -109,7 +109,7 @@ def browser_root():
 
 
 @app.route("/buscar", methods=['GET', 'POST'])
-def browserBucador():
+def browserBuscador():
     """
     Comunicacion con el agente mediante un formulario en un navegador
     """
@@ -189,7 +189,7 @@ def browserBucador():
             logger.info(listaProductos)
             return render_template('buscador.html', products=listaProductos)
 
-        elif request.form['submit'] == 'Comprar':
+        elif request.form['submit'] == 'comprar':
             productosPedidos = []
             for producto in request.form.getlist("checkbox"):
                 productoMarcado = []
@@ -214,20 +214,11 @@ def browserBucador():
             # Asignar prioridad a la peticion (asignamos el contador de mensaje)
             gr.add((content, ECSDI.Prioridad, Literal(get_count(), datatype=XSD.integer)))
 
-            # Creacion de la ciudad (por ahora Barcelona) --------------------------------------------------------------
-            subject_ciudad = ECSDI['Ciudad_' + str(random.randint(1, sys.float_info.max))]
-
-            gr.add((subject_ciudad, RDF.type, ECSDI.Ciudad))
-            gr.add((subject_ciudad, ECSDI.Nombre, Literal(41.398373, datatype=XSD.float)))
-            gr.add((subject_ciudad, ECSDI.Latitud, Literal(2.188247, datatype=XSD.float)))
-            gr.add((subject_ciudad, ECSDI.Longitud, Literal('Barcelona', datatype=XSD.string)))
-
             # Creacion del sobre (Compra) ------------------------------------------------------------------------------
             sCompra = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
             gr.add((sCompra, RDF.type, ECSDI.Compra))
 
             gr.add((sCompra, ECSDI.Pagat, Literal(0, datatype=XSD.integer)))
-            gr.add((sCompra, ECSDI.Enviar_a, URIRef(subject_ciudad)))
 
             totalPrice = 0.0
             for producto in productosPedidos:
@@ -242,14 +233,18 @@ def browserBucador():
                 gr.add((sProducto, ECSDI.Peso, Literal(producto[5], datatype=XSD.float)))
                 gr.add((sCompra, ECSDI.Productos, URIRef(sProducto)))
 
-            gr.add((sProducto, ECSDI.Precio_total, Literal(totalPrice, datatype=XSD.float)))
-            gr.add((content, ECSDI.Sobre, URIRef(sCompra)))
+            gr.add((content, RDF.type, ECSDI.Hacer_pedido))
+            gr.add((content, ECSDI.Precio_total, Literal(totalPrice, datatype=XSD.float)))
+            gr.add((content, ECSDI.Compra, URIRef(sCompra)))
 
-            tienda = get_agent_info(agn.AgenteCompra, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
+            tienda = get_agent_info(agn.AgenteCompras, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
 
+            logger.info('Llego aqui')
             respuesta = send_message(
                 build_message(
                     gr, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=tienda.uri, msgcnt=get_count(), content=content), tienda.address)
+
+            logger.info('Aqui no llego ni de coña')
 
             matrizProductos = []
             for item in respuesta.subjects(RDF.type, ECSDI.Producto):

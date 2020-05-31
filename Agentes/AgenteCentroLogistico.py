@@ -13,9 +13,11 @@ Asume que el agente de registro esta en el puerto 9000
 
 @author: Alex
 """
-
+import sys
+import random
 from multiprocessing import Process, Queue
 import socket
+import datetime
 
 from rdflib import Namespace, Graph, Literal
 from flask import Flask, request
@@ -116,11 +118,30 @@ def comunicacion():
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
-    else:
+    elif msgdic['performative'] == ACL.request:
 
         content = msgdic['content']
+        accion = gm.value(subject=content, predicate=RDF.type)
 
-        if msgdic['performative'] == ACL.request:
+        if accion == ECSDI.Hacer_pedido:
+            ofile = open('../data/pedidos_pendientes.owl', "ab")
+            ofile.write(gm.serialize(format='turtle'))
+            ofile.close()
+            if(datetime.datetime.now() ):
+                g = Graph()
+                g.parse('../data/pedidos_pendientes.owl', format='turtle')
+                pedidos = g.subjects(predicate=RDF.type, object=ECSDI.Compra)
+
+                gr = Graph()
+
+                Lote = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
+                gr.add((Lote, RDF.type, ECSDI.Lote))
+                for p in pedidos:
+                    gr.add((pedido, ))
+
+
+
+        else:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
             # de registro
 
@@ -148,7 +169,7 @@ def comunicacion():
             content = msgdic3['content']
 
             if msgdic['performative'] == ACL.accept:
-                agenteAsistentePersonal = get_agent_info(agn.AgenteCompras, AgenteDirectorio, AgenteCentroLogistico, get_count())
+                agenteAsistentePersonal = get_agent_info(agn.AgenteExternoAsistentePersonal, AgenteDirectorio, AgenteCentroLogistico, get_count())
                 nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
                 fecha_llegada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
 
