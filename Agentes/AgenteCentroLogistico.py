@@ -19,7 +19,7 @@ import socket
 
 from rdflib import Namespace, Graph, Literal
 from flask import Flask, request
-from AgentUtil.ACLMessages import get_message_properties, build_message, send_message
+from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info
 
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
@@ -33,7 +33,7 @@ __author__ = 'Alex'
 # Configuration stuff
 
 hostname = socket.gethostname()
-port = 9031
+port = 9012
 
 logger = config_logger(level=1)
 
@@ -126,7 +126,7 @@ def comunicacion():
 
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
             prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
-            Agente = get_agent_info(agn.AgenteExternoTransportista)
+            Agente = get_agent_info(agn.AgenteExternoTransportista, DirectoryAgent, AgenteCentroLogistico, get_count())
 
             resposta_preu = send_message(build_message(enviar_mensaje_transportista(peso, prioridad),
                                ACL['request'],
@@ -148,15 +148,15 @@ def comunicacion():
             content = msgdic3['content']
 
             if msgdic['performative'] == ACL.accept:
-                agenteBuscador = get_agent_info(agn.AgenteBuscador)
+                agenteAsistentePersonal = get_agent_info(agn.AgenteCompras, DirectoryAgent, AgenteCentroLogistico, get_count())
                 nom = gm.value(subject=content, predicate=ECSDI.Nombre)
-                data_arribada = gm.value(subject=content, predicate=ECSDI.Nombre)
+                data_arribada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
 
                 # PIENSA EL TIPO DEL GRAFO
                 gr = build_message(informar_usuario(nom, data_arribada, preu),
                         ACL['inform'],
                         sender=AgenteCentroLogistico.uri,
-                        receiver=agenteBuscador.uri,
+                        receiver=agenteAsistentePersonal.uri,
                         msgcnt=get_count())
 
     logger.info('Respondemos a la peticion')
@@ -201,6 +201,7 @@ def enviar_mensaje_transportista(peso, prioridad):
     content = ECSDI['Ecsdi_envio']
     g.add((content, RDF.Type, ECSDI.Lote))
     g.add((content, ECSDI.Peso, Literal(peso)))
+    g.add((content, ECSDI.Prioridad, Literal(prioridad)))
 
     return g
 
@@ -220,45 +221,9 @@ def informar_usuario(nombre, fecha_llegada, preu):
     g.add((content, RDF.Type, ECSDI.Info_transporte))
     g.add((content, ECSDI.Informacion_transportista, Literal(nombre)))
     g.add((content, ECSDI.Fecha_final, Literal(fecha_llegada)))
-    g.add((content, ECSDI.Informacion_transportista, Literal(preu)))
+    g.add((content, ECSDI.Precio, Literal(preu)))
 
     return g
-
-
-def get_agent_info(type):
-    """
-    Busca en el servicio de registro mandando un
-    mensaje de request con una accion Search del servicio de directorio
-    :param type:
-    :return:
-    """
-    global mss_cnt
-    logger.info('Buscamos en el servicio de registro')
-
-    gmess = Graph()
-
-    gmess.bind('foaf', FOAF)
-    gmess.bind('dso', DSO)
-    reg_obj = agn[AgenteCentroLogistico.name + '-search']
-    gmess.add((reg_obj, RDF.type, DSO.Search))
-    gmess.add((reg_obj, DSO.AgentType, type))
-
-    msg = build_message(gmess, perf=ACL.request,
-                        sender=AgenteCentroLogistico.uri,
-                        receiver=DirectoryAgent.uri,
-                        content=reg_obj,
-                        msgcnt=mss_cnt)
-    gr = send_message(msg, DirectoryAgent.address)
-    mss_cnt += 1
-    logger.info('Recibimos informacion del agente')
-
-    dic = get_message_properties(gr)
-    content = dic['content']
-    address = gr.value(subject=content, predicate=DSO.Address)
-    url = gr.value(subject=content, predicate=DSO.Uri)
-    name = gr.value(subject=content, predicate=FOAF.name)
-
-    return Agent(name, url, address, None)
 
 
 if __name__ == '__main__':
