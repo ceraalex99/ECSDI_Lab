@@ -180,6 +180,6 @@ if __name__ == '__main__':
 
     # Grabamos el OWL resultante
     # Lo podemos cargar en Protege para verlo y cargarlo con RDFlib o en una triplestore (Stardog/Fuseki)
-    ofile  = open('../../data/product.owl', "wb")
+    ofile = open('../../data/product.owl', "wb")
     ofile.write(products_graph.serialize(format='turtle'))
     ofile.close()
