@@ -19,7 +19,7 @@ import socket
 
 from rdflib import Namespace, Graph, Literal
 from flask import Flask, request
-from AgentUtil.ACLMessages import get_message_properties, build_message, send_message
+from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info
 
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
@@ -114,7 +114,7 @@ def comunicacion():
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCompras.uri, msgcnt=get_count())
     else:
 
-        Agente = get_agent_info(agn.AgentePersonal)
+        Agente = get_agent_info(agn.AgentePersonal, DirectoryAgent, AgenteCompras, get_count())
 
         if msgdic['performative'] == ACL.inform:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
@@ -174,42 +174,6 @@ def enviar_info_transporte(nom, precio, data_arribada):
     g.add((content, ECSDI.Precio, Literal(precio)))
 
     return g
-
-
-def get_agent_info(type):
-    """
-    Busca en el servicio de registro mandando un
-    mensaje de request con una accion Search del servicio de directorio
-    :param type:
-    :return:
-    """
-    global mss_cnt
-    logger.info('Buscamos en el servicio de registro')
-
-    gmess = Graph()
-
-    gmess.bind('foaf', FOAF)
-    gmess.bind('dso', DSO)
-    reg_obj = agn[AgenteCompras.name + '-search']
-    gmess.add((reg_obj, RDF.type, DSO.Search))
-    gmess.add((reg_obj, DSO.AgentType, type))
-
-    msg = build_message(gmess, perf=ACL.request,
-                        sender=AgenteCompras.uri,
-                        receiver=DirectoryAgent.uri,
-                        content=reg_obj,
-                        msgcnt=mss_cnt)
-    gr = send_message(msg, DirectoryAgent.address)
-    mss_cnt += 1
-    logger.info('Recibimos informacion del agente')
-
-    dic = get_message_properties(gr)
-    content = dic['content']
-    address = gr.value(subject=content, predicate=DSO.Address)
-    url = gr.value(subject=content, predicate=DSO.Uri)
-    name = gr.value(subject=content, predicate=FOAF.name)
-
-    return Agent(name, url, address, None)
 
 
 if __name__ == '__main__':
