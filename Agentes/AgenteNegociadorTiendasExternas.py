@@ -81,10 +81,10 @@ def register():
     gr = send_message(
         build_message(gmess, perf=ACL.request,
                       sender=AgenteNegociadorTiendasExternas.uri,
-                      receiver=DirectoryAgent.uri,
+                      receiver=AgenteDirectorio.uri,
                       content=reg_obj,
                       msgcnt=mss_cnt),
-        DirectoryAgent.address)
+        AgenteDirectorio.address)
     mss_cnt += 1
 
     return gr
@@ -116,7 +116,6 @@ def comunicacion():
         if msgdic['performative'] == ACL.request:
             content = msgdic['content']
 
-            producto = gm.value(subject=content, predicate=ECSDI.Producto)
             modelo = gm.value(subject=content, predicate=ECSDI.Modelo)
             marca = gm.value(subject=content, predicate=ECSDI.Marca)
             tienda = gm.value(subject=content, predicate=ECSDI.TiendaOrigen)
