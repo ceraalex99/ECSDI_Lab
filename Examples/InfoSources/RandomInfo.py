@@ -59,9 +59,10 @@ def random_attribute(type, lim):
 
 if __name__ == '__main__':
     # Declaramos espacios de nombres de nuestra ontologia, al estilo DBPedia (clases, propiedades, recursos)
-    PrOnt = Namespace("http://www.products.org/ontology/")
-    PrOntPr = Namespace("http://www.products.org/ontology/property/")
-    PrOntRes = Namespace("http://www.products.org/ontology/resource/")
+    PrOntPr = Namespace("http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/property/")
+    PrOntRes = Namespace("http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/")
+    PrOnt = Namespace("http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/")
+
 
     # lista de tipos XSD datatypes para los rangos de las propiedades
     xsddatatypes = {'s': XSD.string, 'i': XSD.int, 'f': XSD.float}
@@ -76,22 +77,26 @@ if __name__ == '__main__':
     #  * PrOntPr.nombre: string
 
     # Diccionario de atributos f= tipo float, i= tipo int, s= tipo string, otro => clase existente en la ontologia
-    product_properties = {'tieneMarca': 'Marca',
+    product_properties = {'marca': 'Marca',
+                          'modelo': 'Modelo',
                           'precio': 'i',
                           'peso': 'f',
                           'nombre': 's'}
 
     # Diccionario con clases, cada clase tiene una lista con los atributos y en el caso de necesitarlo, su rango min/max
-    product_classes = {'Phone': [['tieneMarca'],
+    product_classes = {'Movil': [['marca'],
+                                 ['modelo'],
                                  ['precio', 50, 600],
                                  ['peso', 200,400],
                                  ['nombre']],
-                       'Blender': [['tieneMarca'],
-                                 ['precio', 25, 100],
-                                 ['peso', 500, 1000],
+                       'Silla': [['marca'],
+                                 ['modelo'],
+                                 ['precio', 30, 200],
+                                 ['peso', 4000, 20000],
                                  ['nombre']],
-                       'Computer': [['tieneMarca'],
-                                 ['precio', 450, 3000],
+                       'Portatil': [['marca'],
+                                    ['modelo'],
+                                 ['precio', 450, 2000],
                                  ['peso', 1000, 2500],
                                  ['nombre']],
                        }
@@ -100,11 +105,10 @@ if __name__ == '__main__':
 
     # Añadimos los espacios de nombres al grafo
     products_graph.bind('pont', PrOnt)
-    products_graph.bind('pontp', PrOntPr)
-    products_graph.bind('pontr', PrOntRes)
+
 
     # Clase padre de los productos
-    products_graph.add((PrOnt.ElectronicDevice, RDF.type, OWL.Class))
+    products_graph.add((PrOnt.Producto, RDF.type, OWL.Class))
 
     # Añadimos los atributos al grafo con sus rangos (los dominios los añadimos despues con cada clase)
     for prop in product_properties:
@@ -123,7 +127,7 @@ if __name__ == '__main__':
     products_graph.add((PrOnt.Marca, RDF.type, OWL.Class))
 
     for prc in product_classes:
-        products_graph.add((PrOnt[prc], RDFS.subClassOf, PrOnt.ElectronicDevice))
+        products_graph.add((PrOnt[prc], RDFS.subClassOf, PrOnt.Producto))
 
         # Añadimos las propiedades con sus dominios (si no estan ya en la definicion de la ontologia original)
 
@@ -132,7 +136,7 @@ if __name__ == '__main__':
 
         # Generamos instancias de marcas al azar (nada impide que las marcas puedan ser comunes
         # entre productos (en este ejemplo no lo son)
-        dclases = {'Marca': []}
+        dclases = {'Marca': [], 'Modelo': []}
         for i in range(10):
             # instancia al azar
             rmarca = random_name('Marca_'+ prc)
@@ -141,6 +145,12 @@ if __name__ == '__main__':
             products_graph.add((PrOntRes[rmarca], RDF.type, PrOnt.Marca))
             # Le asignamos una propiedad nombre a la marca
             products_graph.add((PrOntRes[rmarca], PrOntPr.nombre, Literal(rmarca)))
+
+        for i in range(10):
+            rmodelo = random_name('Modelo_' + prc)
+            dclases['Modelo'].append(rmodelo)
+            products_graph.add((PrOntRes[rmodelo], RDF.type, PrOnt.Modelo))
+            products_graph.add((PrOntRes[rmodelo], PrOntPr.nombre, Literal(rmodelo)))
 
 
 
@@ -170,6 +180,6 @@ if __name__ == '__main__':
 
     # Grabamos el OWL resultante
     # Lo podemos cargar en Protege para verlo y cargarlo con RDFlib o en una triplestore (Stardog/Fuseki)
-    ofile  = open('product.owl', "wb")
+    ofile  = open('../../data/product.owl', "wb")
     ofile.write(products_graph.serialize(format='turtle'))
     ofile.close()
