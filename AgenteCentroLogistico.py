@@ -126,34 +126,34 @@ def comunicacion():
 
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
             prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
-            Agente = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio, AgenteCentroLogistico, get_count())
+            AgenteTransportista = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio, AgenteCentroLogistico, get_count())
 
-            resposta_preu = send_message(build_message(enviar_mensaje_transportista(peso, prioridad),
+            resposta_precio = send_message(build_message(enviar_mensaje_transportista(peso, prioridad),
                                ACL['request'],
                                sender=AgenteCentroLogistico.uri,
-                               receiver=Agente.uri,
-                               msgcnt=get_count()), agn.AgenteExternoTransportista)
+                               receiver=AgenteTransportista.uri,
+                               msgcnt=get_count()), AgenteTransportista.address)
 
-            msgdic2 = get_message_properties(resposta_preu)
+            msgdic2 = get_message_properties(resposta_precio)
             content = msgdic2['content']
 
-            preu = resposta_preu.value(subject=content, predicate=ECSDI.Precio)
+            precio = resposta_precio.value(subject=content, predicate=ECSDI.Precio)
 
-            resposta_proposta = build_message(informar_transportista(),
+            resposta_proposta = send_message(build_message(informar_transportista(),
                                ACL['inform'],
                                sender=AgenteCentroLogistico.uri,
-                               receiver=Agente.uri,
-                               msgcnt=get_count())
+                               receiver=AgenteTransportista.uri,
+                               msgcnt=get_count()), AgenteTransportista.address)
             msgdic3 = get_message_properties(resposta_proposta)
             content = msgdic3['content']
 
             if msgdic['performative'] == ACL.accept:
                 agenteAsistentePersonal = get_agent_info(agn.AgenteCompras, AgenteDirectorio, AgenteCentroLogistico, get_count())
-                nom = gm.value(subject=content, predicate=ECSDI.Nombre)
-                data_arribada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
+                nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
+                fecha_llegada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
 
                 # PIENSA EL TIPO DEL GRAFO
-                gr = build_message(informar_usuario(nom, data_arribada, preu),
+                gr = build_message(informar_usuario(nombre, fecha_llegada, precio),
                         ACL['inform'],
                         sender=AgenteCentroLogistico.uri,
                         receiver=agenteAsistentePersonal.uri,
@@ -215,13 +215,13 @@ def informar_transportista():
     return g
 
 
-def informar_usuario(nombre, fecha_llegada, preu):
+def informar_usuario(nombre, fecha_llegada, precio):
     g = Graph()
     content = ECSDI['Ecsdi_envio']
     g.add((content, RDF.Type, ECSDI.Info_transporte))
     g.add((content, ECSDI.Informacion_transportista, Literal(nombre)))
     g.add((content, ECSDI.Fecha_final, Literal(fecha_llegada)))
-    g.add((content, ECSDI.Precio, Literal(preu)))
+    g.add((content, ECSDI.Precio, Literal(precio)))
 
     return g
 
