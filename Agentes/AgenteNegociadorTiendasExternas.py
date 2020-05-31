@@ -89,7 +89,6 @@ def register():
 
     return gr
 
-
 @app.route("/comm")
 def comunicacion():
     """
@@ -108,29 +107,20 @@ def comunicacion():
 
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
-        gr = build_message(Graph(), ACL['not-understood'], sender=AgenteNegociadorTiendasExternas.uri,
-                           msgcnt=get_count())
+        gr = build_message(Graph(), ACL['not-understood'], sender=AgenteNegociadorTiendasExternas.uri, msgcnt=get_count())
     else:
-        # Se ha vendido un producto de una tienda externa
-        # AgenteCompra --> AgenteNegociadorTiendasExternas --> TiendaExterna
-        if msgdic['performative'] == ACL.request:
+        # Llega una metodologia
+        if msgdic['performative'] == ACL.inform:
             content = msgdic['content']
 
-            modelo = gm.value(subject=content, predicate=ECSDI.Modelo)
-            marca = gm.value(subject=content, predicate=ECSDI.Marca)
-            tienda = gm.value(subject=content, predicate=ECSDI.TiendaOrigen)
+            metodologiaDePago = gm.value(subject=content, predicate=ECSDI.Metodologia_de_pago)
+            tiendaExterna = msgdic['sender']
 
-            #Tramitar Pago a Tienda Externa
-
-            gr = build_message(enviarMsgATiendaExterna(modelo, marca),
-                               ACL['inform'],
-                               sender=AgenteNegociadorTiendasExternas.uri,
-                               msgcnt=get_count(),
-                               receiver=tienda)
+            ok = añadirMetodologiaDePago(tiendaExterna, metodologiaDePago)
 
 
         # Una tienda externa quiere añadir un producto a nuestra tienda
-        elif msgdic['performative'] == ACL.inform:
+        elif msgdic['performative'] == ACL.request:
             content = msgdic['content']
             new = {}  # nuevo producto
 
@@ -185,15 +175,26 @@ def anadirProductosTiendaExterna(producto=None, modelo=None, marca=None, precio=
         return False
 
 
-def enviarMsgATiendaExterna(modelo, marca):
-    g = Graph()
-    prod = ECSDI.Producto
+def añadirMetodologiaDePago(tienda=None, met=None):
+    graph = Graph()
+    ontologyFile = open('../data/metodologias_de_pago')
+    graph.parse(ontologyFile, format='turtle')
 
-    g.add((prod, RDF.Type, ECSDI.Producto))
-    g.add((prod, ECSDI.Modelo, Literal(modelo)))
-    g.add((prod, ECSDI.Marca, Literal(marca)))
+    if met is not None and tienda is not None :
+        query = """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX default: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#>
+                INSERT INTO metodologiasDePago VALUES ("""
 
-    return g
+        query += tienda + """, """
+        query += met + """);"""
+
+        graph.query(query)
+
+        return True
+    else:
+        return False
 
 @app.route("/Stop")
 def stop():
