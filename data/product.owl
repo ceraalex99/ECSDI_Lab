@@ -45,420 +45,420 @@ ns1:precio a <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_I6EXKB> a pont:Modelo ;
     ns1:nombre "Modelo_Silla_I6EXKB" .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_3K5ETI> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_3K5ETI> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_XRVNTX> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3UNBES> ;
     ns1:nombre "nombre_BWGBEO" ;
     ns1:peso 3.091446e+02 ;
     ns1:precio 347 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_4KCNQD> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_4KCNQD> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_F03XH5> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3UNBES> ;
     ns1:nombre "nombre_TKK3XR" ;
     ns1:peso 3.85835e+02 ;
     ns1:precio 445 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_6O6XJY> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_6O6XJY> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_F03XH5> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_8CRVJB> ;
     ns1:nombre "nombre_1YOSYE" ;
     ns1:peso 3.169879e+02 ;
     ns1:precio 383 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_A6F4UX> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_A6F4UX> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_F03XH5> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_HASQ1U> ;
     ns1:nombre "nombre_VKYKQY" ;
     ns1:peso 2.664068e+02 ;
     ns1:precio 136 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ADSHJF> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ADSHJF> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_25GHE0> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_BWPA2H> ;
     ns1:nombre "nombre_FXZ72T" ;
     ns1:peso 2.25157e+02 ;
     ns1:precio 107 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_AXDKNO> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_AXDKNO> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_IG3QRS> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_BWPA2H> ;
     ns1:nombre "nombre_NS903J" ;
     ns1:peso 2.676969e+02 ;
     ns1:precio 569 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_BF200J> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_BF200J> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_F03XH5> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_RHGF2I> ;
     ns1:nombre "nombre_5HDCO8" ;
     ns1:peso 2.814939e+02 ;
     ns1:precio 323 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_D8QIKB> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_D8QIKB> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_25GHE0> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3S4PI3> ;
     ns1:nombre "nombre_5UPMG7" ;
     ns1:peso 3.542041e+02 ;
     ns1:precio 137 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_EKYDRE> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_EKYDRE> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_X79K65> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_TPYCMD> ;
     ns1:nombre "nombre_3HQDER" ;
     ns1:peso 3.360344e+02 ;
     ns1:precio 235 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_F6RPOS> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_F6RPOS> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_S1J35E> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_RHGF2I> ;
     ns1:nombre "nombre_87XI0A" ;
     ns1:peso 3.641413e+02 ;
     ns1:precio 341 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GH4QOU> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GH4QOU> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_XRVNTX> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_ESWZDW> ;
     ns1:nombre "nombre_0VSM0V" ;
     ns1:peso 2.992598e+02 ;
     ns1:precio 167 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GQG4Y4> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GQG4Y4> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_F03XH5> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_ESWZDW> ;
     ns1:nombre "nombre_XBW8RM" ;
     ns1:peso 3.91028e+02 ;
     ns1:precio 505 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GUMTHB> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GUMTHB> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_P5INGZ> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_LINGD5> ;
     ns1:nombre "nombre_XHZ4DS" ;
     ns1:peso 3.799767e+02 ;
     ns1:precio 488 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_H67WUG> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_H67WUG> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_S1J35E> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_TPYCMD> ;
     ns1:nombre "nombre_13D8FF" ;
     ns1:peso 2.30272e+02 ;
     ns1:precio 456 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_I66COR> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3UNBES> ;
     ns1:nombre "nombre_2OXHUO" ;
     ns1:peso 3.992119e+02 ;
     ns1:precio 569 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_MQKYDM> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_MQKYDM> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_X79K65> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_210OHZ> ;
     ns1:nombre "nombre_KF4442" ;
     ns1:peso 2.586423e+02 ;
     ns1:precio 335 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_U8FNXK> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_U8FNXK> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_I66COR> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_RHGF2I> ;
     ns1:nombre "nombre_NRYJAC" ;
     ns1:peso 2.734735e+02 ;
     ns1:precio 401 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_UXTI5P> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_UXTI5P> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_XRVNTX> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3UNBES> ;
     ns1:nombre "nombre_5KNMA3" ;
     ns1:peso 3.458366e+02 ;
     ns1:precio 453 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_XK3RF2> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_XK3RF2> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_I66COR> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3S4PI3> ;
     ns1:nombre "nombre_ISOM8P" ;
     ns1:peso 3.44806e+02 ;
     ns1:precio 200 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ZS02A4> a pont:Movil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ZS02A4> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Movil_IG3QRS> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Movil_3S4PI3> ;
     ns1:nombre "nombre_JMB1PC" ;
     ns1:peso 2.87707e+02 ;
     ns1:precio 225 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_0M5JXQ> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_0M5JXQ> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_4SU8R8> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_OWIQ68> ;
     ns1:nombre "nombre_PPJ0Z8" ;
     ns1:peso 2.4861e+03 ;
     ns1:precio 1052 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_50RC92> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_50RC92> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_4SU8R8> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_UOAOR5> ;
     ns1:nombre "nombre_45UGTK" ;
     ns1:peso 1.959681e+03 ;
     ns1:precio 1239 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_5AN5SU> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_5AN5SU> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_4SU8R8> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_OWIQ68> ;
     ns1:nombre "nombre_IX901O" ;
     ns1:peso 1.768147e+03 ;
     ns1:precio 1659 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_71SMOW> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_71SMOW> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_EJTLT9> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_BI6QNA> ;
     ns1:nombre "nombre_OAI3G7" ;
     ns1:peso 2.320531e+03 ;
     ns1:precio 1429 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_81B596> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_81B596> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_OL2RZK> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_CKSTAF> ;
     ns1:nombre "nombre_9PMDDY" ;
     ns1:peso 1.288773e+03 ;
     ns1:precio 1921 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_9017N0> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_9017N0> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_0XAMAP> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_QYER6Y> ;
     ns1:nombre "nombre_V5SHI2" ;
     ns1:peso 1.383606e+03 ;
     ns1:precio 1998 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_AEZJWZ> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_AEZJWZ> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_PTGBQI> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_TZX70M> ;
     ns1:nombre "nombre_46SOKC" ;
     ns1:peso 2.420469e+03 ;
     ns1:precio 1340 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_B7Y3G7> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_B7Y3G7> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_OL2RZK> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_1Q5G7Z> ;
     ns1:nombre "nombre_G7KDDB" ;
     ns1:peso 1.764538e+03 ;
     ns1:precio 573 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_E1HB7K> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_E1HB7K> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_UC8OJB> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_4D7NS1> ;
     ns1:nombre "nombre_N0PI6E" ;
     ns1:peso 1.56703e+03 ;
     ns1:precio 959 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_FV82PC> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_FV82PC> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_GKBALR> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_BI6QNA> ;
     ns1:nombre "nombre_CZJM28" ;
     ns1:peso 2.243705e+03 ;
     ns1:precio 1211 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_GOIKB4> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_GOIKB4> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_OL2RZK> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_OWIQ68> ;
     ns1:nombre "nombre_OHXP5Y" ;
     ns1:peso 1.847652e+03 ;
     ns1:precio 503 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_MAU3O5> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_MAU3O5> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_UC8OJB> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_BI6QNA> ;
     ns1:nombre "nombre_J5ZKJR" ;
     ns1:peso 1.592342e+03 ;
     ns1:precio 1250 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_NJB4K4> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_NJB4K4> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_0XAMAP> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_TZX70M> ;
     ns1:nombre "nombre_QOMY6J" ;
     ns1:peso 1.145077e+03 ;
     ns1:precio 1222 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_PFOA6Y> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_PFOA6Y> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_4AT7GF> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_TZX70M> ;
     ns1:nombre "nombre_N99WOR" ;
     ns1:peso 1.627655e+03 ;
     ns1:precio 1776 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_PM4DRZ> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_PM4DRZ> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_PTGBQI> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_EIL2ZI> ;
     ns1:nombre "nombre_ZRQSOF" ;
     ns1:peso 1.046868e+03 ;
     ns1:precio 1611 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_Q2ULJC> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_Q2ULJC> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_GKBALR> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_UOAOR5> ;
     ns1:nombre "nombre_QQL7EK" ;
     ns1:peso 1.465097e+03 ;
     ns1:precio 1563 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_URW92V> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_URW92V> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_0XAMAP> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_QYER6Y> ;
     ns1:nombre "nombre_XR1AJO" ;
     ns1:peso 1.90986e+03 ;
     ns1:precio 720 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_VH6B6V> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_VH6B6V> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_O823AT> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_P877D3> ;
     ns1:nombre "nombre_V261PA" ;
     ns1:peso 1.236275e+03 ;
     ns1:precio 1154 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_W3EQXE> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_W3EQXE> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_4SU8R8> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_1Q5G7Z> ;
     ns1:nombre "nombre_QWALSP" ;
     ns1:peso 1.760031e+03 ;
     ns1:precio 671 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_ZAFAY5> a pont:Portatil ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_ZAFAY5> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Portatil_EJTLT9> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Portatil_BI6QNA> ;
     ns1:nombre "nombre_UPWRUU" ;
     ns1:peso 1.93795e+03 ;
     ns1:precio 1345 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_0ZZMWD> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_0ZZMWD> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_I1SRBI> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_7TWXV9> ;
     ns1:nombre "nombre_TQD9DW" ;
     ns1:peso 1.85684e+04 ;
     ns1:precio 180 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_1L7XU2> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_1L7XU2> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_H05ZL3> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_AVU21P> ;
     ns1:nombre "nombre_050VG8" ;
     ns1:peso 1.609353e+04 ;
     ns1:precio 159 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_BLZI8G> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_BLZI8G> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_LA8BH0> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_QJWGOW> ;
     ns1:nombre "nombre_TB6U7U" ;
     ns1:peso 6.445487e+03 ;
     ns1:precio 188 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_CAQWQ6> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_CAQWQ6> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_ETUAIU> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_Q04WV3> ;
     ns1:nombre "nombre_XZ0U6Z" ;
     ns1:peso 1.118293e+04 ;
     ns1:precio 60 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_G1KHYF> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_G1KHYF> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_L9CQ4C> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_F9FERT> ;
     ns1:nombre "nombre_Q0X7CX" ;
     ns1:peso 9.434123e+03 ;
     ns1:precio 138 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_HG3RLM> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_HG3RLM> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_ETUAIU> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_AVU21P> ;
     ns1:nombre "nombre_G81NHX" ;
     ns1:peso 1.948761e+04 ;
     ns1:precio 167 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_JGLZUS> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_JGLZUS> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_ETUAIU> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_AVU21P> ;
     ns1:nombre "nombre_HPCMND" ;
     ns1:peso 1.542126e+04 ;
     ns1:precio 126 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KHPXN1> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KHPXN1> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_I1SRBI> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_A0PVXZ> ;
     ns1:nombre "nombre_FG3R2F" ;
     ns1:peso 1.955553e+04 ;
     ns1:precio 180 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_GK5W89> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_Q04WV3> ;
     ns1:nombre "nombre_TC5BWP" ;
     ns1:peso 7.327585e+03 ;
     ns1:precio 139 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_M68VS6> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_M68VS6> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_920IDM> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_E6O2RP> ;
     ns1:nombre "nombre_Q2T3SJ" ;
     ns1:peso 1.578599e+04 ;
     ns1:precio 189 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_MPS2JQ> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_MPS2JQ> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_XDI5OM> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_J0R2EH> ;
     ns1:nombre "nombre_RVBQZ1" ;
     ns1:peso 1.818828e+04 ;
     ns1:precio 79 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_XDI5OM> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_Q04WV3> ;
     ns1:nombre "nombre_PRKVMV" ;
     ns1:peso 5.278006e+03 ;
     ns1:precio 121 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_PRW6TE> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_PRW6TE> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_XDI5OM> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_Q04WV3> ;
     ns1:nombre "nombre_D0WCVB" ;
     ns1:peso 7.606377e+03 ;
     ns1:precio 120 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_RPWOSY> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_RPWOSY> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_920IDM> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_Q04WV3> ;
     ns1:nombre "nombre_P7KGNY" ;
     ns1:peso 1.146702e+04 ;
     ns1:precio 71 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_SNVN4Q> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_SNVN4Q> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_7D8AQI> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_J0R2EH> ;
     ns1:nombre "nombre_RTR22W" ;
     ns1:peso 7.702358e+03 ;
     ns1:precio 101 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_GK5W89> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_QJWGOW> ;
     ns1:nombre "nombre_EKKFRT" ;
     ns1:peso 1.975466e+04 ;
     ns1:precio 104 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_TCBWRL> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_TCBWRL> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_H05ZL3> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_J0R2EH> ;
     ns1:nombre "nombre_RANN2Z" ;
     ns1:peso 7.164019e+03 ;
     ns1:precio 33 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_7JPK1V> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_A0PVXZ> ;
     ns1:nombre "nombre_9H6T0F" ;
     ns1:peso 1.102748e+04 ;
     ns1:precio 114 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_X8Z92Y> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_X8Z92Y> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_I1SRBI> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_A47QQF> ;
     ns1:nombre "nombre_TG3N67" ;
     ns1:peso 4.235402e+03 ;
     ns1:precio 59 .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> a pont:Silla ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> a pont:Producto ;
     ns1:marca <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Marca_Silla_ETUAIU> ;
     ns1:modelo <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Modelo_Silla_J0R2EH> ;
     ns1:nombre "nombre_DM7G31" ;

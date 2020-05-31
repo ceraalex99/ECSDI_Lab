@@ -123,8 +123,6 @@ def comunicacion():
                 if gm.value(subject=accion, predicate=RDF.type) == ECSDI.Devolucion_insatisfaccion and fuera_plazo(gm, content):  # si se ha comprado hace mas de 15 dias, rechazado
                     gr = build_message(Graph(), ACL['refuse'], sender=AgenteDevoluciones.uri, msgcnt=get_count())
                 else:
-                    for item in gm.subjects(RDF.type, ACL.FipaAclMessage):
-                        gm.remove((item, None, None))
 
                     centroLogistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteDevoluciones, get_count())
 

@@ -80,7 +80,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteBuscador.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteBuscador.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteBuscador.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteBuscador))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteBuscador))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
@@ -119,7 +119,7 @@ def comunicacion():
             content = msgdic['content']
             accion = gm.value(subject=content, predicate=RDF.type)
 
-            if accion == ECSDI.Mostrar_busqueda:
+            if accion == ECSDI.Buscar:
                 restricciones = gm.objects(content, ECSDI.Restringe)
                 restricciones_dict = {}
                 for restriccion in restricciones:
@@ -136,10 +136,11 @@ def comunicacion():
                         precio_min = gm.value(subject=restriccion, predicate=ECSDI.Precio_min)
                         if precio_min:
                             logger.info('Precio minimo: ' + precio_min)
-                            restricciones_dict['precio_min'] = precio_min.toPython()
+                            restricciones_dict['precio_min'] = precio_min
+                            logger.info(restricciones_dict['precio_min'])
                         if precio_max:
                             logger.info('Precio maximo: ' + precio_max)
-                            restricciones_dict['precio_max'] = precio_max.toPython()
+                            restricciones_dict['precio_max'] = precio_max
 
                 gr = buscarProductos(**restricciones_dict)
                 gr = build_message(gr, perf=ACL['inform-done'], sender=AgenteBuscador.uri, msgcnt=get_count(), receiver=msgdic['sender'])
@@ -153,23 +154,24 @@ def comunicacion():
 
 def buscarProductos(modelo=None, marca=None, precio_min=0.0, precio_max=sys.float_info.max):
     graph = Graph()
-    ontologyFile= open('../data/productos')
+    ontologyFile= open('../data/product.owl', 'r')
     graph.parse(ontologyFile, format='turtle')
 
     modeloPresence = marcaPresence = False
     query = """
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX default: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#>
+    PREFIX default: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/property/>
+    PREFIX pont: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/>
     
     SELECT DISTINCT ?producto ?nombre ?marca ?modelo ?precio
         where {
-            { ?producto rdf:type default:Producto } .
-            ?producto default:Nombre ?nombre .
-            ?producto default:Marca ?marca .
-            ?producto default:Modelo ?modelo .
-            ?producto default:Precio ?precio .
-            ?producto default:Peso ?peso .
+            { ?producto rdf:type pont:Producto } .
+            ?producto default:nombre ?nombre .
+            ?producto default:marca ?marca .
+            ?producto default:modelo ?modelo .
+            ?producto default:precio ?precio .
+            ?producto default:peso ?peso .
             FILTER("""
 
     if modelo is not None:
@@ -184,13 +186,13 @@ def buscarProductos(modelo=None, marca=None, precio_min=0.0, precio_max=sys.floa
 
     if modeloPresence or marcaPresence:
         query += """ && """
-    query += """?precio >= """ + str(precio_min)  + """ && ?precio <= """ + str(precio_max) + """ )} order by asc(UCASE(str(?nombre)))"""
+    query += """?precio >= """ + str(precio_min) + """ && ?precio <= """ + str(precio_max) + """ )}"""
 
     gquery = graph.query(query)
     res = Graph()
     res.bind('ECSDI', ECSDI)
     for prod in gquery:
-        logger.debug(prod.nombre, prod.marca, prod.modelo, prod.precio)
+        logger.info(prod.nombre, prod.marca, prod.modelo, prod.precio)
         res.add((prod.producto, RDF.type, ECSDI.Producto))
         res.add((prod.producto, ECSDI.Nombre, Literal(prod.nombre, datatype=XSD.string)))
         res.add((prod.producto, ECSDI.Marca, Literal(prod.marca, datatype=XSD.string)))
@@ -226,16 +228,17 @@ def agentbehavior1(cola):
 
     :return:
     """
+
     pass
 
 
 if __name__ == '__main__':
     # Ponemos en marcha los behaviors
     ab1 = Process(target=agentbehavior1, args=(cola1,))
-    register()
 
+    register()
     # Ponemos en marcha el servidor
-    app.run(host=hostname, port=port)
+    app.run(host=hostname, port=port, debug=True)
 
     # Esperamos a que acaben los behaviors
     ab1.join()

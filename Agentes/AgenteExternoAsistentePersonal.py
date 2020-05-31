@@ -68,8 +68,7 @@ agn = Namespace("http://www.agentes.org#")
 # Contador de mensajes
 mss_cnt = 0
 
-# Configuration constants and variables
-agn = Namespace("http://www.agentes.org#")
+
 
 # Datos del Agente
 AgenteExternoAsistentePersonal = Agent('AgenteExternoAsistentePersonal',
@@ -91,8 +90,6 @@ cola1 = Queue()
 # Flask stuff
 app = Flask(__name__, template_folder='../templates')
 
-# Global dsgraph triplestore
-dsgraph = Graph()
 
 # Productos enconctrados
 listaProductos = []
@@ -110,6 +107,7 @@ def get_count():
 def browser_root():
     return render_template('rootAsistentePersonal.html')
 
+
 @app.route("/buscar", methods=['GET', 'POST'])
 def browserBucador():
     """
@@ -126,41 +124,43 @@ def browserBucador():
             content = ECSDI['BuscarProductos_' + str(get_count())]
 
             gr = Graph()
-            gr.add((content, RDF.type, ECSDI.Cerca_productes))
+            gr.add((content, RDF.type, ECSDI.Buscar))
 
             modelo = request.form['modelo']
             if modelo:
                 # Subject modelo
                 sModelo = ECSDI['RestriccioModelo' + str(get_count())]
-                gr.add((sModelo, RDF.type, ECSDI.RestriccioNom))
-                gr.add((sModelo, ECSDI.Nom, Literal(modelo, datatype=XSD.string)))
+                gr.add((sModelo, RDF.type, ECSDI.Restriccion_Modelo))
+                gr.add((sModelo, ECSDI.Modelo, Literal(modelo, datatype=XSD.string)))
                 # Add restriccio to content
                 gr.add((content, ECSDI.Restringe, URIRef(sModelo)))
 
             marca = request.form['marca']
             if marca:
-                subject_marca = ECSDI['RestriccionMarca_' + str(get_count())]
-                gr.add((subject_marca, RDF.type, ECSDI.Restriccion_Marca))
-                gr.add((subject_marca, ECSDI.Marca, Literal(marca, datatype=XSD.string)))
-                gr.add((content, ECSDI.Restringe, URIRef(subject_marca)))
+                smarca = ECSDI['RestriccionMarca_' + str(get_count())]
+                gr.add((smarca, RDF.type, ECSDI.Restriccion_Marca))
+                gr.add((smarca, ECSDI.Marca, Literal(marca, datatype=XSD.string)))
+                gr.add((content, ECSDI.Restringe, URIRef(smarca)))
 
             min_price = request.form['min_price']
             max_price = request.form['max_price']
             if min_price or max_price:
-                sPreus = ECSDI['RestriccionPreus_' + str(get_count())]
-                gr.add((sPreus, RDF.type, ECSDI.Rango_precio))
+                sPrecio = ECSDI['RestriccionPrecio_' + str(get_count())]
+                gr.add((sPrecio, RDF.type, ECSDI.Restriccion_Precio))
                 if min_price:
-                    gr.add((sPreus, ECSDI.Precio_min, Literal(min_price)))
+                    gr.add((sPrecio, ECSDI.Precio_min, Literal(min_price)))
                 if max_price:
-                    gr.add((sPreus, ECSDI.Precio_max, Literal(max_price)))
-                gr.add((content, ECSDI.Restringe, URIRef(sPreus)))
+                    gr.add((sPrecio, ECSDI.Precio_max, Literal(max_price)))
+                gr.add((content, ECSDI.Restringe, URIRef(sPrecio)))
 
             buscador = get_agent_info(agn.AgenteBuscador, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
 
+            logger.info("He recibido la uri del buscador")
             gr2 = send_message(
                 build_message(
                     gr, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=buscador.uri, msgcnt=get_count(), content=content), buscador.address)
 
+            logger.info("Todo feten con la llamada al buscador")
             index = 0
             # posicion del sujeto
             sPos = {}
@@ -186,6 +186,7 @@ def browserBucador():
                         sDict['peso'] = o
                     listaProductos[sPos[s]] = sDict
 
+            logger.info(listaProductos)
             return render_template('buscador.html', products=listaProductos)
 
         elif request.form['submit'] == 'Comprar':
@@ -359,7 +360,7 @@ if __name__ == '__main__':
     ab1.start()
 
     # Ponemos en marcha el servidor
-    app.run(host=hostname, port=port)
+    app.run(host=hostname, port=port, debug=True)
 
     # Esperamos a que acaben los behaviors
     ab1.join()
