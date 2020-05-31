@@ -179,7 +179,7 @@ def enviar_info_transporte(nom, precio, data_arribada):
 if __name__ == '__main__':
     # Ponemos en marcha los behaviors
     ab1 = Process(target=agentbehavior1, args=(cola1,))
-    ab1.start()
+    register()
 
     # Ponemos en marcha el servidor
     app.run(host=hostname, port=port)

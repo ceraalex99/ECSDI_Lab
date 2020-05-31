@@ -178,6 +178,7 @@ def agentbehavior1(cola):
 if __name__ == '__main__':
     # Ponemos en marcha los behaviors
     ab1 = Process(target=agentbehavior1, args=(cola1,))
+    register()
 
     # Ponemos en marcha el servidor
     app.run(host=hostname, port=port)
