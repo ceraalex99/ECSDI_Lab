@@ -50,7 +50,7 @@ AgenteCentroLogistico = Agent('AgenteCentroLogistico',
                        'http://%s:%d/Stop' % (hostname, port))
 
 # Directory agent address
-DirectoryAgent = Agent('AgenteDirectorio',
+AgenteDirectorio = Agent('AgenteDirectorio',
                        agn.Directorio,
                        'http://%s:9000/Register' % hostname,
                        'http://%s:9000/Stop' % hostname)
@@ -87,10 +87,10 @@ def register():
     gr = send_message(
         build_message(gmess, perf=ACL.request,
                       sender=AgenteCentroLogistico.uri,
-                      receiver=DirectoryAgent.uri,
+                      receiver=AgenteDirectorio.uri,
                       content=reg_obj,
                       msgcnt=mss_cnt),
-        DirectoryAgent.address)
+        AgenteDirectorio.address)
     mss_cnt += 1
 
     return gr
@@ -126,7 +126,7 @@ def comunicacion():
 
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
             prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
-            Agente = get_agent_info(agn.AgenteExternoTransportista, DirectoryAgent, AgenteCentroLogistico, get_count())
+            Agente = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio, AgenteCentroLogistico, get_count())
 
             resposta_preu = send_message(build_message(enviar_mensaje_transportista(peso, prioridad),
                                ACL['request'],
@@ -148,7 +148,7 @@ def comunicacion():
             content = msgdic3['content']
 
             if msgdic['performative'] == ACL.accept:
-                agenteAsistentePersonal = get_agent_info(agn.AgenteCompras, DirectoryAgent, AgenteCentroLogistico, get_count())
+                agenteAsistentePersonal = get_agent_info(agn.AgenteCompras, AgenteDirectorio, AgenteCentroLogistico, get_count())
                 nom = gm.value(subject=content, predicate=ECSDI.Nombre)
                 data_arribada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
 
