@@ -109,7 +109,7 @@ def browser_root():
 
 
 @app.route("/buscar", methods=['GET', 'POST'])
-def browserBucador():
+def browserBuscador():
     """
     Comunicacion con el agente mediante un formulario en un navegador
     """
@@ -214,20 +214,11 @@ def browserBucador():
             # Asignar prioridad a la peticion (asignamos el contador de mensaje)
             gr.add((content, ECSDI.Prioridad, Literal(get_count(), datatype=XSD.integer)))
 
-            # Creacion de la ciudad (por ahora Barcelona) --------------------------------------------------------------
-            subject_ciudad = ECSDI['Ciudad_' + str(random.randint(1, sys.float_info.max))]
-
-            gr.add((subject_ciudad, RDF.type, ECSDI.Ciudad))
-            gr.add((subject_ciudad, ECSDI.Nombre, Literal(41.398373, datatype=XSD.float)))
-            gr.add((subject_ciudad, ECSDI.Latitud, Literal(2.188247, datatype=XSD.float)))
-            gr.add((subject_ciudad, ECSDI.Longitud, Literal('Barcelona', datatype=XSD.string)))
-
-            # Creacion del sobre (Compra) ------------------------------------------------------------------------------
+            # Creacion de la Compra ------------------------------------------------------------------------------------
             sCompra = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
             gr.add((sCompra, RDF.type, ECSDI.Compra))
 
             gr.add((sCompra, ECSDI.Pagat, Literal(0, datatype=XSD.integer)))
-            gr.add((sCompra, ECSDI.Enviar_a, URIRef(subject_ciudad)))
 
             totalPrice = 0.0
             for producto in productosPedidos:
