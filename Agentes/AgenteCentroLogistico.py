@@ -33,7 +33,7 @@ __author__ = 'Alex'
 # Configuration stuff
 
 hostname = socket.gethostname()
-port = 9031
+port = 9012
 
 logger = config_logger(level=1)
 
@@ -201,7 +201,7 @@ def enviar_mensaje_transportista(peso, prioridad):
     content = ECSDI['Ecsdi_envio']
     g.add((content, RDF.Type, ECSDI.Lote))
     g.add((content, ECSDI.Peso, Literal(peso)))
-    g.add((content, ECSDI.Peso, Literal(prioridad)))
+    g.add((content, ECSDI.Prioridad, Literal(prioridad)))
 
     return g
 

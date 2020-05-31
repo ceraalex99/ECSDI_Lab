@@ -32,7 +32,7 @@ __author__ = 'Alex'
 
 # Configuration stuff
 hostname = socket.gethostname()
-port = 9020
+port = 9011
 logger = config_logger(level=1)
 
 agn = Namespace("http://www.agentes.org#")
