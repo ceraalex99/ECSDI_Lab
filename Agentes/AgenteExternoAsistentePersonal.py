@@ -214,7 +214,7 @@ def browserBuscador():
             # Asignar prioridad a la peticion (asignamos el contador de mensaje)
             gr.add((content, ECSDI.Prioridad, Literal(get_count(), datatype=XSD.integer)))
 
-            # Creacion del sobre (Compra) ------------------------------------------------------------------------------
+            # Creacion de la Compra ------------------------------------------------------------------------------------
             sCompra = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
             gr.add((sCompra, RDF.type, ECSDI.Compra))
 

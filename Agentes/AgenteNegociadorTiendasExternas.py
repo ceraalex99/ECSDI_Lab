@@ -116,26 +116,15 @@ def comunicacion():
             metodologiaDePago = gm.value(subject=content, predicate=ECSDI.Metodologia_de_pago)
             tiendaExterna = msgdic['sender']
 
-            ok = añadirMetodologiaDePago(tiendaExterna, metodologiaDePago)
+            gr = añadirMetodologiaDePago(tiendaExterna, metodologiaDePago)
 
 
         # Una tienda externa quiere añadir un producto a nuestra tienda
         elif msgdic['performative'] == ACL.request:
-            content = msgdic['content']
-            new = {}  # nuevo producto
 
-            producto = gm.value(subject=content, predicate=ECSDI.Producto)
-            new['producto'] = producto
-            modelo = gm.value(subject=content, predicate=ECSDI.Modelo)
-            new['modelo'] = modelo
-            marca = gm.value(subject=content, predicate=ECSDI.Marca)
-            new['marca'] = marca
-            precio = gm.value(subject=content, predicate=ECSDI.Precio)
-            new['precio'] = precio
             tiendaOrigen = msgdic['sender']
-            new['tiendaOrigen'] = tiendaOrigen
 
-            ok = anadirProductosTiendaExterna(**new)
+            ok = anadirProductosTiendaExterna(gm, tiendaOrigen)
 
             if ok:
                 gr = build_message(gr, perf=ACL['inform-done'], sender=AgenteNegociadorTiendasExternas.uri,
@@ -149,36 +138,31 @@ def comunicacion():
     return gr.serialize(format='xml'), 200
 
 
-def anadirProductosTiendaExterna(producto=None, modelo=None, marca=None, precio=0.0, tiendaOrigen=None):
+def anadirProductosTiendaExterna(gm, tiendaOrigen):
     graph = Graph()
     ontologyFile = open('../data/productos')
     graph.parse(ontologyFile, format='turtle')
 
-    if producto is not None and modelo is not None and marca is not None:
-        query = """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX default: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#>
-        INSERT INTO Productos VALUES ("""
+    # falta añadir que el producto es externo y su tienda origen -------------------------------------------------------
 
-        query += producto + """, """
-        query += modelo + """, """
-        query += marca + """, """
-        query += str(precio) + """, """
-        query += tiendaOrigen + """);"""
+    producto = gm.subjects(RDF.type, ECSDI.Producto)
+    producto = producto.next()
 
-        gquery = graph.query(query)
+    for s, p, o in gm:
+        if s == producto:
+            graph.add((s, p, o))
 
-        return True
-    else:
-        # gr = build_message(Graph(), ACL['not-understood'], sender=AgenteNegociadorTiendasExternas.uri, msgcnt=get_count())
-        return False
+    graph.serialize(destination='../data/product', format='turtle')
+
+    return gm
 
 
 def añadirMetodologiaDePago(tienda=None, met=None):
     graph = Graph()
     ontologyFile = open('../data/metodologias_de_pago')
     graph.parse(ontologyFile, format='turtle')
+
+    # check that -------------------------------------------------------------------------------------------------------
 
     if met is not None and tienda is not None :
         query = """
