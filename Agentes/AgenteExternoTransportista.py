@@ -13,7 +13,8 @@ Asume que el agente de registro esta en el puerto 9000
 
 @author: javier
 """
-
+import random
+import sys
 from multiprocessing import Process, Queue
 import socket
 
@@ -25,7 +26,7 @@ from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
 from AgentUtil.Logging import config_logger
 from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL
-from rdflib.namespace import RDF, FOAF
+from rdflib.namespace import RDF, FOAF, XSD
 
 __author__ = 'javier'
 
@@ -79,7 +80,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteExternoTransportista.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteExternoTransportista.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteExternoTransportista.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteExternoTransportista))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteExternoTransportista))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
@@ -109,22 +110,28 @@ def comunicacion():
     msgdic = get_message_properties(gm)
 
     gr = None
-
+    logger.info('ANTES DE NONE')
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
     else:
         # El agente centro logistico nos hace request del precio de nuestro transporte
+        logger.info('HAY MENSAJE')
         if msgdic['performative'] == ACL.request:
-
+            logger.info('ES REQUEST')
             content = msgdic['content']
-            peso = gm.value(subject=content, predicate=ECSDI.Peso)
+            accion = gm.value(subject=content, predicate=RDF.type)
+            if accion == ECSDI.Lote:
+                logger.info('ES Lote')
+                peso = gm.value(subject=content, predicate=ECSDI.Peso_lote)
 
-            gr = build_message(devolverPrecio(peso),
-                               ACL['propose'],
-                               sender=AgenteExternoTransportista.uri,
-                               msgcnt=get_count())
+                logger.info(float(peso.strip('"')))
 
+                gr = build_message(devolverPrecio(float(peso.strip('"'))),
+                                   ACL['propose'],
+                                   sender=AgenteExternoTransportista.uri,
+                                   msgcnt=get_count(), content=content)
+                logger.info('Builded')
         # El agentre centro logistico nos informa que nos ha elegido como transportista
         elif msgdic['performative'] == ACL.inform:
             gr = build_message(Graph(), ACL['agree'], sender=AgenteExternoTransportista.uri,
@@ -167,12 +174,14 @@ def agentbehavior1(cola):
 
 def devolverPrecio(peso):
     g = Graph()
-    transportista = ECSDI.Transportista
+    content = ECSDI['Transportista_' + str(random.randint(1, sys.float_info.max))]
 
     precio = peso * 3
-    g.add((transportista, RDF.Type, ECSDI.Transportista))
-    g.add((transportista, ECSDI.Nombre, Literal('Pedro')))
-    g.add((transportista, ECSDI.Precio, Literal(precio)))
+    logger.info(precio)
+
+    g.add((content, RDF.type, ECSDI.Transportista))
+    g.add((content, ECSDI.Nombre, Literal('Pedro')))
+    g.add((content, ECSDI.Precio_entrega, Literal(precio, datatype=XSD.float)))
 
     return g
 

@@ -27,7 +27,7 @@ from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
 from AgentUtil.Logging import config_logger
 from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL
-from rdflib.namespace import RDF, FOAF
+from rdflib.namespace import RDF, FOAF, XSD
 
 __author__ = 'Alex'
 
@@ -40,6 +40,9 @@ port = 9012
 logger = config_logger(level=1)
 
 agn = Namespace("http://www.agentes.org#")
+
+# Peso del lote
+peso_lote = 0.0
 
 # Contador de mensajes
 mss_cnt = 0
@@ -84,7 +87,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteCentroLogistico.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteCentroLogistico.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteCentroLogistico.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteCentroLogistico))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteCentroLogistico))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
@@ -115,30 +118,56 @@ def comunicacion():
 
     gr = None
 
+    logger.info('HE LLEGADO AQUI')
+
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
     elif msgdic['performative'] == ACL.request:
+        logger.info('HE LLEGADO AQUI2')
 
         content = msgdic['content']
         accion = gm.value(subject=content, predicate=RDF.type)
 
-        if accion == ECSDI.Hacer_pedido:
+        if accion == ECSDI.Pedido:
+            for item in gm.subjects(RDF.type, ACL.FipaAclMessage):
+                gm.remove((item, None, None))
+
             ofile = open('../data/pedidos_pendientes.owl', "ab")
             ofile.write(gm.serialize(format='turtle'))
             ofile.close()
-            if(datetime.datetime.now() ):
+
+            peso_pedido = gm.value(subject=content, predicate=ECSDI.Peso)
+            logger.info(float(peso_pedido.strip('"')))
+
+            actPesoLote(float(peso_pedido.strip('"')))
+
+            time = datetime.datetime.now().time()
+            nine_am = datetime.datetime.strptime("09:00:00", '%H:%M:%S').time()
+            nine_pm = datetime.datetime.strptime("21:00:00", '%H:%M:%S').time()
+            logger.info('ANTES DE LA HORA')
+            if nine_am < time < nine_pm:
+                logger.info('HE LLEGADO A LA HORA')
+                AgenteTransportista = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio,
+                                                     AgenteCentroLogistico, get_count())
                 g = Graph()
                 g.parse('../data/pedidos_pendientes.owl', format='turtle')
-                pedidos = g.subjects(predicate=RDF.type, object=ECSDI.Compra)
 
                 gr = Graph()
+                content = ECSDI['Lote_' + str(random.randint(1, sys.float_info.max))]
+                gr.add((content, RDF.type, ECSDI.Lote))
+                gr.add((content, ECSDI.Peso_lote, Literal(peso_lote, datatype=XSD.float)))
 
-                Lote = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
-                gr.add((Lote, RDF.type, ECSDI.Lote))
-                for p in pedidos:
-                    gr.add((pedido, ))
-
+                resposta_precio = send_message(build_message(gr,
+                                                             ACL['request'],
+                                                             sender=AgenteCentroLogistico.uri,
+                                                             receiver=AgenteTransportista.uri,
+                                                             msgcnt=get_count(), content=content), AgenteTransportista.address)
+                msgdic2 = get_message_properties(resposta_precio)
+                content = msgdic2['content']
+                precio = resposta_precio.value(subject=content, predicate=ECSDI.Precio_entrega)
+                logger.info(precio)
+            logger.info('Llego al final')
 
 
         else:
@@ -147,13 +176,7 @@ def comunicacion():
 
             peso = gm.value(subject=content, predicate=ECSDI.Peso)
             prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
-            AgenteTransportista = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio, AgenteCentroLogistico, get_count())
 
-            resposta_precio = send_message(build_message(enviar_mensaje_transportista(peso, prioridad),
-                               ACL['request'],
-                               sender=AgenteCentroLogistico.uri,
-                               receiver=AgenteTransportista.uri,
-                               msgcnt=get_count()), AgenteTransportista.address)
 
             msgdic2 = get_message_properties(resposta_precio)
             content = msgdic2['content']
@@ -216,6 +239,10 @@ def agentbehavior1(cola):
 
 # DETERMINATE AGENT FUNCTIONS ------------------------------------------------------------------------------
 
+def actPesoLote(peso_pedido):
+    global peso_lote
+    peso_lote += peso_pedido
+    return peso_lote
 
 def enviar_mensaje_transportista(peso, prioridad):
     g = Graph()
@@ -225,7 +252,6 @@ def enviar_mensaje_transportista(peso, prioridad):
     g.add((content, ECSDI.Prioridad, Literal(prioridad)))
 
     return g
-
 
 def informar_transportista():
     g = Graph()

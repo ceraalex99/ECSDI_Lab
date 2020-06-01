@@ -17,7 +17,7 @@ Asume que el agente de registro esta en el puerto 9000
 from multiprocessing import Process, Queue
 import socket
 
-from rdflib import Namespace, Graph, Literal
+from rdflib import Namespace, Graph, Literal, URIRef
 from flask import Flask, request
 from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info
 
@@ -104,17 +104,40 @@ def comunicacion():
     message = request.args['content']
     gm = Graph()
     gm.parse(data=message)
-
     msgdic = get_message_properties(gm)
-    content = msgdic['content']
+
 
     gr = None
 
+    logger.info('HE LLEGAO AQUI COMPRAS')
+
     if msgdic is None:
+        logger.info('NO ENTIENDO')
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCompras.uri, msgcnt=get_count())
     else:
-        if msgdic['performative'] == ACL.inform:
+
+        content = msgdic['content']
+
+        if msgdic['performative'] == ACL.request:
+            content = msgdic['content']
+            # Averiguamos el tipo de la accion
+            accion = gm.value(subject=content, predicate=RDF.type)
+            logger.info("He rebut la peticio de request")
+            logger.info(accion)
+
+            if accion == ECSDI.Pedido:
+                logger.info("He rebut la peticio de compra")
+
+                centrologistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteCompras, get_count())
+                logger.info('HE LLEGAO AQUI COMPRAS')
+
+                gr = send_message(
+                    build_message(gm, perf=ACL.request, sender=AgenteCompras.uri, receiver=centrologistico.uri,
+                                  msgcnt=get_count(),
+                                  content=content), centrologistico.address)
+
+        elif msgdic['performative'] == ACL.inform:
             Agente = get_agent_info(agn.AgentePersonal, AgenteDirectorio, AgenteCompras, get_count())
 
 
@@ -131,17 +154,6 @@ def comunicacion():
                                sender=AgenteCompras.uri,
                                receiver=Agente,
                                msgcnt=get_count())
-
-        if msgdic['performative'] == ACL.request:
-            CentroLogistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteCompras, get_count())
-            gr = send_message(
-                build_message(gm, perf=ACL.request,
-                              sender=AgenteCompras.uri,
-                              receiver=CentroLogistico.uri,
-                              msgcnt=mss_cnt),
-                CentroLogistico.address)
-
-
 
     logger.info('Respondemos a la peticion')
 
