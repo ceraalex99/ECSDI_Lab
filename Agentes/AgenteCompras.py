@@ -138,7 +138,7 @@ def comunicacion():
                                   content=content), centrologistico.address)
 
         elif msgdic['performative'] == ACL.inform:
-            Agente = get_agent_info(agn.AgentePersonal, AgenteDirectorio, AgenteCompras, get_count())
+            Agente = get_agent_info(agn.AgenteExternoAsistentePersonal, AgenteDirectorio, AgenteCompras, get_count())
 
 
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
@@ -192,7 +192,7 @@ def agentbehavior1(cola):
 def enviar_info_transporte(nom, precio, data_arribada):
     g = Graph()
     content = ECSDI['Ecsdi_envio']
-    g.add((content, RDF.Type, ECSDI.Info_transporte))
+    g.add((content, RDF.type, ECSDI.Info_transporte))
     g.add((content, ECSDI.Informacion_transportista, Literal(nom)))
     g.add((content, ECSDI.Fecha_final, Literal(data_arribada)))
     g.add((content, ECSDI.Precio, Literal(precio)))

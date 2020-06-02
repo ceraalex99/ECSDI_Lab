@@ -15,6 +15,7 @@ Asume que el agente de registro esta en el puerto 9000
 """
 import random
 import sys
+from datetime import datetime
 from multiprocessing import Process, Queue
 import socket
 
@@ -110,19 +111,19 @@ def comunicacion():
     msgdic = get_message_properties(gm)
 
     gr = None
-    logger.info('ANTES DE NONE')
+
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
     else:
         # El agente centro logistico nos hace request del precio de nuestro transporte
-        logger.info('HAY MENSAJE')
+
         if msgdic['performative'] == ACL.request:
-            logger.info('ES REQUEST')
+
             content = msgdic['content']
             accion = gm.value(subject=content, predicate=RDF.type)
             if accion == ECSDI.Lote:
-                logger.info('ES Lote')
+                logger.info('Es Request')
                 peso = gm.value(subject=content, predicate=ECSDI.Peso_lote)
 
                 logger.info(float(peso.strip('"')))
@@ -130,10 +131,11 @@ def comunicacion():
                 gr = build_message(devolverPrecio(float(peso.strip('"'))),
                                    ACL['propose'],
                                    sender=AgenteExternoTransportista.uri,
-                                   msgcnt=get_count(), content=content)
-                logger.info('Builded')
+                                   msgcnt=get_count(), receiver=msgdic['sender'])
+
         # El agentre centro logistico nos informa que nos ha elegido como transportista
         elif msgdic['performative'] == ACL.inform:
+            logger.info('Es Inform')
             gr = build_message(Graph(), ACL['agree'], sender=AgenteExternoTransportista.uri,
                                msgcnt=get_count())
             logger.info('Pedido entregado')
@@ -176,12 +178,14 @@ def devolverPrecio(peso):
     g = Graph()
     content = ECSDI['Transportista_' + str(random.randint(1, sys.float_info.max))]
 
-    precio = peso * 3
+    precio = peso * 0.001
     logger.info(precio)
 
+    d = datetime.today
     g.add((content, RDF.type, ECSDI.Transportista))
     g.add((content, ECSDI.Nombre, Literal('Pedro')))
     g.add((content, ECSDI.Precio_entrega, Literal(precio, datatype=XSD.float)))
+    g.add((content, ECSDI.Fecha_entrega, Literal(precio, datatype=XSD.datetime)))
 
     return g
 

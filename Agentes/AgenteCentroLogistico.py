@@ -17,7 +17,7 @@ import sys
 import random
 from multiprocessing import Process, Queue
 import socket
-import datetime
+from datetime import datetime, timedelta
 
 from rdflib import Namespace, Graph, Literal
 from flask import Flask, request
@@ -138,13 +138,13 @@ def comunicacion():
             ofile.close()
 
             peso_pedido = gm.value(subject=content, predicate=ECSDI.Peso)
-            logger.info(float(peso_pedido.strip('"')))
+            prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
 
             actPesoLote(float(peso_pedido.strip('"')))
 
-            time = datetime.datetime.now().time()
-            nine_am = datetime.datetime.strptime("09:00:00", '%H:%M:%S').time()
-            nine_pm = datetime.datetime.strptime("21:00:00", '%H:%M:%S').time()
+            time = datetime.now().time()
+            nine_am = datetime.strptime("09:00:00", '%H:%M:%S').time()
+            nine_pm = datetime.strptime("21:00:00", '%H:%M:%S').time()
             logger.info('ANTES DE LA HORA')
             if nine_am < time < nine_pm:
                 logger.info('HE LLEGADO A LA HORA')
@@ -158,51 +158,38 @@ def comunicacion():
                 gr.add((content, RDF.type, ECSDI.Lote))
                 gr.add((content, ECSDI.Peso_lote, Literal(peso_lote, datatype=XSD.float)))
 
-                resposta_precio = send_message(build_message(gr,
+                respuesta_precio = send_message(build_message(gr,
                                                              ACL['request'],
                                                              sender=AgenteCentroLogistico.uri,
                                                              receiver=AgenteTransportista.uri,
                                                              msgcnt=get_count(), content=content), AgenteTransportista.address)
-                msgdic2 = get_message_properties(resposta_precio)
-                content = msgdic2['content']
-                precio = resposta_precio.value(subject=content, predicate=ECSDI.Precio_entrega)
+
+                subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
+                precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
+                nombre = respuesta_precio.value(subject=content, predicate=ECSDI.Nombre)
+                if(prioridad == 1):
+                    fecha_llegada = datetime.today() + timedelta(days=2)
+                else:
+                    fecha_llegada = datetime.today() + timedelta(days=5)
                 logger.info(precio)
+                logger.info(fecha_llegada)
+
+                resposta_proposta = send_message(build_message(informar_transportista(),
+                                                               ACL['inform'],
+                                                               sender=AgenteCentroLogistico.uri,
+                                                               receiver=AgenteTransportista.uri,
+                                                               msgcnt=get_count()), AgenteTransportista.address)
+                msgdic2 = get_message_properties(resposta_proposta)
+
+                if msgdic2['performative'] == ACL.agree:
+                    logger.info('Acepta')
+                    # PIENSA EL TIPO DEL GRAFO
+                    gr = build_message(informar_usuario(nombre, fecha_llegada, precio),
+                                       ACL['inform'],
+                                       sender=AgenteCentroLogistico.uri,
+                                       msgcnt=get_count())
+
             logger.info('Llego al final')
-
-
-        else:
-            # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
-            # de registro
-
-            peso = gm.value(subject=content, predicate=ECSDI.Peso)
-            prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
-
-
-            msgdic2 = get_message_properties(resposta_precio)
-            content = msgdic2['content']
-
-            precio = resposta_precio.value(subject=content, predicate=ECSDI.Precio)
-
-            resposta_proposta = send_message(build_message(informar_transportista(),
-                               ACL['inform'],
-                               sender=AgenteCentroLogistico.uri,
-                               receiver=AgenteTransportista.uri,
-                               msgcnt=get_count()), AgenteTransportista.address)
-            msgdic3 = get_message_properties(resposta_proposta)
-            content = msgdic3['content']
-
-            if msgdic['performative'] == ACL.accept:
-                agenteAsistentePersonal = get_agent_info(agn.AgenteExternoAsistentePersonal, AgenteDirectorio, AgenteCentroLogistico, get_count())
-                nombre = gm.value(subject=content, predicate=ECSDI.Nombre)
-                fecha_llegada = gm.value(subject=content, predicate=ECSDI.Fecha_Final)
-
-                # PIENSA EL TIPO DEL GRAFO
-                gr = build_message(informar_usuario(nombre, fecha_llegada, precio),
-                        ACL['inform'],
-                        sender=AgenteCentroLogistico.uri,
-                        receiver=agenteAsistentePersonal.uri,
-                        msgcnt=get_count())
-
     logger.info('Respondemos a la peticion')
 
     return gr.serialize(format='xml'), 200
@@ -244,19 +231,10 @@ def actPesoLote(peso_pedido):
     peso_lote += peso_pedido
     return peso_lote
 
-def enviar_mensaje_transportista(peso, prioridad):
-    g = Graph()
-    content = ECSDI['Ecsdi_envio']
-    g.add((content, RDF.Type, ECSDI.Lote))
-    g.add((content, ECSDI.Peso, Literal(peso)))
-    g.add((content, ECSDI.Prioridad, Literal(prioridad)))
-
-    return g
-
 def informar_transportista():
     g = Graph()
     content = ECSDI['Ecsdi_envio']
-    g.add((content, RDF.Type, ECSDI.Aceptacion_o_denegacion_devolucion))
+    g.add((content, RDF.type, ECSDI.Aceptacion_o_denegacion_devolucion))
     g.add((content, ECSDI.Resolucion, Literal('Eres el transportista elegido')))
 
     return g
@@ -264,10 +242,10 @@ def informar_transportista():
 
 def informar_usuario(nombre, fecha_llegada, precio):
     g = Graph()
-    content = ECSDI['Ecsdi_envio']
-    g.add((content, RDF.Type, ECSDI.Info_transporte))
-    g.add((content, ECSDI.Informacion_transportista, Literal(nombre)))
-    g.add((content, ECSDI.Fecha_final, Literal(fecha_llegada)))
+    content = ECSDI['Ecsdi_envio' + str(get_count())]
+    g.add((content, RDF.type, ECSDI.Info_transporte))
+    g.add((content, ECSDI.Nombre_transportista, Literal(nombre)))
+    g.add((content, ECSDI.Fecha_entrega, Literal(fecha_llegada)))
     g.add((content, ECSDI.Precio, Literal(precio)))
 
     return g

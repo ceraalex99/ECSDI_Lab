@@ -152,3 +152,67 @@ ns1:PeticionCompra_123 a ns1:Pedido ;
     ns1:Precio_total "139.0"^^xsd:float ;
     ns1:Prioridad 124 .
 
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_6 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 7 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_15 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 16 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_6 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 7 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_15 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 16 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_24 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 25 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_33 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 34 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_42 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 43 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_51 a ns1:Pedido ;
+    ns1:Peso "7327.585"^^xsd:float ;
+    ns1:Precio_total "139.0"^^xsd:float ;
+    ns1:Prioridad 52 .
+
