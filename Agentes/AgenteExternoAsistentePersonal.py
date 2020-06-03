@@ -209,37 +209,51 @@ def browserBuscador():
 
             # Graph creation
             gr = Graph()
+            gr.add((content, RDF.type, ECSDI.Peticion_compra))
+
+            tienda = get_agent_info(agn.AgenteCompras, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
+
+            # Creacion del sobre (Compra) ------------------------------------------------------------------------------
+            subject_sobre = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
+            gr.add((subject_sobre, RDF.type, ECSDI.Compra))
+
+            total_price = 0.0
+            total_peso = 0.0
+            for item in productosPedidos:
+                total_price += float(item[3])
+                total_peso += float(item[5])
+                # Creacion del producto --------------------------------------------------------------------------------
+                subject_producto = item[4]
+                gr.add((subject_producto, RDF.type, ECSDI.Producto))
+                gr.add((subject_producto, ECSDI.Marca, Literal(item[0], datatype=XSD.string)))
+                gr.add((subject_producto, ECSDI.Modelo, Literal(item[1], datatype=XSD.string)))
+                gr.add((subject_producto, ECSDI.Nombre, Literal(item[2], datatype=XSD.string)))
+                gr.add((subject_producto, ECSDI.Precio, Literal(item[3], datatype=XSD.float)))
+                gr.add((subject_producto, ECSDI.Peso, Literal(item[5], datatype=XSD.float)))
+                gr.add((subject_sobre, ECSDI.Productos, URIRef(subject_producto)))
+
+            gr.add((subject_sobre, ECSDI.Precio_total, Literal(total_price, datatype=XSD.float)))
+
+            gr.add((content, ECSDI.Sobre, URIRef(subject_sobre)))
+
+            logger.info('Llego aqui1')
+
+            send_message(build_message(gr, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=tienda.uri,
+                    msgcnt=get_count(), content=content), tienda.address)
+
+            logger.info('Llego aqui2')
+
+            # Graph creation
+            gr = Graph()
             gr.add((content, RDF.type, ECSDI.Pedido))
 
             # Asignar prioridad a la peticion (asignamos el contador de mensaje)
             gr.add((content, ECSDI.Prioridad, Literal(get_count(), datatype=XSD.integer)))
 
-            # Creacion del sobre (Compra) ------------------------------------------------------------------------------
-            #sCompra = ECSDI['Compra_' + str(random.randint(1, sys.float_info.max))]
-            #gr.add((sCompra, RDF.type, ECSDI.Compra))
-
-            #gr.add((sCompra, ECSDI.Pagat, Literal(0, datatype=XSD.integer)))
-
-            totalPrice = 0.0
-            total_peso = 0.0
-            for producto in productosPedidos:
-                totalPrice += float(producto[3])
-                total_peso += float(producto[5])
-                # Creacion del producto --------------------------------------------------------------------------------
-                #sProducto = producto[4]
-                #gr.add((sProducto, RDF.type, ECSDI.Producto))
-                #gr.add((sProducto, ECSDI.Marca, Literal(producto[0], datatype=XSD.string)))
-                #gr.add((sProducto, ECSDI.Modelo, Literal(producto[1], datatype=XSD.string)))
-                #gr.add((sProducto, ECSDI.Nombre, Literal(producto[2], datatype=XSD.string)))
-                #gr.add((sProducto, ECSDI.Precio, Literal(producto[3], datatype=XSD.float)))
-                #gr.add((sProducto, ECSDI.Peso, Literal(producto[5], datatype=XSD.float)))
-                #gr.add((sCompra, ECSDI.Productos, URIRef(sProducto)))
-
-            gr.add((content, ECSDI.Precio_total, Literal(totalPrice, datatype=XSD.float)))
+            gr.add((content, ECSDI.Precio_total, Literal(total_price, datatype=XSD.float)))
             gr.add((content, ECSDI.Peso, Literal(total_peso, datatype=XSD.float)))
-            #gr.add((content, ECSDI.Compra, URIRef(sCompra)))
 
-            tienda = get_agent_info(agn.AgenteCompras, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
+
 
             logger.info('Llego aqui')
             respuesta = send_message(

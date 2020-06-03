@@ -125,8 +125,23 @@ def comunicacion():
             accion = gm.value(subject=content, predicate=RDF.type)
             logger.info("He rebut la peticio de request")
             logger.info(accion)
+            if accion == ECSDI.Peticion_compra:
 
-            if accion == ECSDI.Pedido:
+                gm.remove((content, None, None))
+                for item in gm.subjects(RDF.type, ACL.FipaAclMessage):
+                    gm.remove((item, None, None))
+
+                ontologyFile = open('../data/productos_pedidos.owl')
+                gr = Graph()
+                gr.parse(ontologyFile, format='turtle')
+                gr += gm
+
+                # Guardem el graf
+                gr.serialize(destination='../data/productos_pedidos.owl', format='turtle')
+
+
+
+            elif accion == ECSDI.Pedido:
                 logger.info("He rebut la peticio de compra")
 
                 centrologistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteCompras, get_count())
