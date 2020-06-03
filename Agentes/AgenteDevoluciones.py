@@ -18,7 +18,7 @@ from multiprocessing import Process, Queue
 import socket
 
 import datetime
-from rdflib import Namespace, Graph, Literal, XSD
+from rdflib import Namespace, Graph, Literal, XSD, URIRef
 from flask import Flask, request
 from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info
 from AgentUtil.Logging import config_logger
@@ -123,10 +123,28 @@ def comunicacion():
                 if gm.value(subject=accion, predicate=RDF.type) == ECSDI.Devolucion_insatisfaccion and fuera_plazo(gm, content):  # si se ha comprado hace mas de 15 dias, rechazado
                     gr = build_message(Graph(), ACL['refuse'], sender=AgenteDevoluciones.uri, msgcnt=get_count())
                 else:
+                    comprasbd = open("../data/productos_pedidos.owl")
+                    gcomp = Graph()
+                    gcomp.parse(comprasbd, format='turtle')
+                    compras = gm.subjects(predicate=RDF.type, object=ECSDI.Compra)
+                    pesototal = 0.0
+                    for compra in compras:
+                        productos = gm.objects(subject=compra, predicate=ECSDI.Productos)
+                        for prod in productos:
+                            gcomp.remove((compra, ECSDI.Productos, prod))
+                            peso = gm.value(subject=prod, predicate=ECSDI.Peso)
+                            pesototal += peso
+                    comprasbd.close()
+                    gcomp.serialize(destination='../data/productos_pedidos.owl', format='turtle')
+
+                    gr = Graph()
+                    gr.add((content, RDF.type, ECSDI.Devolver_producto))
+                    gr.add((content, ECSDI.Peso_total, pesototal))
 
                     centroLogistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteDevoluciones, get_count())
 
-                    gr = send_message(build_message(gm, perf=ACL.request, sender=AgenteDevoluciones.uri, receiver=centroLogistico.uri, msgcnt=get_count(), content=content), centroLogistico.address)
+                    gr = send_message(build_message(gr, perf=ACL.request, sender=AgenteDevoluciones.uri, receiver=centroLogistico.uri, msgcnt=get_count(), content=content), centroLogistico.address)
+
             else:
                 gr = build_message(Graph(), ACL['not-understood'], sender=AgenteDevoluciones.uri, msgcnt=get_count())
 

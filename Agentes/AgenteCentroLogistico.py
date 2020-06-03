@@ -167,7 +167,7 @@ def comunicacion():
                 subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
                 precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
                 nombre = respuesta_precio.value(subject=content, predicate=ECSDI.Nombre)
-                if(prioridad == 1):
+                if prioridad == 1:
                     fecha_llegada = datetime.today() + timedelta(days=2)
                 else:
                     fecha_llegada = datetime.today() + timedelta(days=5)
@@ -190,6 +190,16 @@ def comunicacion():
                                        msgcnt=get_count())
 
             logger.info('Llego al final')
+
+        elif accion == ECSDI.Devolver_producto:
+
+            AgenteTransportista = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio,
+                                                 AgenteCentroLogistico, get_count())
+
+            resp = send_message(build_message(gm, ACL['request'], sender=AgenteCentroLogistico.uri, receiver=AgenteTransportista.uri, msgcnt=get_count(), content=content), AgenteTransportista.address)
+            nombre = resp.value(subject=content, predicate=ECSDI.nombre)
+            gr = build_message(informar_devolucion(nombre), ACL['inform'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
+
     logger.info('Respondemos a la peticion')
 
     return gr.serialize(format='xml'), 200
@@ -236,6 +246,15 @@ def informar_transportista():
     content = ECSDI['Ecsdi_envio']
     g.add((content, RDF.type, ECSDI.Aceptacion_o_denegacion_devolucion))
     g.add((content, ECSDI.Resolucion, Literal('Eres el transportista elegido')))
+
+    return g
+
+
+def informar_devolucion(nombre):
+    g = Graph()
+    content = ECSDI['Ecsdi_envio'+ str(get_count())]
+    g.add((content, RDF.type, ECSDI.Info_transporte))
+    g.add((content, ECSDI.Nombre_transportista, Literal(nombre)))
 
     return g
 

@@ -155,10 +155,6 @@ def comunicacion():
         elif msgdic['performative'] == ACL.inform:
             Agente = get_agent_info(agn.AgenteExternoAsistentePersonal, AgenteDirectorio, AgenteCompras, get_count())
 
-
-            # Extraemos el objeto del contenido que ha de ser una accion de la ontologia
-            # de registro
-
             # Averiguamos el tipo de la accion
             nom = gm.value(subject=content, predicate=ECSDI.Nombre)
             precio = gm.value(subject=content, predicate=ECSDI.Precio)
