@@ -287,6 +287,7 @@ def browserDevolucion():
 
         g = Graph()
         content = ECSDI['Devolver_producto_' + str(get_count())]
+        g.add((content, RDF.type, ECSDI.Devolver_producto))
 
         for producto in devoluciones:
             g.add((content, ECSDI.Devolver_producto, URIRef(producto)))
