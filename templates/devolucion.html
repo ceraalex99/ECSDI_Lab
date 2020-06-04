@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/-c9bKgaRfC3Q/AAAAAAAAAAI/AAAAAAAAJUE/Eo2MLCqyiZs/s0-c-k-no-ns/photo.jpg">
+    <title>Azamon Devolucion</title>
+</head>
+<body>
+    <h1>Devolucion de Productos</h1>
+    <a href="javascript:history.back()"></a>
+    <form method="post">
+        <table cellpadding="7px">
+            <tr>
+                <th></th>
+                <th><b>PRODUCTOS</b></th>
+                {%  for r in range(count-1) %}
+                    <th></th>
+                {% endfor %}
+                <th></th>
+            </tr>
+            {% for c in compras %}
+                <tr>
+                    <tb><b>{{ compras.index(item) + 1 }}</b></tb>
+                    {%  for p in c[1] %}
+                        <td>{{ p }}</td>
+                    {% endfor %}
+                    {% for r in range(count - sizes[compras.index(c)]) %}
+                        <td></td>
+                    {% endfor %}
+                    <td>{{ c[2] }}</td>
+                    <td><input type="checkbox" name="checkbox" value="{{ compras.index(c) }}"><td>
+                </tr>
+        </table>
+    </form>
+</body>
+</html>

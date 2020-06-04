@@ -21,7 +21,7 @@ import sys
 
 from rdflib import Namespace, Graph, Literal, URIRef
 from flask import Flask, request, render_template
-from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info
+from AgentUtil.ACLMessages import build_message, send_message, get_agent_info
 
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
@@ -297,7 +297,7 @@ def browserDevolucion():
                           msgcnt=get_count(),
                           content=content), tienda.address)
 
-        return render_template('endRetorna.html')
+        return render_template('finDevolucion.html')
 
 @app.route("/comm")
 def comunicacion():
