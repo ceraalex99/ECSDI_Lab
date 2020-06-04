@@ -281,23 +281,26 @@ def browserDevolucion():
         return render_template('devolucion.html', compras=compras, count=count, tam=counts)
     else:
         logger.info('Peticon de devolucion')
-        comprasRealizadas = []
+        devoluciones = []
         for item in request.form.getlist("checkbox"):
-            comprasRealizadas.append(compras[int(item)][0])
-        g = Graph()
-        content = ECSDI['PeticionDevolucion_' + str(get_count())]
-        g.add((content, RDF.type, ECSDI.PeticionDevolucion))
-        for producto in comprasRealizadas:
-            g.add((content, ECSDI.DevolucionCompra, URIRef(producto)))
+            devoluciones.append(compras[int(item)][0])
 
-        tienda = get_agent_info(agn.SellerAgent, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
+        g = Graph()
+        content = ECSDI['Devolver_producto_' + str(get_count())]
+
+        for producto in devoluciones:
+            g.add((content, ECSDI.Devolver_producto, URIRef(producto)))
+
+        logger.info('AQUI SI')
+        agenteDevoluciones = get_agent_info(agn.AgenteDevoluciones, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
+        logger.info('AQUI NO')
 
         send_message(
-            build_message(g, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=tienda.uri,
+            build_message(g, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=agenteDevoluciones.uri,
                           msgcnt=get_count(),
-                          content=content), tienda.address)
+                          content=content), agenteDevoluciones.address)
 
-        return render_template('finDevolucion.html')
+        return render_template('buscador.html')
 
 @app.route("/comm")
 def comunicacion():
