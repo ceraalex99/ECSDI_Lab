@@ -132,6 +132,16 @@ def comunicacion():
                                    ACL['propose'],
                                    sender=AgenteExternoTransportista.uri,
                                    msgcnt=get_count(), receiver=msgdic['sender'])
+            elif accion == ECSDI.Devolver_producto:
+                logger.info('Es Request')
+                peso = gm.value(subject=content, predicate=ECSDI.Peso_lote)
+
+                logger.info(float(peso.strip('"')))
+
+                gr = build_message(devolverPrecio(float(peso.strip('"'))),
+                                   ACL['inform'],
+                                   sender=AgenteExternoTransportista.uri,
+                                   msgcnt=get_count(), receiver=msgdic['sender'])
 
         # El agentre centro logistico nos informa que nos ha elegido como transportista
         elif msgdic['performative'] == ACL.inform:

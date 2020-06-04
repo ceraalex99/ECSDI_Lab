@@ -128,18 +128,22 @@ def comunicacion():
                     gcomp.parse(comprasbd, format='turtle')
                     compras = gm.subjects(predicate=RDF.type, object=ECSDI.Compra)
                     pesototal = 0.0
+                    logger.info("fuera")
                     for compra in compras:
-                        productos = gm.objects(subject=compra, predicate=ECSDI.Productos)
+                        logger.info("dentro")
+                        productos = gcomp.objects(subject=compra, predicate=ECSDI.Productos)
                         for prod in productos:
                             gcomp.remove((compra, ECSDI.Productos, prod))
-                            peso = gm.value(subject=prod, predicate=ECSDI.Peso)
-                            pesototal += peso
+                            peso = gcomp.value(subject=prod, predicate=ECSDI.Peso)
+                            logger.info(peso)
+                            pesototal += peso.toPython()
+                        gcomp.remove((compra,RDF.type, ECSDI.Compra))
                     comprasbd.close()
                     gcomp.serialize(destination='../data/productos_pedidos.owl', format='turtle')
 
                     gr = Graph()
                     gr.add((content, RDF.type, ECSDI.Devolver_producto))
-                    gr.add((content, ECSDI.Peso_total, pesototal))
+                    gr.add((content, ECSDI.Peso_lote, Literal(pesototal)))
 
                     centroLogistico = get_agent_info(agn.AgenteCentroLogistico, AgenteDirectorio, AgenteDevoluciones, get_count())
 
