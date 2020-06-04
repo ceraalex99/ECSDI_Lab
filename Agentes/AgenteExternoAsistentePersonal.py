@@ -272,7 +272,7 @@ def browserBuscador():
 
             return render_template('finalCompra.html', products=matrizProductos)
 
-@app.route("/retorna", methods=['GET', 'POST'])
+@app.route("/devolucion", methods=['GET', 'POST'])
 def browserDevolucion():
     global compras
     if request.method == 'GET':
@@ -344,8 +344,7 @@ def getAllCompras():
     counts = []
 
     gCompras = Graph()
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    gCompras.parse(open('../data/compras'), format='turtle')
+    gCompras.parse(open('../data/productos_pedidos.owl'), format='turtle')
 
     for compraUrl in gCompras.subjects(RDF.type, ECSDI.Compra):
         countCompras = 0
@@ -355,7 +354,7 @@ def getAllCompras():
             countCompras += 1
             products.append(gCompras.value(subject=productUrl, predicate=ECSDI.Nombre))
         compraUnica.append(products)
-        for precio_total in gCompras.objects(subject=compraUrl, predicate=ECSDI.PrecioTotal):
+        for precio_total in gCompras.objects(subject=compraUrl, predicate=ECSDI.Precio_total):
             compraUnica.append(precio_total)
         compras.append(compraUnica)
         counts.append(countCompras)
