@@ -121,7 +121,7 @@ def browser_registrarProducto():
     via un formulario
     """
     if request.method == 'GET':
-        return render_template('rootTiendaExterna.html')
+        return render_template('añadirProducto.html')
     else:
         nombre = request.form['nombre']
         marca = request.form['marca']
@@ -171,6 +171,17 @@ def browser_registrarProducto():
            'precio': request.form['precio'], 'peso': request.form['peso']}
 
     return render_template('rootTiendaExterna.html', res=res)
+
+@app.route("/metodologia", methods=['GET', 'POST'])
+def browser_metodologia():
+    """
+    Permite la comunicacion con el agente via un navegador
+    via un formulario
+    """
+    if request.method == 'GET':
+        return render_template('metodologia.html')
+    else:
+        return render_template('metodologia.html')
 
 @app.route("/comm")
 def comunicacion():
