@@ -149,7 +149,7 @@ def comunicacion():
 
             time = datetime.now().time()
             nine_am = datetime.strptime("09:00:00", '%H:%M:%S').time()
-            nine_pm = datetime.strptime("23:50:00", '%H:%M:%S').time()
+            nine_pm = datetime.strptime("21:00:00", '%H:%M:%S').time()
             logger.info('ANTES DE LA HORA')
             if nine_am < time < nine_pm:
                 logger.info('HE LLEGADO A LA HORA')

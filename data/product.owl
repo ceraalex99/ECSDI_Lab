@@ -489,3 +489,15 @@ ns1:precio a <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
     ns1:peso "12341.0"^^xsd:float ;
     ns1:precio "12341.0"^^xsd:float .
 
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/property/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/Integrar_producto_2> a <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/Integrar_producto> .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_27376832862353796154832201665817105985288282941813658245037700326053287565546410027680097392511501682632519965294674159163990664435693649983382992114597711284382742116078023743959893715437043210477141475033948376959433409186028094130018227952710050369503069244873583962519296962655158993017096216057274129678> a <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/Producto> ;
+    ns1:marca "Marca_Silla_GK5W89"^^xsd:string ;
+    ns1:modelo "ads"^^xsd:string ;
+    ns1:nombre "Pablo"^^xsd:string ;
+    ns1:peso "132321.0"^^xsd:float ;
+    ns1:precio "1322.0"^^xsd:float .
+
