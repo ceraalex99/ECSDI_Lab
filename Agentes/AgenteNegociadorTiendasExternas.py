@@ -17,14 +17,14 @@ Asume que el agente de registro esta en el puerto 9000
 from multiprocessing import Process, Queue
 import socket
 
-from rdflib import Namespace, Graph, Literal, XSD, logger
+from rdflib import Namespace, Graph, Literal, XSD
 from flask import Flask, request
 from AgentUtil.ACLMessages import get_message_properties, build_message, send_message
 from AgentUtil.Logging import config_logger
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
 from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL
-from rdflib.namespace import RDF, FOAF
+from rdflib.namespace import RDF, FOAF, XSD
 
 __author__ = 'Miguel'
 
@@ -36,6 +36,8 @@ agn = Namespace("http://www.agentes.org#")
 
 # Contador de mensajes
 mss_cnt = 0
+
+logger = config_logger(level=1)
 
 # Datos del Agente
 
@@ -125,7 +127,6 @@ def comunicacion():
             tiendaOrigen = msgdic['sender']
 
             anadirProductosTiendaExterna(gm, tiendaOrigen)
-            logger.info('llego aqui')
 
             gr = build_message(Graph(), perf=ACL['inform'], sender=AgenteNegociadorTiendasExternas.uri,
                                 msgcnt=get_count(), receiver=tiendaOrigen)
@@ -135,19 +136,23 @@ def comunicacion():
 
 
 def anadirProductosTiendaExterna(gm, tiendaOrigen):
-    graph = Graph()
-    ontologyFile = open('../data/product.owl')
-    graph.parse(ontologyFile, format='turtle')
+    #graph = Graph()
+    #ontologyFile = open('../data/product.owl')
+    #graph.parse(ontologyFile, format='turtle')
 
     # falta añadir que el producto es externo y su tienda origen -------------------------------------------------------
 
-    producto = gm.subjects(RDF.type, ECSDI.Producto)
+    #producto = gm.subjects(RDF.type, ECSDI.Producto)
+    #logger.info(producto)
 
-    for s, p, o in gm:
-        if s == producto:
-            graph.add((s, p, o))
+    #ontologyFile.write((gm.serialize(format='turtle')))
+    #ontologyFile.close()
+    for item in gm.subjects(RDF.type, ACL.FipaAclMessage):
+        gm.remove((item, None, None))
 
-    graph.serialize(destination='../data/product.owl', format='turtle')
+    ofile = open('../data/product.owl', "ab")
+    ofile.write(gm.serialize(format='turtle'))
+    ofile.close()
 
 
 def añadirMetodologiaDePago(tienda=None, met=None):
