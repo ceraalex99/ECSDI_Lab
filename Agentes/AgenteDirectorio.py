@@ -141,6 +141,7 @@ def register():
                     agn_add = dsgraph.value(subject=agn_uri, predicate=DSO.Address)
                     rsp_obj = agn['Directory-response'+str(countAgentes)]
                     gr.add((agentes, FOAF.Agent, rsp_obj))
+                    logger.info(agn_uri)
                     gr.add((rsp_obj, DSO.Address, agn_add))
                     gr.add((rsp_obj, DSO.Uri, agn_uri))
                     countAgentes += 1
