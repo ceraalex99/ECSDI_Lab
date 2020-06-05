@@ -131,19 +131,36 @@ def register():
         agn_type = gm.value(subject=content, predicate=DSO.AgentType)
         rsearch = dsgraph.triples((None, DSO.AgentType, agn_type))
         if rsearch is not None:
-            agn_uri = next(rsearch)[0]
-            agn_add = dsgraph.value(subject=agn_uri, predicate=DSO.Address)
-            gr = Graph()
-            gr.bind('dso', DSO)
-            rsp_obj = agn['Directory-response']
-            gr.add((rsp_obj, DSO.Address, agn_add))
-            gr.add((rsp_obj, DSO.Uri, agn_uri))
-            return build_message(gr,
-                                 ACL.inform,
-                                 sender=AgenteDirectorio.uri,
-                                 msgcnt=mss_cnt,
-                                 receiver=agn_uri,
-                                 content=rsp_obj)
+            if agn_type == agn.AgenteExternoTransportista:
+                gr = Graph()
+                gr.bind('dso', DSO)
+                countAgentes = 0
+                for triple in rsearch:
+                    agn_uri = triple[0]
+                    agn_add = dsgraph.value(subject=agn_uri, predicate=DSO.Address)
+                    rsp_obj = agn['Directory-response'+str(countAgentes)]
+                    gr.add((rsp_obj, DSO.Address, agn_add))
+                    gr.add((rsp_obj, DSO.Uri, agn_uri))
+                    countAgentes += 1
+                return build_message(gr,
+                                     ACL.inform,
+                                     sender=AgenteDirectorio.uri,
+                                     msgcnt=mss_cnt
+                                     )
+            else:
+                agn_uri = next(rsearch)[0]
+                agn_add = dsgraph.value(subject=agn_uri, predicate=DSO.Address)
+                gr = Graph()
+                gr.bind('dso', DSO)
+                rsp_obj = agn['Directory-response']
+                gr.add((rsp_obj, DSO.Address, agn_add))
+                gr.add((rsp_obj, DSO.Uri, agn_uri))
+                return build_message(gr,
+                                     ACL.inform,
+                                     sender=AgenteDirectorio.uri,
+                                     msgcnt=mss_cnt,
+                                     receiver=agn_uri,
+                                     content=rsp_obj)
         else:
             # Si no encontramos nada retornamos un inform sin contenido
             return build_message(Graph(),
