@@ -124,6 +124,8 @@ def comunicacion():
         # Si no es, respondemos que no hemos entendido el mensaje
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
     elif msgdic['performative'] == ACL.request:
+        gr = Graph()
+
         logger.info('HE LLEGADO AQUI2')
         global peso_lote
 
@@ -145,7 +147,7 @@ def comunicacion():
 
             time = datetime.now().time()
             nine_am = datetime.strptime("09:00:00", '%H:%M:%S').time()
-            nine_pm = datetime.strptime("21:00:00", '%H:%M:%S').time()
+            nine_pm = datetime.strptime("23:00:00", '%H:%M:%S').time()
             logger.info('ANTES DE LA HORA')
             if nine_am < time < nine_pm:
                 logger.info('HE LLEGADO A LA HORA')
@@ -159,7 +161,7 @@ def comunicacion():
                 ofile.close()
 
 
-                gr = Graph()
+
                 content = ECSDI['Lote_' + str(random.randint(1, sys.float_info.max))]
                 gr.add((content, RDF.type, ECSDI.Lote))
                 gr.add((content, ECSDI.Peso_lote, Literal(peso_lote, datatype=XSD.float)))

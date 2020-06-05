@@ -269,8 +269,9 @@ def browserBuscador():
             logger.info(nombre_transportista)
             logger.info('Aqui no llego ni de coña')
 
-            precio_transporte = precio_transporte.toPython()
-            precio_transporte = round(precio_transporte, 2)
+            if precio_transporte is not None:
+                precio_transporte = precio_transporte.toPython()
+                precio_transporte = round(precio_transporte, 2)
 
             return render_template('finalCompra.html', products= productosPedidos,fecha_llegada=fecha_llegada, precio_total= total_price,precio_transporte=precio_transporte, nombre_transportista= nombre_transportista)
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Fri Dec 27 15:58:13 2013
 
@@ -15,7 +14,7 @@ Asume que el agente de registro esta en el puerto 9000
 """
 import random
 import sys
-from datetime import datetime, date
+from datetime import datetime
 from multiprocessing import Process, Queue
 import socket
 
@@ -34,7 +33,7 @@ __author__ = 'javier'
 
 # Configuration stuff
 hostname = socket.gethostname()
-port = 9010
+port = 9015
 
 logger = config_logger(level=1)
 
@@ -45,7 +44,7 @@ mss_cnt = 0
 
 # Datos del Agente
 
-AgenteExternoTransportista = Agent('AgenteExternoTransportista',
+AgenteExternoTransportista = Agent('AgenteExternoTransportista2',
                        agn.AgenteExternoTransportista,
                        'http://%s:%d/comm' % (hostname, port),
                        'http://%s:%d/Stop' % (hostname, port))
@@ -191,11 +190,11 @@ def devolverPrecio(peso):
     precio = peso * random.uniform(0.000, 0.002)
     logger.info(precio)
 
-    d = date.today
+    d = datetime.today
     g.add((content, RDF.type, ECSDI.Transportista))
     g.add((content, ECSDI.Nombre, Literal('Pedro')))
     g.add((content, ECSDI.Precio_entrega, Literal(precio, datatype=XSD.float)))
-    g.add((content, ECSDI.Fecha_entrega, Literal(d, datatype=XSD.datetime)))
+    g.add((content, ECSDI.Fecha_entrega, Literal(precio, datatype=XSD.datetime)))
 
     return g
 

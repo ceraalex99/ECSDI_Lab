@@ -24,8 +24,19 @@
     </table>
     <br>
     <td>PRECIO: {{ precio_total }}</td><br>
+
+    {% if  precio_transporte %}
     <td>PRECIO TRANSPORTE: {{ precio_transporte }}</td><br>
+    {% else %}
+    <td>PRECIO TRANSPORTE: Aún pendiente de asignar</td><br>
+    {% endif %}
+
+
+    {% if  fecha_llegada %}
     <td>FECHA LLEGADA: {{ fecha_llegada }}</td><br>
+    {% else %}
+    <td>FECHA LLEGADA: Aún pendiente de asignar</td><br>
+    {% endif %}
 
     {% if nombre_transportista %}
     <td>TRANSPORTISTA: {{ nombre_transportista }}</td><br>
