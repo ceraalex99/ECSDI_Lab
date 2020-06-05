@@ -163,6 +163,7 @@ def comunicacion():
                 precio = gm.value(subject=content, predicate=ECSDI.Contraoferta)
                 content = ECSDI['Contraoferta' + str(random.randint(1, sys.float_info.max))]
                 g.add((content, ECSDI.Precio, Literal(precio/0.97, datatype=XSD.float)))
+                g.add((content, ECSDI.Nombre, Literal('Pedro')))
                 gr = build_message(g, ACL['propose'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
     logger.info('Respondemos a la peticion')
 

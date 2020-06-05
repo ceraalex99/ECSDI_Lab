@@ -168,7 +168,7 @@ def comunicacion():
                 gr.add((content, RDF.type, ECSDI.Lote))
                 gr.add((content, ECSDI.Peso_lote, Literal(peso_lote, datatype=XSD.float)))
 
-                oferta_min = (sys.float_info.max, None)
+                oferta_min = (sys.float_info.max, None, None)
 
                 for transportista in transportistas:
                     respuesta_precio = send_message(build_message(gr,
@@ -178,8 +178,9 @@ def comunicacion():
                                                                  msgcnt=get_count(), content=content), transportista.address)
                     subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
                     precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
+                    nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
                     if precio < oferta_min:
-                        oferta_min = (precio, transportista)
+                        oferta_min = (precio, transportista, nombre)
 
                 contraoferta = oferta_min[0]*0.95
 
@@ -191,6 +192,15 @@ def comunicacion():
                                                                  sender=AgenteCentroLogistico.uri,
                                                                  receiver=transportista.uri,
                                                                  msgcnt=get_count(), content=content), transportista.address)
+
+                    msgdicres = get_message_properties(respuesta_contraoferta)
+                    if msgdicres['performative'] == ACL.propose:
+                        subject = respuesta_contraoferta.value(predicate=RDF.type, object=ECSDI.Transportista)
+                        precio = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Precio_entrega)
+                        nombre = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Nombre)
+                        if precio < oferta_min:
+                            oferta_min = (precio, transportista, nombre)
+
                 #nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
                 #logger.info(nombre)
                 if prioridad == "true":
