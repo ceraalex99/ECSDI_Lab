@@ -21,7 +21,7 @@ from datetime import datetime, timedelta, date
 
 from rdflib import Namespace, Graph, Literal
 from flask import Flask, request
-from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info
+from AgentUtil.ACLMessages import get_message_properties, build_message, send_message, get_agent_info, get_agents_info
 
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
@@ -151,7 +151,7 @@ def comunicacion():
             logger.info('ANTES DE LA HORA')
             if nine_am < time < nine_pm:
                 logger.info('HE LLEGADO A LA HORA')
-                AgenteTransportista = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio,
+                transportistas = get_agents_info(agn.AgenteExternoTransportista, AgenteDirectorio,
                                                      AgenteCentroLogistico, get_count())
                 g = Graph()
                 g.parse('../data/pedidos_pendientes.owl', format='turtle')
@@ -166,16 +166,31 @@ def comunicacion():
                 gr.add((content, RDF.type, ECSDI.Lote))
                 gr.add((content, ECSDI.Peso_lote, Literal(peso_lote, datatype=XSD.float)))
 
-                respuesta_precio = send_message(build_message(gr,
-                                                             ACL['request'],
-                                                             sender=AgenteCentroLogistico.uri,
-                                                             receiver=AgenteTransportista.uri,
-                                                             msgcnt=get_count(), content=content), AgenteTransportista.address)
+                oferta_min = (sys.float_info.max, None)
 
-                subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
-                precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
-                nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
-                logger.info(nombre)
+                for transportista in transportistas:
+                    respuesta_precio = send_message(build_message(gr,
+                                                                 ACL['request'],
+                                                                 sender=AgenteCentroLogistico.uri,
+                                                                 receiver=transportista.uri,
+                                                                 msgcnt=get_count(), content=content), transportista.address)
+                    subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
+                    precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
+                    if precio < oferta_min:
+                        oferta_min = (precio, transportista)
+
+                contraoferta = oferta_min[0]*0.95
+
+                content = ECSDI['Contraoferta' + str(random.randint(1, sys.float_info.max))]
+                gr.add((content, ECSDI.Contraoferta, Literal(contraoferta, datatype=XSD.float)))
+                for transportista in transportistas:
+                    respuesta_contraoferta = send_message(build_message(gr,
+                                                                 ACL['propose'],
+                                                                 sender=AgenteCentroLogistico.uri,
+                                                                 receiver=transportista.uri,
+                                                                 msgcnt=get_count(), content=content), transportista.address)
+                #nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
+                #logger.info(nombre)
                 if prioridad == "true":
                     fecha_llegada = date.today() + timedelta(days=2)
                     precio = precio*2

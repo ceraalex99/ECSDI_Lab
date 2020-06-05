@@ -109,3 +109,30 @@ def get_agent_info(tipo, directory_agent, sender, msgcnt):
     name = gr.value(subject=content, predicate=FOAF.name)
 
     return Agent(name, url, address, None)
+
+def get_agents_info(tipo, directory_agent, sender, msgcnt):
+    gmess = Graph()
+    # Construimos el mensaje de registro
+    gmess.bind('foaf', FOAF)
+    gmess.bind('dso', DSO)
+    ask_obj = agn[sender.name + '-Search']
+
+    gmess.add((ask_obj, RDF.type, DSO.Search))
+    gmess.add((ask_obj, DSO.AgentType, tipo))
+    gr = send_message(
+        build_message(gmess, perf=ACL.request, sender=sender.uri, receiver=directory_agent.uri, msgcnt=msgcnt,
+                      content=ask_obj),
+        directory_agent.address
+    )
+    dic = get_message_properties(gr)
+    content = dic['content']
+
+    agn_uris = gr.objects(subject=content, predicate=FOAF.Agent)
+    agentes = []
+    for agn_uri in agn_uris:
+        address = gr.value(subject=agn_uri, predicate=DSO.Address)
+        url = gr.value(subject=agn_uri, predicate=DSO.Uri)
+        name = gr.value(subject=agn_uri, predicate=FOAF.name)
+        agentes.append(Agent(name, url, address, None))
+
+    return agentes
