@@ -45,7 +45,7 @@ mss_cnt = 0
 # Datos del Agente
 
 AgenteExternoTransportista = Agent('AgenteExternoTransportista2',
-                       agn.AgenteExternoTransportista,
+                       agn.AgenteExternoTransportista2,
                        'http://%s:%d/comm' % (hostname, port),
                        'http://%s:%d/Stop' % (hostname, port))
 
