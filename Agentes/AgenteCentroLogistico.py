@@ -125,6 +125,7 @@ def comunicacion():
         gr = build_message(Graph(), ACL['not-understood'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
     elif msgdic['performative'] == ACL.request:
         logger.info('HE LLEGADO AQUI2')
+        global peso_lote
 
         content = msgdic['content']
         accion = gm.value(subject=content, predicate=RDF.type)
@@ -166,7 +167,8 @@ def comunicacion():
 
                 subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
                 precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
-                nombre = respuesta_precio.value(subject=content, predicate=ECSDI.Nombre)
+                nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
+                logger.info(nombre)
                 if prioridad == 1:
                     fecha_llegada = datetime.today() + timedelta(days=2)
                 else:
@@ -190,6 +192,8 @@ def comunicacion():
                                        msgcnt=get_count())
 
             logger.info('Llego al final')
+
+            peso_lote = 0
 
         elif accion == ECSDI.Devolver_producto:
 

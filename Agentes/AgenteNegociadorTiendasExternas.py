@@ -76,7 +76,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteNegociadorTiendasExternas.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteNegociadorTiendasExternas.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteNegociadorTiendasExternas.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteExternoTransportista))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteExternoTransportista))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,

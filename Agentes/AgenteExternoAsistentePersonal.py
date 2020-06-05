@@ -260,17 +260,16 @@ def browserBuscador():
                 build_message(
                     gr, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=tienda.uri, msgcnt=get_count(), content=content), tienda.address)
 
+            subject = respuesta.value(predicate=RDF.type, object=ECSDI.Info_transporte)
+            precio_total = respuesta.value(subject=subject, predicate=ECSDI.Precio)
+            nombre_transportista = respuesta.value(subject=subject, predicate=ECSDI.Nombre_transportista)
+
+            logger.info(precio_total)
+            logger.info(nombre_transportista)
             logger.info('Aqui no llego ni de coña')
 
-            matrizProductos = []
-            for item in respuesta.subjects(RDF.type, ECSDI.Producto):
-                product = [respuesta.value(subject=item, predicate=ECSDI.Marca),
-                           respuesta.value(subject=item, predicate=ECSDI.Modelo),
-                           respuesta.value(subject=item, predicate=ECSDI.Nombre),
-                           respuesta.value(subject=item, predicate=ECSDI.Precio)]
-                matrizProductos.append(product)
+            return render_template('finalCompra.html', products= request.form.getlist("checkbox"), precio_total= precio_total, nombre_transportista= nombre_transportista)
 
-            return render_template('finalCompra.html', products=matrizProductos)
 
 @app.route("/devolucion", methods=['GET', 'POST'])
 def browserDevolucion():
