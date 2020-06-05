@@ -135,17 +135,20 @@ def register():
                 gr = Graph()
                 gr.bind('dso', DSO)
                 countAgentes = 0
+                agentes=agn['Directory-response']
                 for triple in rsearch:
                     agn_uri = triple[0]
                     agn_add = dsgraph.value(subject=agn_uri, predicate=DSO.Address)
                     rsp_obj = agn['Directory-response'+str(countAgentes)]
+                    gr.add((agentes, FOAF.Agent, rsp_obj))
                     gr.add((rsp_obj, DSO.Address, agn_add))
                     gr.add((rsp_obj, DSO.Uri, agn_uri))
                     countAgentes += 1
                 return build_message(gr,
                                      ACL.inform,
                                      sender=AgenteDirectorio.uri,
-                                     msgcnt=mss_cnt
+                                     msgcnt=mss_cnt,
+                                     content=agentes
                                      )
             else:
                 agn_uri = next(rsearch)[0]

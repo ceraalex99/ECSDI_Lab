@@ -150,6 +150,20 @@ def comunicacion():
                                msgcnt=get_count())
             logger.info('Pedido entregado')
 
+        elif msgdic['performative'] == ACL.propose:
+            logger.info('Propose')
+            respuesta = random.randint(1, 3)
+            if respuesta == 1:
+                gr = build_message(Graph(), ACL['accept-proposal'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
+            elif respuesta == 2:
+                gr = build_message(Graph(), ACL['reject-proposal'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
+            else:
+                g = Graph()
+                content = msgdic['content']
+                precio = gm.value(subject=content, predicate=ECSDI.Contraoferta)
+                content = ECSDI['Contraoferta' + str(random.randint(1, sys.float_info.max))]
+                g.add((content, ECSDI.Precio, Literal(precio/0.97, datatype=XSD.float)))
+                gr = build_message(g, ACL['propose'], sender=AgenteExternoTransportista.uri, msgcnt=get_count())
     logger.info('Respondemos a la peticion')
 
     return gr.serialize(format='xml'), 200
