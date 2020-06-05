@@ -300,12 +300,14 @@ def browserDevolucion():
         agenteDevoluciones = get_agent_info(agn.AgenteDevoluciones, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
         logger.info('AQUI NO')
 
-        send_message(
+        gm = send_message(
             build_message(g, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=agenteDevoluciones.uri,
                           msgcnt=get_count(),
                           content=content), agenteDevoluciones.address)
 
-        return render_template('buscador.html')
+        subject = gm.value(predicate=RDF.type, object=ECSDI.Info_transporte)
+        transportista = gm.value(subject=subject, predicate=ECSDI.Nombre_transportista)
+        return render_template('finalDevolucion.html', transportista=transportista)
 
 @app.route("/comm")
 def comunicacion():
