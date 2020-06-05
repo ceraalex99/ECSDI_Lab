@@ -143,11 +143,11 @@ def browser_registrarProducto():
     logger.info("----2----")
 
     gr.add((sProdructo, RDF.type, ECSDI.Producto))
-    gr.add((sProdructo, ECSDI.Nombre, Literal(nombre, datatype=XSD.string)))
-    gr.add((sProdructo, ECSDI.Marca, Literal(marca, datatype=XSD.string)))
-    gr.add((sProdructo, ECSDI.Modelo, Literal(modelo, datatype=XSD.string)))
-    gr.add((sProdructo, ECSDI.Precio, Literal(precio, datatype=XSD.float)))
-    gr.add((sProdructo, ECSDI.Peso, Literal(peso, datatype=XSD.float)))
+    gr.add((sProdructo, ECSDI.Nombre, Literal(nombre)))
+    gr.add((sProdructo, ECSDI.Marca, Literal(marca)))
+    gr.add((sProdructo, ECSDI.Modelo, Literal(modelo)))
+    gr.add((sProdructo, ECSDI.Precio, Literal(precio)))
+    gr.add((sProdructo, ECSDI.Peso, Literal(peso)))
 
     logger.info("----3----")
 
