@@ -118,7 +118,6 @@ def comunicacion():
 
             gr = añadirMetodologiaDePago(tiendaExterna, metodologiaDePago)
 
-
         # Una tienda externa quiere añadir un producto a nuestra tienda
         elif msgdic['performative'] == ACL.request:
 
@@ -146,7 +145,6 @@ def anadirProductosTiendaExterna(gm, tiendaOrigen):
     # falta añadir que el producto es externo y su tienda origen -------------------------------------------------------
 
     producto = gm.subjects(RDF.type, ECSDI.Producto)
-    producto = producto.next()
 
     for s, p, o in gm:
         if s == producto:
