@@ -188,7 +188,7 @@ def devolverPrecio(peso):
     g = Graph()
     content = ECSDI['Transportista_' + str(random.randint(1, sys.float_info.max))]
 
-    precio = peso * random.uniform(0.000, 0.002)
+    precio = peso * random.uniform(0.0005, 0.002)
     logger.info(precio)
 
     d = date.today

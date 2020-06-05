@@ -1,0 +1,8 @@
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_5 a ns1:Pedido ;
+    ns1:Peso "27082.245"^^xsd:float ;
+    ns1:Precio_total "243.0"^^xsd:float ;
+    ns1:Prioridad "true"^^xsd:string .
+

@@ -143,6 +143,8 @@ def comunicacion():
             peso_pedido = gm.value(subject=content, predicate=ECSDI.Peso)
             prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
 
+            logger.info(prioridad)
+
             actPesoLote(float(peso_pedido.strip('"')))
 
             time = datetime.now().time()
