@@ -159,17 +159,18 @@ def browser_registrarProducto():
 
     logger.info("----5----")
 
-    send_message(
-        build_message(
-            gr, perf=ACL.request, sender=AgenteExternoTiendaExterna.uri, receiver=agente.uri, content=content, msgcnt=get_count())
-        , agente.address)
+    gr = send_message(build_message(gr, perf=ACL.request,
+                                    sender=AgenteExternoTiendaExterna.uri,
+                                    receiver=agente.uri,
+                                    content=content,
+                                    msgcnt=get_count()), agente.address)
 
     logger.info("----6----")
 
     res = {'marca': request.form['marca'], 'nombre': request.form['nombre'], 'modelo': request.form['modelo'],
            'precio': request.form['precio'], 'peso': request.form['peso']}
 
-    return render_template('rootTiendaExterna.html')
+    return render_template('rootTiendaExterna.html', res=res)
 
 @app.route("/comm")
 def comunicacion():
@@ -247,6 +248,7 @@ if __name__ == '__main__':
     # Ponemos en marcha los behaviors
     ab1 = Process(target=agentbehavior1, args=(cola1,))
     ab1.start()
+    register()
 
     # Ponemos en marcha el servidor
     app.run(host=hostname, port=port)

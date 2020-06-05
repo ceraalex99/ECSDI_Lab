@@ -268,7 +268,7 @@ def browserBuscador():
             logger.info(nombre_transportista)
             logger.info('Aqui no llego ni de coña')
 
-            return render_template('finalCompra.html', products= request.form.getlist("checkbox"), precio_total= precio_total, nombre_transportista= nombre_transportista)
+            return render_template('finalCompra.html', products= productosPedidos, precio_total= precio_total, nombre_transportista= nombre_transportista)
 
 
 @app.route("/devolucion", methods=['GET', 'POST'])

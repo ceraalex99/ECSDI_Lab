@@ -124,15 +124,11 @@ def comunicacion():
 
             tiendaOrigen = msgdic['sender']
 
-            ok = anadirProductosTiendaExterna(gm, tiendaOrigen)
+            anadirProductosTiendaExterna(gm, tiendaOrigen)
+            logger.info('llego aqui')
 
-            if ok:
-                gr = build_message(gr, perf=ACL['inform-done'], sender=AgenteNegociadorTiendasExternas.uri,
-                                   msgcnt=get_count(), receiver=tiendaOrigen)
-            else:
-                gr = build_message(Graph(), ACL['not-understood'], sender=AgenteNegociadorTiendasExternas.uri,
-                                   msgcnt=get_count())
-
+            gr = build_message(Graph(), perf=ACL['inform'], sender=AgenteNegociadorTiendasExternas.uri,
+                                msgcnt=get_count(), receiver=tiendaOrigen)
     logger.info('Respondemos a la peticion')
 
     return gr.serialize(format='xml'), 200
@@ -146,15 +142,12 @@ def anadirProductosTiendaExterna(gm, tiendaOrigen):
     # falta añadir que el producto es externo y su tienda origen -------------------------------------------------------
 
     producto = gm.subjects(RDF.type, ECSDI.Producto)
-    producto = producto.next()
 
     for s, p, o in gm:
         if s == producto:
             graph.add((s, p, o))
 
     graph.serialize(destination='../data/product.owl', format='turtle')
-
-    return gm
 
 
 def añadirMetodologiaDePago(tienda=None, met=None):
@@ -213,6 +206,7 @@ if __name__ == '__main__':
     # Ponemos en marcha los behaviors
     ab1 = Process(target=agentbehavior1, args=(cola1,))
     ab1.start()
+    register()
 
     # Ponemos en marcha el servidor
     app.run(host=hostname, port=port)

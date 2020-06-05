@@ -465,9 +465,3 @@ ns1:precio a <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
     ns1:peso 8.799533e+03 ;
     ns1:precio 146 .
 
-
-pont:Movil rdfs:subClassOf pont:Producto .
-
-pont:Portatil rdfs:subClassOf pont:Producto .
-
-pont:Silla rdfs:subClassOf pont:Producto .
