@@ -52,16 +52,6 @@ if args.open is None:
 else:
     hostname = socket.gethostname()
 
-if args.dport is None:
-    dport = 9000
-else:
-    dport = args.dport
-
-if args.dhost is None:
-    dhostname = socket.gethostname()
-else:
-    dhostname = args.dhost
-
 logger = config_logger(level=1)
 
 agn = Namespace("http://www.agentes.org#")
@@ -107,7 +97,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteExternoTiendaExterna.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteExternoTiendaExterna.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteExternoTiendaExterna.address)))
-    gmess.add((reg_obj, DSO.AgentType, DSO.AgenteExternoTiendaExterna))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteExternoTiendaExterna))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
@@ -139,32 +129,47 @@ def browser_registrarProducto():
         precio = request.form['precio']
         peso = request.form['peso']
 
-    content = ECSDI['Registra_productes_' + str(get_count())]
+    content = ECSDI['Integrar_producto_' + str(get_count())]
+
+    logger.info("----0----")
 
     gr = Graph()
     gr.add((content, RDF.type, ECSDI.Integrar_producto))
 
+    logger.info("----1----")
+
     sProdructo = ECSDI['Producto_' + str(random.randint(1, sys.float_info.max))]
 
-    gr.add((sProdructo, RDF.type, ECSDI.Producto_externo))
+    logger.info("----2----")
+
+    gr.add((sProdructo, RDF.type, ECSDI.Producto))
     gr.add((sProdructo, ECSDI.Nombre, Literal(nombre, datatype=XSD.string)))
     gr.add((sProdructo, ECSDI.Marca, Literal(marca, datatype=XSD.string)))
     gr.add((sProdructo, ECSDI.Modelo, Literal(modelo, datatype=XSD.string)))
     gr.add((sProdructo, ECSDI.Precio, Literal(precio, datatype=XSD.float)))
     gr.add((sProdructo, ECSDI.Peso, Literal(peso, datatype=XSD.float)))
 
+    logger.info("----3----")
+
     gr.add((content, ECSDI.producto, sProdructo))
+
+    logger.info("----4----")
 
     agente = get_agent_info(agn.AgenteNegociadorTiendasExternas, AgenteDirectorio, AgenteExternoTiendaExterna, get_count())
 
+    logger.info("----5----")
+
     send_message(
         build_message(
-            gr, perf=ACL.request, sender=AgenteExternoTiendaExterna.uri, receiver=agente.uri, msgcnt=get_count(), content=content), agente.address)
+            gr, perf=ACL.request, sender=AgenteExternoTiendaExterna.uri, receiver=agente.uri, content=content, msgcnt=get_count())
+        , agente.address)
+
+    logger.info("----6----")
 
     res = {'marca': request.form['marca'], 'nombre': request.form['nombre'], 'modelo': request.form['modelo'],
            'precio': request.form['precio'], 'peso': request.form['peso']}
 
-    return render_template('producto.html', producto=res)
+    return render_template('rootTiendaExterna.html')
 
 @app.route("/comm")
 def comunicacion():

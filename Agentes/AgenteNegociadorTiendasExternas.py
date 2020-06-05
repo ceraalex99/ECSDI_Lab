@@ -76,7 +76,7 @@ def register():
     gmess.add((reg_obj, DSO.Uri, AgenteNegociadorTiendasExternas.uri))
     gmess.add((reg_obj, FOAF.name, Literal(AgenteNegociadorTiendasExternas.name)))
     gmess.add((reg_obj, DSO.Address, Literal(AgenteNegociadorTiendasExternas.address)))
-    gmess.add((reg_obj, DSO.AgentType, agn.AgenteExternoTransportista))
+    gmess.add((reg_obj, DSO.AgentType, agn.AgenteNegociadorTiendasExternas))
 
     gr = send_message(
         build_message(gmess, perf=ACL.request,
@@ -140,7 +140,7 @@ def comunicacion():
 
 def anadirProductosTiendaExterna(gm, tiendaOrigen):
     graph = Graph()
-    ontologyFile = open('../data/productos')
+    ontologyFile = open('../data/product.owl')
     graph.parse(ontologyFile, format='turtle')
 
     # falta añadir que el producto es externo y su tienda origen -------------------------------------------------------
@@ -152,7 +152,7 @@ def anadirProductosTiendaExterna(gm, tiendaOrigen):
         if s == producto:
             graph.add((s, p, o))
 
-    graph.serialize(destination='../data/product', format='turtle')
+    graph.serialize(destination='../data/product.owl', format='turtle')
 
     return gm
 

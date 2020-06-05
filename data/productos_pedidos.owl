@@ -1,10 +1,7 @@
 @prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ns1:Compra_10167381197067200957523508552966194543099020073034226236561965161849590207193106586182262228064799284980528506258052170691344024013892962031010360628103369227248531766945515260539973428198276511490244594010864456281094343321533555942599388239108538592861610279413008948769716411809749817894826401550210448254 a ns1:Compra ;
-    ns1:Precio_total "243.0"^^xsd:float ;
-    ns1:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31>,
-        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> .
+ns1:Compra_10167381197067200957523508552966194543099020073034226236561965161849590207193106586182262228064799284980528506258052170691344024013892962031010360628103369227248531766945515260539973428198276511490244594010864456281094343321533555942599388239108538592861610279413008948769716411809749817894826401550210448254 ns1:Precio_total "243.0"^^xsd:float .
 
 ns1:Compra_117264607257302487762204042161247420932786659484117072315454340588386336180252102962337692159738994165020762033900346540109300433811699061743831058741835746295911869028106768717958949214199514542958594686621794280519393094198162289082090225569739979696799944890288711468275861946005385687413734968080805468253 a ns1:Compra ;
     ns1:Precio_total "146.0"^^xsd:float ;
@@ -47,20 +44,6 @@ ns1:Compra_986975985914223316861555299516478880563966906540031242741762530741942
     ns1:Peso "19555.53"^^xsd:float ;
     ns1:Precio "180.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC> a ns1:Producto ;
-    ns1:Marca "Marca_Silla_XDI5OM"^^xsd:string ;
-    ns1:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
-    ns1:Nombre "nombre_PRKVMV"^^xsd:string ;
-    ns1:Peso "5278.006"^^xsd:float ;
-    ns1:Precio "121.0"^^xsd:float .
-
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> a ns1:Producto ;
-    ns1:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
-    ns1:Modelo "Modelo_Silla_J0R2EH"^^xsd:string ;
-    ns1:Nombre "nombre_DM7G31"^^xsd:string ;
-    ns1:Peso "8799.533"^^xsd:float ;
-    ns1:Precio "146.0"^^xsd:float .
-
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31> a ns1:Producto ;
     ns1:Marca "Marca_Silla_GK5W89"^^xsd:string ;
     ns1:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
@@ -68,12 +51,26 @@ ns1:Compra_986975985914223316861555299516478880563966906540031242741762530741942
     ns1:Peso "7327.585"^^xsd:float ;
     ns1:Precio "139.0"^^xsd:float .
 
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC> a ns1:Producto ;
+    ns1:Marca "Marca_Silla_XDI5OM"^^xsd:string ;
+    ns1:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
+    ns1:Nombre "nombre_PRKVMV"^^xsd:string ;
+    ns1:Peso "5278.006"^^xsd:float ;
+    ns1:Precio "121.0"^^xsd:float .
+
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> a ns1:Producto ;
     ns1:Marca "Marca_Silla_GK5W89"^^xsd:string ;
     ns1:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
     ns1:Nombre "nombre_EKKFRT"^^xsd:string ;
     ns1:Peso "19754.66"^^xsd:float ;
     ns1:Precio "104.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> a ns1:Producto ;
+    ns1:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
+    ns1:Modelo "Modelo_Silla_J0R2EH"^^xsd:string ;
+    ns1:Nombre "nombre_DM7G31"^^xsd:string ;
+    ns1:Peso "8799.533"^^xsd:float ;
+    ns1:Precio "146.0"^^xsd:float .
 
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> a ns1:Producto ;
     ns1:Marca "Marca_Silla_7JPK1V"^^xsd:string ;
