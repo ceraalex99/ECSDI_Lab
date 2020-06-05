@@ -248,7 +248,7 @@ def browserBuscador():
             gr.add((content, RDF.type, ECSDI.Pedido))
 
             # Asignar prioridad a la peticion (asignamos el contador de mensaje)
-            gr.add((content, ECSDI.Prioridad, Literal(get_count(), datatype=XSD.integer)))
+            gr.add((content, ECSDI.Prioridad, Literal(request.form["prioridad"], datatype=XSD.string)))
 
             gr.add((content, ECSDI.Precio_total, Literal(total_price, datatype=XSD.float)))
             gr.add((content, ECSDI.Peso, Literal(total_peso, datatype=XSD.float)))
@@ -263,6 +263,7 @@ def browserBuscador():
             subject = respuesta.value(predicate=RDF.type, object=ECSDI.Info_transporte)
             precio_transporte = respuesta.value(subject=subject, predicate=ECSDI.Precio)
             nombre_transportista = respuesta.value(subject=subject, predicate=ECSDI.Nombre_transportista)
+            fecha_llegada = respuesta.value(subject=subject, predicate=ECSDI.Fecha_entrega)
 
             logger.info(precio_transporte)
             logger.info(nombre_transportista)
@@ -271,7 +272,7 @@ def browserBuscador():
             precio_transporte = precio_transporte.toPython()
             precio_transporte = round(precio_transporte, 2)
 
-            return render_template('finalCompra.html', products= productosPedidos, precio_total= total_price,precio_transporte=precio_transporte, nombre_transportista= nombre_transportista)
+            return render_template('finalCompra.html', products= productosPedidos,fecha_llegada=fecha_llegada, precio_total= total_price,precio_transporte=precio_transporte, nombre_transportista= nombre_transportista)
 
 
 @app.route("/devolucion", methods=['GET', 'POST'])

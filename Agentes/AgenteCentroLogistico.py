@@ -17,7 +17,7 @@ import sys
 import random
 from multiprocessing import Process, Queue
 import socket
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 from rdflib import Namespace, Graph, Literal
 from flask import Flask, request
@@ -174,10 +174,11 @@ def comunicacion():
                 precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
                 nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
                 logger.info(nombre)
-                if prioridad == 1:
-                    fecha_llegada = datetime.today() + timedelta(days=2)
+                if prioridad == "true":
+                    fecha_llegada = date.today() + timedelta(days=2)
+                    precio = precio*2
                 else:
-                    fecha_llegada = datetime.today() + timedelta(days=5)
+                    fecha_llegada = date.today() + timedelta(days=5)
                 logger.info(precio)
                 logger.info(fecha_llegada)
 
