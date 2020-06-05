@@ -26,7 +26,7 @@ from AgentUtil.ACLMessages import get_message_properties, build_message, send_me
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
 from AgentUtil.Logging import config_logger
-from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL
+from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL, PROPS
 from rdflib.namespace import RDF, FOAF, XSD
 
 __author__ = 'Miguel'
@@ -143,15 +143,15 @@ def browser_registrarProducto():
     logger.info("----2----")
 
     gr.add((sProdructo, RDF.type, ECSDI.Producto))
-    gr.add((sProdructo, ECSDI.Nombre, Literal(nombre)))
-    gr.add((sProdructo, ECSDI.Marca, Literal(marca)))
-    gr.add((sProdructo, ECSDI.Modelo, Literal(modelo)))
-    gr.add((sProdructo, ECSDI.Precio, Literal(precio)))
-    gr.add((sProdructo, ECSDI.Peso, Literal(peso)))
+    gr.add((sProdructo, PROPS.Nombre, Literal(nombre)))
+    gr.add((sProdructo, PROPS.Marca, Literal(marca)))
+    gr.add((sProdructo, PROPS.Modelo, Literal(modelo)))
+    gr.add((sProdructo, PROPS.Precio, Literal(precio)))
+    gr.add((sProdructo, PROPS.Peso, Literal(peso)))
 
     logger.info("----3----")
 
-    gr.add((content, ECSDI.producto, sProdructo))
+    #gr.add((content, ECSDI.producto, sProdructo))
 
     logger.info("----4----")
 
