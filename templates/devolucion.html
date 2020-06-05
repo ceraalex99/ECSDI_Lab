@@ -20,7 +20,7 @@
             {% for c in compras %}
                 <tr>
                     <td>
-                        <input type="checkbox" name="checkbox" value="{{ compras.index(c) }}">
+                        <input onchange="hola()" type="checkbox" name="checkbox" value="{{ compras.index(c) }}">
                     </td>
                     <td>total: {{ c[2] }}</td>
                     <td> con: </td>
@@ -33,7 +33,18 @@
                 </tr>
             {% endfor %}
         </table>
-         <input type="submit" name="submit" value="Devolver">
+         <input disabled="disabled" type="submit" name="submit" value="Devolver">
     </form>
 </body>
 </html>
+<script>
+    function hola() {
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+      document.querySelectorAll('input[type="submit"]')[0].disabled = true;
+      if (checkedOne) {
+        document.querySelectorAll('input[type="submit"]')[0].disabled = false;
+      }
+}
+</script>

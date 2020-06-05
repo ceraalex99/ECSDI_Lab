@@ -15,7 +15,7 @@ color: #666666;
 </head>
 <body>
     <h1>AZAMON | asistente personal</h1>
-    <h3>¿Què estas buscando?</h3>
+    <h3>¿Qué estás buscando?</h3>
 
  {% if not products %}
      <form method="post">
@@ -48,39 +48,27 @@ color: #666666;
                         <td>{{ item.modelo }}</td>
                         <td>{{ item.precio }}</td>
                         <td>{{ item.peso }}</td>
-                        <td><input type="checkbox" name="checkbox" value="{{ products.index(item) }}"></td>
+                        <td><input type="checkbox" name="checkbox" value="{{ products.index(item) }}" onchange="hola()"></td>
                     </tr>
                     {% endif %}
                 {% endfor %}
             </table>
-            <input type="submit" name="submit" value="comprar">
+            <input disabled="disabled" type="submit" name="submit" value="comprar">
         </form>
     {% endif %}
-
 
 </body>
 </html>
 <script type="text/javascript">
-        var checkboxes = $("input[type='checkbox']"),
-        submitButt = $("input[type='submit']");
+    function hola() {
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
 
-        checkboxes.change(function() {
-
-            var isOneChecked = false;
-
-            checkboxes.each(function() {
-                if ($(this).attr("checked")) {
-                    isOneChecked = true;
-                }
-            });
-
-            if (isOneChecked) {
-                submitButt.removeAttr("disabled");
-            } else {
-                submitButt.attr("disabled", true);
-            }
-
-        });
+      document.querySelectorAll('input[type="submit"]')[0].disabled = true;
+      if (checkedOne) {
+        document.querySelectorAll('input[type="submit"]')[0].disabled = false;
+      }
+}
 
 </script>
 

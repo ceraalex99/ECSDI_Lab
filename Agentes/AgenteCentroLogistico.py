@@ -154,6 +154,11 @@ def comunicacion():
                 g = Graph()
                 g.parse('../data/pedidos_pendientes.owl', format='turtle')
 
+                ofile = open('../data/pedidos_pendientes.owl', "w")
+                ofile.write('')
+                ofile.close()
+
+
                 gr = Graph()
                 content = ECSDI['Lote_' + str(random.randint(1, sys.float_info.max))]
                 gr.add((content, RDF.type, ECSDI.Lote))
