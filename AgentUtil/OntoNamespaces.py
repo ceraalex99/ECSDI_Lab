@@ -42,3 +42,4 @@ ECSDI = Namespace('http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-prac
 
 PROPS = Namespace('http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/property/')
 
+RESOURCES = Namespace('http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/')

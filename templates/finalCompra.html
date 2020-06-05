@@ -11,19 +11,26 @@
             <th><b>PESO</b></th>
         </tr>
         {% for item in products %}
-            {% if item.nombre %}
+            {% if item[2] %}
             <tr>
-                <td>{{ item.nombre }}</td>
-                <td>{{ item.marca }}</td>
-                <td>{{ item.modelo }}</td>
-                <td>{{ item.precio }}</td>
-                <td>{{ item.peso }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[5] }}</td>
             </tr>
             {% endif %}
         {% endfor %}
     </table>
-    <td>PRECIO: {{ precio_total }}</td>
-    <td>TRANSPORTISTA: {{ nombre_transportista }}</td>
+    <br>
+    <td>PRECIO: {{ precio_total }}</td><br>
+    <td>PRECIO TRANSPORTE: {{ precio_transporte }}</td><br>
+
+    {% if nombre_transportista %}
+    <td>TRANSPORTISTA: {{ nombre_transportista }}</td><br>
+    {% else %}
+    <td>TRANSPORTISTA: Aún pendiente de asignar</td><br>
+    {% endif %}
 </form>
 <body>
 

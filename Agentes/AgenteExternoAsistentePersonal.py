@@ -261,14 +261,17 @@ def browserBuscador():
                     gr, perf=ACL.request, sender=AgenteExternoAsistentePersonal.uri, receiver=tienda.uri, msgcnt=get_count(), content=content), tienda.address)
 
             subject = respuesta.value(predicate=RDF.type, object=ECSDI.Info_transporte)
-            precio_total = respuesta.value(subject=subject, predicate=ECSDI.Precio)
+            precio_transporte = respuesta.value(subject=subject, predicate=ECSDI.Precio)
             nombre_transportista = respuesta.value(subject=subject, predicate=ECSDI.Nombre_transportista)
 
-            logger.info(precio_total)
+            logger.info(precio_transporte)
             logger.info(nombre_transportista)
             logger.info('Aqui no llego ni de coña')
 
-            return render_template('finalCompra.html', products= productosPedidos, precio_total= precio_total, nombre_transportista= nombre_transportista)
+            precio_transporte = precio_transporte.toPython()
+            precio_transporte = round(precio_transporte, 2)
+
+            return render_template('finalCompra.html', products= productosPedidos, precio_total= total_price,precio_transporte=precio_transporte, nombre_transportista= nombre_transportista)
 
 
 @app.route("/devolucion", methods=['GET', 'POST'])

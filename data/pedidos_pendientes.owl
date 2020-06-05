@@ -352,3 +352,43 @@ ns1:PeticionCompra_6 a ns1:Pedido ;
     ns1:Precio_total "139.0"^^xsd:float ;
     ns1:Prioridad 9 .
 
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_5 a ns1:Pedido ;
+    ns1:Peso "12341.0"^^xsd:float ;
+    ns1:Precio_total "12341.0"^^xsd:float ;
+    ns1:Prioridad 8 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_9 a ns1:Pedido ;
+    ns1:Peso "12341.0"^^xsd:float ;
+    ns1:Precio_total "12341.0"^^xsd:float ;
+    ns1:Prioridad 12 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_5 a ns1:Pedido ;
+    ns1:Peso "12341.0"^^xsd:float ;
+    ns1:Precio_total "12341.0"^^xsd:float ;
+    ns1:Prioridad 8 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_5 a ns1:Pedido ;
+    ns1:Peso "12341.0"^^xsd:float ;
+    ns1:Precio_total "12341.0"^^xsd:float ;
+    ns1:Prioridad 8 .
+
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ns1:PeticionCompra_14 a ns1:Pedido ;
+    ns1:Peso "12341.0"^^xsd:float ;
+    ns1:Precio_total "12341.0"^^xsd:float ;
+    ns1:Prioridad 17 .
+

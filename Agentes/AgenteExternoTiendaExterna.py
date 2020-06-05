@@ -26,7 +26,7 @@ from AgentUtil.ACLMessages import get_message_properties, build_message, send_me
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.Agent import Agent
 from AgentUtil.Logging import config_logger
-from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL, PROPS
+from AgentUtil.OntoNamespaces import DSO, ECSDI, ACL, PROPS, RESOURCES
 from rdflib.namespace import RDF, FOAF, XSD
 
 __author__ = 'Miguel'
@@ -134,20 +134,21 @@ def browser_registrarProducto():
     logger.info("----0----")
 
     gr = Graph()
+    gr.bind('pont', ECSDI)
     gr.add((content, RDF.type, ECSDI.Integrar_producto))
 
     logger.info("----1----")
 
-    sProdructo = ECSDI['Producto_' + str(random.randint(1, sys.float_info.max))]
+    sProdructo = RESOURCES['Producto_' + str(random.randint(1, sys.float_info.max))]
 
     logger.info("----2----")
 
     gr.add((sProdructo, RDF.type, ECSDI.Producto))
-    gr.add((sProdructo, PROPS.Nombre, Literal(nombre)))
-    gr.add((sProdructo, PROPS.Marca, Literal(marca)))
-    gr.add((sProdructo, PROPS.Modelo, Literal(modelo)))
-    gr.add((sProdructo, PROPS.Precio, Literal(precio)))
-    gr.add((sProdructo, PROPS.Peso, Literal(peso)))
+    gr.add((sProdructo, PROPS.nombre, Literal(nombre, datatype=XSD.string)))
+    gr.add((sProdructo, PROPS.marca, Literal(marca, datatype=XSD.string)))
+    gr.add((sProdructo, PROPS.modelo, Literal(modelo, datatype=XSD.string)))
+    gr.add((sProdructo, PROPS.precio, Literal(precio, datatype=XSD.float)))
+    gr.add((sProdructo, PROPS.peso, Literal(peso, datatype=XSD.float)))
 
     logger.info("----3----")
 
