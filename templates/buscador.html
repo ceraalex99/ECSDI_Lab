@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+
     <title>Azamon buscador</title>
+    <style>
+    button[disabled] {
+
+background-color: grey;
+color: #666666;
+}
+
+</style>
 </head>
 <body>
     <h1>AZAMON | asistente personal</h1>
@@ -21,7 +31,7 @@
     </p>
      </form>
     {% else %}
-        <form method="post">
+        <form method="post" name="buscador" id="buscador">
             <table cellpadding="5px">
                 <tr>
                     <th><b>NOMBRE</b></th>
@@ -47,5 +57,30 @@
         </form>
     {% endif %}
 
+
 </body>
 </html>
+<script type="text/javascript">
+        var checkboxes = $("input[type='checkbox']"),
+        submitButt = $("input[type='submit']");
+
+        checkboxes.change(function() {
+
+            var isOneChecked = false;
+
+            checkboxes.each(function() {
+                if ($(this).attr("checked")) {
+                    isOneChecked = true;
+                }
+            });
+
+            if (isOneChecked) {
+                submitButt.removeAttr("disabled");
+            } else {
+                submitButt.attr("disabled", true);
+            }
+
+        });
+
+</script>
+
