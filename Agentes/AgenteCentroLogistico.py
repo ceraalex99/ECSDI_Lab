@@ -149,7 +149,7 @@ def comunicacion():
 
             time = datetime.now().time()
             nine_am = datetime.strptime("09:00:00", '%H:%M:%S').time()
-            nine_pm = datetime.strptime("23:00:00", '%H:%M:%S').time()
+            nine_pm = datetime.strptime("23:50:00", '%H:%M:%S').time()
             logger.info('ANTES DE LA HORA')
             if nine_am < time < nine_pm:
                 logger.info('HE LLEGADO A LA HORA')
@@ -168,7 +168,7 @@ def comunicacion():
                 gr.add((content, RDF.type, ECSDI.Lote))
                 gr.add((content, ECSDI.Peso_lote, Literal(peso_lote, datatype=XSD.float)))
 
-                oferta_min = (sys.float_info.max, None, None)
+                oferta_min = [sys.float_info.max, None, None]
 
                 for transportista in transportistas:
                     respuesta_precio = send_message(build_message(gr,
@@ -179,8 +179,8 @@ def comunicacion():
                     subject = respuesta_precio.value(predicate=RDF.type, object=ECSDI.Transportista)
                     precio = respuesta_precio.value(subject=subject, predicate=ECSDI.Precio_entrega)
                     nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
-                    if precio < oferta_min:
-                        oferta_min = (precio, transportista, nombre)
+                    if precio.toPython() < oferta_min[0]:
+                        oferta_min = [precio.toPython(), transportista, nombre]
 
                 contraoferta = oferta_min[0]*0.95
 
@@ -194,34 +194,37 @@ def comunicacion():
                                                                  msgcnt=get_count(), content=content), transportista.address)
 
                     msgdicres = get_message_properties(respuesta_contraoferta)
-                    if msgdicres['performative'] == ACL.propose:
+                    if msgdicres['performative'] == ACL['accept-proposal']:
+                        subject = respuesta_contraoferta.value(predicate=RDF.type, object=ECSDI.Transportista)
+                        nombre = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Nombre)
+                        oferta_min = [contraoferta, transportista, nombre]
+                        break
+                    elif msgdicres['performative'] == ACL.propose:
                         subject = respuesta_contraoferta.value(predicate=RDF.type, object=ECSDI.Transportista)
                         precio = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Precio_entrega)
                         nombre = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Nombre)
-                        if precio < oferta_min:
-                            oferta_min = (precio, transportista, nombre)
+                        if precio.toPython() < oferta_min[0]:
+                            oferta_min = [precio.toPython(), transportista, nombre]
 
-                #nombre = respuesta_precio.value(subject=subject, predicate=ECSDI.Nombre)
-                #logger.info(nombre)
                 if prioridad == "true":
                     fecha_llegada = date.today() + timedelta(days=2)
-                    precio = precio*2
+                    oferta_min[0] = oferta_min[0]*2
                 else:
                     fecha_llegada = date.today() + timedelta(days=5)
-                logger.info(precio)
+                logger.info(oferta_min[0])
                 logger.info(fecha_llegada)
 
                 resposta_proposta = send_message(build_message(informar_transportista(),
                                                                ACL['inform'],
                                                                sender=AgenteCentroLogistico.uri,
-                                                               receiver=AgenteTransportista.uri,
-                                                               msgcnt=get_count()), AgenteTransportista.address)
+                                                               receiver=oferta_min[1].uri,
+                                                               msgcnt=get_count()), oferta_min[1].address)
                 msgdic2 = get_message_properties(resposta_proposta)
 
                 if msgdic2['performative'] == ACL.agree:
                     logger.info('Acepta')
                     # PIENSA EL TIPO DEL GRAFO
-                    gr = build_message(informar_usuario(nombre, fecha_llegada, precio),
+                    gr = build_message(informar_usuario(oferta_min[2], fecha_llegada, oferta_min[0]),
                                        ACL['inform'],
                                        sender=AgenteCentroLogistico.uri,
                                        msgcnt=get_count())
@@ -232,11 +235,13 @@ def comunicacion():
 
         elif accion == ECSDI.Devolver_producto:
 
-            AgenteTransportista = get_agent_info(agn.AgenteExternoTransportista, AgenteDirectorio,
+            AgentesTransportista = get_agents_info(agn.AgenteExternoTransportista, AgenteDirectorio,
                                                  AgenteCentroLogistico, get_count())
 
-            resp = send_message(build_message(gm, ACL['request'], sender=AgenteCentroLogistico.uri, receiver=AgenteTransportista.uri, msgcnt=get_count(), content=content), AgenteTransportista.address)
-            nombre = resp.value(subject=content, predicate=ECSDI.nombre)
+            resp = send_message(build_message(gm, ACL['request'], sender=AgenteCentroLogistico.uri, receiver=AgentesTransportista[0].uri, msgcnt=get_count(), content=content), AgentesTransportista[0].address)
+            subject = resp.value(predicate=RDF.type, object=ECSDI.Transportista)
+            nombre = resp.value(subject=subject, predicate=ECSDI.Nombre)
+            logger.info(nombre)
             gr = build_message(informar_devolucion(nombre), ACL['inform'], sender=AgenteCentroLogistico.uri, msgcnt=get_count())
 
     logger.info('Respondemos a la peticion')
@@ -293,6 +298,8 @@ def informar_devolucion(nombre):
     g = Graph()
     content = ECSDI['Ecsdi_envio'+ str(get_count())]
     g.add((content, RDF.type, ECSDI.Info_transporte))
+    logger.info('SEGUNDO')
+    logger.info(nombre)
     g.add((content, ECSDI.Nombre_transportista, Literal(nombre)))
 
     return g

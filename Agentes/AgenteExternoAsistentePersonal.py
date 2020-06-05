@@ -307,6 +307,7 @@ def browserDevolucion():
 
         subject = gm.value(predicate=RDF.type, object=ECSDI.Info_transporte)
         transportista = gm.value(subject=subject, predicate=ECSDI.Nombre_transportista)
+        logger.info(transportista)
         return render_template('finalDevolucion.html', transportista=transportista)
 
 @app.route("/comm")
