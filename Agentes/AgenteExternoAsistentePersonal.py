@@ -288,8 +288,8 @@ def browserDevolucion():
         content = ECSDI['Devolver_producto_' + str(get_count())]
         g.add((content, RDF.type, ECSDI.Devolver_producto))
 
-        for producto in devoluciones:
-            g.add((content, ECSDI.Devolver_producto, URIRef(producto)))
+        for compra in devoluciones:
+            g.add((compra, RDF.type, ECSDI.Compra))
 
         logger.info('AQUI SI')
         agenteDevoluciones = get_agent_info(agn.AgenteDevoluciones, AgenteDirectorio, AgenteExternoAsistentePersonal, get_count())
