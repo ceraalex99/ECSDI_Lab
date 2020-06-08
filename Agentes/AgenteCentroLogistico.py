@@ -142,6 +142,7 @@ def comunicacion():
 
             peso_pedido = gm.value(subject=content, predicate=ECSDI.Peso)
             prioridad = gm.value(subject=content, predicate=ECSDI.Prioridad)
+            prioridad = str(prioridad.strip('"'))
 
             logger.info(prioridad)
 
@@ -149,7 +150,7 @@ def comunicacion():
 
             time = datetime.now().time()
             nine_am = datetime.strptime("09:00:00", '%H:%M:%S').time()
-            nine_pm = datetime.strptime("21:00:00", '%H:%M:%S').time()
+            nine_pm = datetime.strptime("21:30:00", '%H:%M:%S').time()
             logger.info('ANTES DE LA HORA')
             if nine_am < time < nine_pm:
                 logger.info('HE LLEGADO A LA HORA')
@@ -184,11 +185,13 @@ def comunicacion():
 
                 contraoferta = oferta_min[0]*0.95
 
+                gr = Graph()
+
                 content = ECSDI['Contraoferta' + str(random.randint(1, sys.float_info.max))]
                 gr.add((content, ECSDI.Contraoferta, Literal(contraoferta, datatype=XSD.float)))
                 for transportista in transportistas:
                     respuesta_contraoferta = send_message(build_message(gr,
-                                                                 ACL['propose'],
+                                                                 ACL.propose,
                                                                  sender=AgenteCentroLogistico.uri,
                                                                  receiver=transportista.uri,
                                                                  msgcnt=get_count(), content=content), transportista.address)
@@ -200,8 +203,8 @@ def comunicacion():
                         oferta_min = [contraoferta, transportista, nombre]
                         break
                     elif msgdicres['performative'] == ACL.propose:
-                        subject = respuesta_contraoferta.value(predicate=RDF.type, object=ECSDI.Transportista)
-                        precio = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Precio_entrega)
+                        subject = respuesta_contraoferta.value(predicate=RDF.type, object=ECSDI.Contraoferta)
+                        precio = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Precio)
                         nombre = respuesta_contraoferta.value(subject=subject, predicate=ECSDI.Nombre)
                         if precio.toPython() < oferta_min[0]:
                             oferta_min = [precio.toPython(), transportista, nombre]

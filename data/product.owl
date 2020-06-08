@@ -501,3 +501,15 @@ ns1:precio a <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
     ns1:peso "132321.0"^^xsd:float ;
     ns1:precio "1322.0"^^xsd:float .
 
+@prefix ns1: <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/property/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/Integrar_producto_2> a <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/Integrar_producto> .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_55783364626769751585963817922981529625612576175882016391584101163415858574267722128062441613519182898797332419873187269651901251541927511815793938721410794553490193384901531009067123240936870753481348813399324391039672091458475240711312854969452999917433011236273656513031167530886362570050815226950711530157> a <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/Producto> ;
+    ns1:marca "adsasd"^^xsd:string ;
+    ns1:modelo "adsasd"^^xsd:string ;
+    ns1:nombre "dasdasdas"^^xsd:string ;
+    ns1:peso "132321.0"^^xsd:float ;
+    ns1:precio "123412.0"^^xsd:float .
+

@@ -28,6 +28,15 @@ ns1:Compra_986975985914223316861555299516478880563966906540031242741762530741942
     ns1:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC>,
         <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> .
 
+ns2:Compra_101928800767437489544860357823237845294641793011855543930360135917983241196592204665005758787108694451947685700922651947833322421577156853482809611072772639637245169273277564265561872405877994843611765784966289296529110962136062565333363762629488668783145508240490454052697643933745738266142831042123145197732 a ns2:Compra ;
+    ns2:Precio_total "123412.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_55783364626769751585963817922981529625612576175882016391584101163415858574267722128062441613519182898797332419873187269651901251541927511815793938721410794553490193384901531009067123240936870753481348813399324391039672091458475240711312854969452999917433011236273656513031167530886362570050815226950711530157> .
+
+ns2:Compra_103606068179633294301300449919721372530269534976846395210033500712244877496682747512929708789189544998433917673890971194180043085558960387097617323226735730952003838011769458427751411939039947397473579405781859353837103723056821270802166434281152587710271204390355460939956911427754351947006793131052362006373 a ns2:Compra ;
+    ns2:Precio_total "227.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_CAQWQ6>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_HG3RLM> .
+
 ns2:Compra_104496387063292461747014515325709059563892720219375327581306360782415285452700711900492886647706253956677468158895120054320766516777455465715452026297280212729412785090932930994062920284636455911070366692450487053675197382717453078953973682702236386530135881339303322817001338681218198286143301145680004851089 ns2:Precio_total "243.0"^^xsd:float .
 
 ns2:Compra_120387793498776116974345850369724561287686848468554369995246618437583463435563970505411309831568489832768803630130375239462503532167373912820054626132564258669661743809070372248173917157641570224564881107133251142359576965307367960875565013099545361247697145399588774212120384716254215642769221109716333513012 a ns2:Compra ;
@@ -43,6 +52,12 @@ ns2:Compra_134425542900464738203958962028605312220183647866880082162183018801482
     ns2:Precio_total "243.0"^^xsd:float ;
     ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31>,
         <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> .
+
+ns2:Compra_140035646349576809208327047881963759856345702353651675241933784219327131250741781935869193134787738678618930802935536616001473080648954196189722778557603318917570201570265019966411588950331501351332327134391698626980625679674761474357229981442679881919260867754279576127393760250131542846417706358442311378114 a ns2:Compra ;
+    ns2:Precio_total "377.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_1L7XU2>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> .
 
 ns2:Compra_144314358569677981442689207764972379090156093364831522451170636139872584438386893862790992360496395822477183268153260381457695391760133226271583328006952928847934966429044967314866143167039256999638874851197128231225236615522053127472242672749953665279698054232947202357243746097996423212847751532983844918722 a ns2:Compra ;
     ns2:Precio_total "243.0"^^xsd:float ;
@@ -62,11 +77,28 @@ ns2:Compra_152244524263015097281467699282218660253422069421456235035449909991317
 
 ns2:Compra_157548332248318302374485690506270574303989667678197367866799771619307171373549424572166568404774693384707808927016265674156317895808794373549997747426020801173726969762152306592871897561760184713768576127342548251987727519366562293543370952531705075313273429623516323600828679104661221899194761992968588060388 ns2:Precio_total "180.0"^^xsd:float .
 
+ns2:Compra_159725168236574286458353842903600391755399461965111424667020093011081980939366356754219098121184460315475797548705833703857633954925233535227376964452489755729841169803911591288470573889187741146156563533114201265666925001650349837297860618323693022139903448844582621874401020154125678000813602099517281657327 a ns2:Compra ;
+    ns2:Precio_total "139.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31> .
+
+ns2:Compra_160648016528364429610229692130990180840450989919452397436213547270817839356171032268559401695039724168232138906182661222228413593283601977018507199416372607964076823922003572320434014118083203305396225096380475740315834201951799411758450519346172162279499489197015007365048208382714381061156555573902242779020 a ns2:Compra ;
+    ns2:Precio_total "1710.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_3K5ETI>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_F6RPOS>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_UXTI5P> .
+
 ns2:Compra_161251949196805017166197143075607865886704632095515771378642198996793844563816642166253720709981902659048778367941789830274423998689038909084636506962680029851426833882630057650627325517317241314758030685442200415612683751056145230914872346908584190773158799461226697006453392383329762881090300748135016517196 ns2:Precio_total "12341.0"^^xsd:float .
 
 ns2:Compra_161648622679868679167406253826261070000480323856221428398993317831519306153877441770802920084327823039067785260229534490791376583025064434403121021228311190817469537149177617547895372267720259532822161602606861703983610825754559121771656545656093231216365959094737500450559559729247092523982979461616918413638 ns2:Precio_total "104.0"^^xsd:float .
 
 ns2:Compra_162283505284682548090836426060176268282147380554083534391953214405777942522924634051877106262431955400474084043549076210923136409372848436961405458349441300591486873578615065989375284172334904577394231744341445046403835256844778005956324545495865609956000945008604391295794425305979466441670099891269348484199 ns2:Precio_total "243.0"^^xsd:float .
+
+ns2:Compra_166411715177528069273075806138605397452427954559391989788876991144205750227331211973798426253643839745510495071536449849340930258855588671876054433596810777677899886398771395828030784100448953354695561268058373145496575240359225420014503533041447468991306426026955877340374586121867393345441001375161991715719 a ns2:Compra ;
+    ns2:Precio_total "3236.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_81B596>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_FV82PC>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> .
 
 ns2:Compra_167073560849937874413512537312995685631840919885476161100646610993705406933117516331463324833324040767891835375723549671415831707606724420198020387028357758917251397700733305305359894375006721199569125396847696846805298557843735593190386584390794567377935863452866513681182852923588274606665948711048858474272 a ns2:Compra ;
     ns2:Precio_total "243.0"^^xsd:float ;
@@ -85,6 +117,40 @@ ns2:Compra_222443820330298302401888356999321168622612905315567298371685665903808
     ns2:Precio_total "1611.0"^^xsd:float ;
     ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_PM4DRZ> .
 
+ns2:Compra_23855559339140637905461522108413147714421328944584184303250802749748385614990340605726914600404706204223578560513962261508926376499342347603601900448504173151513563695297471794092025481385586819572915651453862189998388786803579852719965149371865469904827831370836340801032163604141195183326486631709174320024 a ns2:Compra ;
+    ns2:Precio_total "372.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_M68VS6>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_MPS2JQ>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> .
+
+ns2:Compra_24630171003087434598001873871362264464292328704122006086012037711556551859703031311844083022540884897022722368957107593264398955443692482212942989077806583340834448726871512217488384808287653745443500086826623409716502060693579034024239448053444236571458516425074000556306137670182279845934191956524899050245 a ns2:Compra ;
+    ns2:Precio_total "8673.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ADSHJF>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_AXDKNO>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GH4QOU>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_U8FNXK>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_0M5JXQ>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_71SMOW>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_81B596>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_FV82PC>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_MAU3O5>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_CAQWQ6>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_HG3RLM>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_M68VS6>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_MPS2JQ>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_RPWOSY> .
+
+ns2:Compra_25140870156308501669586647168548077858144711845645816753959582745108615187703971575639967856075372688162835732149473993568013009259796228502026598759588447150818550858516386859771787212495048264875670409308836130290681193625497356755728512458480112514757370312422292280433301210519146895848080103434040127982 a ns2:Compra ;
+    ns2:Precio_total "947.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_CAQWQ6>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_G1KHYF>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_JGLZUS>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KHPXN1>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_MPS2JQ>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> .
+
 ns2:Compra_3000238990414466090285418214400223550344441192270383919555929751719992143101116229282155328532867433416305203072494857729220027704855523003389960373079826590839847250431107099039784677491556182080059407078347097822513912798634008266339109738913281402529732702679408049740741370775699723345524897847090940292 a ns2:Compra ;
     ns2:Precio_total "569.0"^^xsd:float ;
     ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC> .
@@ -93,21 +159,75 @@ ns2:Compra_399115972324838271328428086314860438170793940620018863277750017379006
 
 ns2:Compra_45362743481613434607682962077850737996172935555238363918764176803242828807276343821843593035598103108728464779749389459543206293028470960469826720435925807365996886440232836439837687313910616223485960948536513551356084664604551838397379525124998493970744201666307382770182722671782205052058925306393365771005 ns2:Precio_total "12341.0"^^xsd:float .
 
+ns2:Compra_45632547746179522021896873410433352506954538520117102599971749788688319452244738361652284263824445048333455678549012837919759217357790725681657248553012839427880926004675449724551293130515485843204600216913929729557052636509876023884690638023971809739030865311429519448561159256809067728952517147628462920550 a ns2:Compra ;
+    ns2:Precio_total "139.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31> .
+
+ns2:Compra_46068020898966081537311084452398283592767550614020938195217063497552170990596898870026527552218045269643345724018307158521521299720150713149101647035527958750828806746914904394528477793443763872224720115752508024307808902659238637132854154685619437563688608691362189637837983325541982939089515923150953264319 a ns2:Compra ;
+    ns2:Precio_total "3183.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_EKYDRE>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_MQKYDM>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_NJB4K4>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_URW92V>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_W3EQXE> .
+
 ns2:Compra_46751627061996248359194119749111964852490126030077341583522089797316521198595631256771202459826538856658067839894353531203682616528478643645782026329644594309193226811022332373021876808241851794663753579988194129055380720454719357268471289931016131772755249968822111514342411182136858031623934135105549354692 ns2:Precio_total "243.0"^^xsd:float .
 
-ns2:Compra_50257817850040084630120092921134837791378159185854483441134135179516012267336048006953791114948179911111002235623334328079370157121874898261386048057146925315053019573460602689104869049536805862847951495670947690173711254195283397731953461766167033871566918525839769304947764057077489381778085863710470069953 a ns2:Compra ;
-    ns2:Precio_total "569.0"^^xsd:float ;
-    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC> .
+ns2:Compra_50257817850040084630120092921134837791378159185854483441134135179516012267336048006953791114948179911111002235623334328079370157121874898261386048057146925315053019573460602689104869049536805862847951495670947690173711254195283397731953461766167033871566918525839769304947764057077489381778085863710470069953 ns2:Precio_total "569.0"^^xsd:float .
+
+ns2:Compra_52705249667551533937382642896611001120493548211334854956756006788010958321524032054618022139816652775253930808079161393751569458679924205032090565730725396531192380229723438625772358680229016946390822039229135852360145235345346829969212504455312692734944692628076472922181021845549851835310455396228451533250 ns2:Precio_total "5735.0"^^xsd:float .
 
 ns2:Compra_53171179606486099940009110912608617773282330232072900026540433780307256707372215142654083598221974903291380027490549551983432885341142876436946377534244940279580397858603866656487653370561952573383242210646891980435290816934080524336441083989395355166753514337796529585200515050946786289893502176845001300760 ns2:Precio_total "243.0"^^xsd:float .
+
+ns2:Compra_6444989214897916260376127873625638071284922724058847505159550291437618699455066459223984111372693403262427900957884819115307892687137888696009674725155239153367599417305815355118925115545068998611803922323852474567300074496815597986972648506188586170022889024806679707928006387671032192873649095916180679441 a ns2:Compra ;
+    ns2:Precio_total "6049.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_AXDKNO>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_BF200J>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ZS02A4>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_0M5JXQ>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_50RC92>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_MAU3O5>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_URW92V>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_W3EQXE> .
 
 ns2:Compra_70441201802476634019231478492231390245234661287875679415174134257408639911188987363016920340435127724190991375388315956896647558803051538082208430031108836135101447869808349592480024579652540121443107088177416588873881508381208579511822833411504300185037342639208315260956233218712696198826399277095031826997 ns2:Precio_total "12341.0"^^xsd:float .
 
 ns2:Compra_72397556985785018940947980278394986114571514696040316789320189716781027867643797355926105721601973105711588194022379101163901265346057602066530574428974102442535138147318181782581147757821639645955685902421640923044220541588396962340389243025458214891419232991862863683066749873923062350492230639881067472437 ns2:Precio_total "12341.0"^^xsd:float .
 
+ns2:Compra_795390932281156916071297613896770116428807462159036542703129199947143835007875063895420023783270797533487969893014578488250825581447906809229917082071524505123342044241995293756675253600070698367015706658101949111363253426880700341917208588093264939927954263359368380011282815812873960788233947541264420833 a ns2:Compra ;
+    ns2:Precio_total "123412.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_55783364626769751585963817922981529625612576175882016391584101163415858574267722128062441613519182898797332419873187269651901251541927511815793938721410794553490193384901531009067123240936870753481348813399324391039672091458475240711312854969452999917433011236273656513031167530886362570050815226950711530157> .
+
+ns2:Compra_80684369431663507542596711970022317394291440545843527354429657147894668140212120921213101911818534409681304742123806888817422119999542444089169488660728200490445324365312982967784293544151129449090496058238994775884491114204767464653125067736613154176272381980552580834804010242480755114806875167655131472136 a ns2:Compra ;
+    ns2:Precio_total "1565.0"^^xsd:float ;
+    ns2:Productos <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_27376832862353796154832201665817105985288282941813658245037700326053287565546410027680097392511501682632519965294674159163990664435693649983382992114597711284382742116078023743959893715437043210477141475033948376959433409186028094130018227952710050369503069244873583962519296962655158993017096216057274129678>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31>,
+        <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> .
+
 ns2:Compra_82342965960147879380116895650283523083488116793064367641978305884057726169184507531389893005299710711336617065794440580417086893975388115430975545806122939753266694865635278561072724915058496598252465392633456745781917635611939002644279621600239014981568790006802100034919455632046417541533574685174523096764 ns2:Precio_total "243.0"^^xsd:float .
 
 ns2:Compra_94568433686048191329712189175456056630891478181684082618027392258233505363367391671084154952234066605536046207972847453698577265546335272349571123932846056766187320282667498471156834232240340764647416174703019472075151784532356167007549531908961735428883033572366322809879257606094281381370715811590408083851 ns2:Precio_total "243.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GQG4Y4> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_F03XH5"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_ESWZDW"^^xsd:string ;
+    ns2:Nombre "nombre_XBW8RM"^^xsd:string ;
+    ns2:Peso "391.028"^^xsd:float ;
+    ns2:Precio "505.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_GOIKB4> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_OL2RZK"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_OWIQ68"^^xsd:string ;
+    ns2:Nombre "nombre_OHXP5Y"^^xsd:string ;
+    ns2:Peso "1847.652"^^xsd:float ;
+    ns2:Precio "503.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_Q2ULJC> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_GKBALR"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_UOAOR5"^^xsd:string ;
+    ns2:Nombre "nombre_QQL7EK"^^xsd:string ;
+    ns2:Peso "1465.097"^^xsd:float ;
+    ns2:Precio "1563.0"^^xsd:float .
 
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_140849050401413143742045578277759509641024732406986095442659934318520614288754414777539936815488748130491151953320688641896200821558773390755966332098491060934969722911983994277404201183830573309735751415508203007282852927633563858924493919447822064334136643033137112675639594873411271182815963992449170884263> a ns2:Producto ;
     ns2:Marca "asdf"^^xsd:string ;
@@ -116,12 +236,89 @@ ns2:Compra_945684336860481913297121891754560566308914781816840826180273922582335
     ns2:Peso "12341.0"^^xsd:float ;
     ns2:Precio "12341.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GH4QOU> a ns1:Producto ;
-    ns1:Marca "Marca_Movil_XRVNTX"^^xsd:string ;
-    ns1:Modelo "Modelo_Movil_ESWZDW"^^xsd:string ;
-    ns1:Nombre "nombre_0VSM0V"^^xsd:string ;
-    ns1:Peso "299.2598"^^xsd:float ;
-    ns1:Precio "167.0"^^xsd:float .
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_0ZZMWD> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_I1SRBI"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_7TWXV9"^^xsd:string ;
+    ns2:Nombre "nombre_TQD9DW"^^xsd:string ;
+    ns2:Peso "18568.4"^^xsd:float ;
+    ns2:Precio "180.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_3K5ETI> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_XRVNTX"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_3UNBES"^^xsd:string ;
+    ns2:Nombre "nombre_BWGBEO"^^xsd:string ;
+    ns2:Peso "309.1446"^^xsd:float ;
+    ns2:Precio "347.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ADSHJF> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_25GHE0"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_BWPA2H"^^xsd:string ;
+    ns2:Nombre "nombre_FXZ72T"^^xsd:string ;
+    ns2:Peso "225.157"^^xsd:float ;
+    ns2:Precio "107.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_BF200J> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_F03XH5"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_RHGF2I"^^xsd:string ;
+    ns2:Nombre "nombre_5HDCO8"^^xsd:string ;
+    ns2:Peso "281.4939"^^xsd:float ;
+    ns2:Precio "323.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_EKYDRE> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_X79K65"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_TPYCMD"^^xsd:string ;
+    ns2:Nombre "nombre_3HQDER"^^xsd:string ;
+    ns2:Peso "336.0344"^^xsd:float ;
+    ns2:Precio "235.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_F6RPOS> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_S1J35E"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_RHGF2I"^^xsd:string ;
+    ns2:Nombre "nombre_87XI0A"^^xsd:string ;
+    ns2:Peso "364.1413"^^xsd:float ;
+    ns2:Precio "341.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_MQKYDM> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_X79K65"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_210OHZ"^^xsd:string ;
+    ns2:Nombre "nombre_KF4442"^^xsd:string ;
+    ns2:Peso "258.6423"^^xsd:float ;
+    ns2:Precio "335.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_U8FNXK> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_I66COR"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_RHGF2I"^^xsd:string ;
+    ns2:Nombre "nombre_NRYJAC"^^xsd:string ;
+    ns2:Peso "273.4735"^^xsd:float ;
+    ns2:Precio "401.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_UXTI5P> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_XRVNTX"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_3UNBES"^^xsd:string ;
+    ns2:Nombre "nombre_5KNMA3"^^xsd:string ;
+    ns2:Peso "345.8366"^^xsd:float ;
+    ns2:Precio "453.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_ZS02A4> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_IG3QRS"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_3S4PI3"^^xsd:string ;
+    ns2:Nombre "nombre_JMB1PC"^^xsd:string ;
+    ns2:Peso "287.707"^^xsd:float ;
+    ns2:Precio "225.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_50RC92> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_4SU8R8"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_UOAOR5"^^xsd:string ;
+    ns2:Nombre "nombre_45UGTK"^^xsd:string ;
+    ns2:Peso "1959.681"^^xsd:float ;
+    ns2:Precio "1239.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_71SMOW> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_EJTLT9"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_BI6QNA"^^xsd:string ;
+    ns2:Nombre "nombre_OAI3G7"^^xsd:string ;
+    ns2:Peso "2320.531"^^xsd:float ;
+    ns2:Precio "1429.0"^^xsd:float .
 
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_9017N0> a ns2:Producto ;
     ns2:Marca "Marca_Portatil_0XAMAP"^^xsd:string ;
@@ -130,6 +327,13 @@ ns2:Compra_945684336860481913297121891754560566308914781816840826180273922582335
     ns2:Peso "1383.606"^^xsd:float ;
     ns2:Precio "1998.0"^^xsd:float .
 
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_NJB4K4> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_0XAMAP"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_TZX70M"^^xsd:string ;
+    ns2:Nombre "nombre_QOMY6J"^^xsd:string ;
+    ns2:Peso "1145.077"^^xsd:float ;
+    ns2:Precio "1222.0"^^xsd:float .
+
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_PM4DRZ> a ns2:Producto ;
     ns2:Marca "Marca_Portatil_PTGBQI"^^xsd:string ;
     ns2:Modelo "Modelo_Portatil_EIL2ZI"^^xsd:string ;
@@ -137,12 +341,143 @@ ns2:Compra_945684336860481913297121891754560566308914781816840826180273922582335
     ns2:Peso "1046.868"^^xsd:float ;
     ns2:Precio "1611.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_BLZI8G> a ns1:Producto ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_27376832862353796154832201665817105985288282941813658245037700326053287565546410027680097392511501682632519965294674159163990664435693649983382992114597711284382742116078023743959893715437043210477141475033948376959433409186028094130018227952710050369503069244873583962519296962655158993017096216057274129678> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_GK5W89"^^xsd:string ;
+    ns2:Modelo "ads"^^xsd:string ;
+    ns2:Nombre "Pablo"^^xsd:string ;
+    ns2:Peso "132321.0"^^xsd:float ;
+    ns2:Precio "1322.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_1L7XU2> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_H05ZL3"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_AVU21P"^^xsd:string ;
+    ns2:Nombre "nombre_050VG8"^^xsd:string ;
+    ns2:Peso "16093.53"^^xsd:float ;
+    ns2:Precio "159.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_BLZI8G> a ns1:Producto,
+        ns2:Producto ;
     ns1:Marca "Marca_Silla_LA8BH0"^^xsd:string ;
     ns1:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
     ns1:Nombre "nombre_TB6U7U"^^xsd:string ;
     ns1:Peso "6445.487"^^xsd:float ;
-    ns1:Precio "188.0"^^xsd:float .
+    ns1:Precio "188.0"^^xsd:float ;
+    ns2:Marca "Marca_Silla_LA8BH0"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
+    ns2:Nombre "nombre_TB6U7U"^^xsd:string ;
+    ns2:Peso "6445.487"^^xsd:float ;
+    ns2:Precio "188.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_G1KHYF> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_L9CQ4C"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_F9FERT"^^xsd:string ;
+    ns2:Nombre "nombre_Q0X7CX"^^xsd:string ;
+    ns2:Peso "9434.123"^^xsd:float ;
+    ns2:Precio "138.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_JGLZUS> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_AVU21P"^^xsd:string ;
+    ns2:Nombre "nombre_HPCMND"^^xsd:string ;
+    ns2:Peso "15421.26"^^xsd:float ;
+    ns2:Precio "126.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC> a ns1:Producto ;
+    ns1:Marca "Marca_Silla_XDI5OM"^^xsd:string ;
+    ns1:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
+    ns1:Nombre "nombre_PRKVMV"^^xsd:string ;
+    ns1:Peso "5278.006"^^xsd:float ;
+    ns1:Precio "121.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_RPWOSY> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_920IDM"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
+    ns2:Nombre "nombre_P7KGNY"^^xsd:string ;
+    ns2:Peso "11467.02"^^xsd:float ;
+    ns2:Precio "71.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_AXDKNO> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_IG3QRS"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_BWPA2H"^^xsd:string ;
+    ns2:Nombre "nombre_NS903J"^^xsd:string ;
+    ns2:Peso "267.6969"^^xsd:float ;
+    ns2:Precio "569.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_GH4QOU> a ns1:Producto,
+        ns2:Producto ;
+    ns1:Marca "Marca_Movil_XRVNTX"^^xsd:string ;
+    ns1:Modelo "Modelo_Movil_ESWZDW"^^xsd:string ;
+    ns1:Nombre "nombre_0VSM0V"^^xsd:string ;
+    ns1:Peso "299.2598"^^xsd:float ;
+    ns1:Precio "167.0"^^xsd:float ;
+    ns2:Marca "Marca_Movil_XRVNTX"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_ESWZDW"^^xsd:string ;
+    ns2:Nombre "nombre_0VSM0V"^^xsd:string ;
+    ns2:Peso "299.2598"^^xsd:float ;
+    ns2:Precio "167.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC> a ns2:Producto ;
+    ns2:Marca "Marca_Movil_I66COR"^^xsd:string ;
+    ns2:Modelo "Modelo_Movil_3UNBES"^^xsd:string ;
+    ns2:Nombre "nombre_2OXHUO"^^xsd:string ;
+    ns2:Peso "399.2119"^^xsd:float ;
+    ns2:Precio "569.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_0M5JXQ> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_4SU8R8"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_OWIQ68"^^xsd:string ;
+    ns2:Nombre "nombre_PPJ0Z8"^^xsd:string ;
+    ns2:Peso "2486.1"^^xsd:float ;
+    ns2:Precio "1052.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_81B596> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_OL2RZK"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_CKSTAF"^^xsd:string ;
+    ns2:Nombre "nombre_9PMDDY"^^xsd:string ;
+    ns2:Peso "1288.773"^^xsd:float ;
+    ns2:Precio "1921.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_FV82PC> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_GKBALR"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_BI6QNA"^^xsd:string ;
+    ns2:Nombre "nombre_CZJM28"^^xsd:string ;
+    ns2:Peso "2243.705"^^xsd:float ;
+    ns2:Precio "1211.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_MAU3O5> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_UC8OJB"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_BI6QNA"^^xsd:string ;
+    ns2:Nombre "nombre_J5ZKJR"^^xsd:string ;
+    ns2:Peso "1592.342"^^xsd:float ;
+    ns2:Precio "1250.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_URW92V> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_0XAMAP"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_QYER6Y"^^xsd:string ;
+    ns2:Nombre "nombre_XR1AJO"^^xsd:string ;
+    ns2:Peso "1909.86"^^xsd:float ;
+    ns2:Precio "720.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Portatil_W3EQXE> a ns2:Producto ;
+    ns2:Marca "Marca_Portatil_4SU8R8"^^xsd:string ;
+    ns2:Modelo "Modelo_Portatil_1Q5G7Z"^^xsd:string ;
+    ns2:Nombre "nombre_QWALSP"^^xsd:string ;
+    ns2:Peso "1760.031"^^xsd:float ;
+    ns2:Precio "671.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Producto_55783364626769751585963817922981529625612576175882016391584101163415858574267722128062441613519182898797332419873187269651901251541927511815793938721410794553490193384901531009067123240936870753481348813399324391039672091458475240711312854969452999917433011236273656513031167530886362570050815226950711530157> a ns2:Producto ;
+    ns2:Marca "adsasd"^^xsd:string ;
+    ns2:Modelo "adsasd"^^xsd:string ;
+    ns2:Nombre "dasdasdas"^^xsd:string ;
+    ns2:Peso "132321.0"^^xsd:float ;
+    ns2:Precio "123412.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_HG3RLM> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_AVU21P"^^xsd:string ;
+    ns2:Nombre "nombre_G81NHX"^^xsd:string ;
+    ns2:Peso "19487.61"^^xsd:float ;
+    ns2:Precio "167.0"^^xsd:float .
 
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KHPXN1> a ns1:Producto,
         ns2:Producto ;
@@ -157,46 +492,52 @@ ns2:Compra_945684336860481913297121891754560566308914781816840826180273922582335
     ns2:Peso "19555.53"^^xsd:float ;
     ns2:Precio "180.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_ODT2OC> a ns1:Producto ;
-    ns1:Marca "Marca_Silla_XDI5OM"^^xsd:string ;
-    ns1:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
-    ns1:Nombre "nombre_PRKVMV"^^xsd:string ;
-    ns1:Peso "5278.006"^^xsd:float ;
-    ns1:Precio "121.0"^^xsd:float .
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_M68VS6> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_920IDM"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_E6O2RP"^^xsd:string ;
+    ns2:Nombre "nombre_Q2T3SJ"^^xsd:string ;
+    ns2:Peso "15785.99"^^xsd:float ;
+    ns2:Precio "189.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> a ns1:Producto ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_YJE3LY> a ns1:Producto,
+        ns2:Producto ;
     ns1:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
     ns1:Modelo "Modelo_Silla_J0R2EH"^^xsd:string ;
     ns1:Nombre "nombre_DM7G31"^^xsd:string ;
     ns1:Peso "8799.533"^^xsd:float ;
-    ns1:Precio "146.0"^^xsd:float .
+    ns1:Precio "146.0"^^xsd:float ;
+    ns2:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_J0R2EH"^^xsd:string ;
+    ns2:Nombre "nombre_DM7G31"^^xsd:string ;
+    ns2:Peso "8799.533"^^xsd:float ;
+    ns2:Precio "146.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Movil_M56GUC> a ns2:Producto ;
-    ns2:Marca "Marca_Movil_I66COR"^^xsd:string ;
-    ns2:Modelo "Modelo_Movil_3UNBES"^^xsd:string ;
-    ns2:Nombre "nombre_2OXHUO"^^xsd:string ;
-    ns2:Peso "399.2119"^^xsd:float ;
-    ns2:Precio "569.0"^^xsd:float .
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_CAQWQ6> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_ETUAIU"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_Q04WV3"^^xsd:string ;
+    ns2:Nombre "nombre_XZ0U6Z"^^xsd:string ;
+    ns2:Peso "11182.93"^^xsd:float ;
+    ns2:Precio "60.0"^^xsd:float .
 
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> a ns1:Producto ;
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_MPS2JQ> a ns2:Producto ;
+    ns2:Marca "Marca_Silla_XDI5OM"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_J0R2EH"^^xsd:string ;
+    ns2:Nombre "nombre_RVBQZ1"^^xsd:string ;
+    ns2:Peso "18188.28"^^xsd:float ;
+    ns2:Precio "79.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_WEKUHM> a ns1:Producto,
+        ns2:Producto ;
     ns1:Marca "Marca_Silla_7JPK1V"^^xsd:string ;
     ns1:Modelo "Modelo_Silla_A0PVXZ"^^xsd:string ;
     ns1:Nombre "nombre_9H6T0F"^^xsd:string ;
     ns1:Peso "11027.48"^^xsd:float ;
-    ns1:Precio "114.0"^^xsd:float .
-
-<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> a ns1:Producto,
-        ns2:Producto ;
-    ns1:Marca "Marca_Silla_GK5W89"^^xsd:string ;
-    ns1:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
-    ns1:Nombre "nombre_EKKFRT"^^xsd:string ;
-    ns1:Peso "19754.66"^^xsd:float ;
-    ns1:Precio "104.0"^^xsd:float ;
-    ns2:Marca "Marca_Silla_GK5W89"^^xsd:string ;
-    ns2:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
-    ns2:Nombre "nombre_EKKFRT"^^xsd:string ;
-    ns2:Peso "19754.66"^^xsd:float ;
-    ns2:Precio "104.0"^^xsd:float .
+    ns1:Precio "114.0"^^xsd:float ;
+    ns2:Marca "Marca_Silla_7JPK1V"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_A0PVXZ"^^xsd:string ;
+    ns2:Nombre "nombre_9H6T0F"^^xsd:string ;
+    ns2:Peso "11027.48"^^xsd:float ;
+    ns2:Precio "114.0"^^xsd:float .
 
 <http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_KK3K31> a ns1:Producto,
         ns2:Producto ;
@@ -210,4 +551,17 @@ ns2:Compra_945684336860481913297121891754560566308914781816840826180273922582335
     ns2:Nombre "nombre_TC5BWP"^^xsd:string ;
     ns2:Peso "7327.585"^^xsd:float ;
     ns2:Precio "139.0"^^xsd:float .
+
+<http://www.semanticweb.org/migue/ontologies/2020/4/ecsdi-practica-ontologia/resource/Silla_T9L3NG> a ns1:Producto,
+        ns2:Producto ;
+    ns1:Marca "Marca_Silla_GK5W89"^^xsd:string ;
+    ns1:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
+    ns1:Nombre "nombre_EKKFRT"^^xsd:string ;
+    ns1:Peso "19754.66"^^xsd:float ;
+    ns1:Precio "104.0"^^xsd:float ;
+    ns2:Marca "Marca_Silla_GK5W89"^^xsd:string ;
+    ns2:Modelo "Modelo_Silla_QJWGOW"^^xsd:string ;
+    ns2:Nombre "nombre_EKKFRT"^^xsd:string ;
+    ns2:Peso "19754.66"^^xsd:float ;
+    ns2:Precio "104.0"^^xsd:float .
 
